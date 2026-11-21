@@ -1,12 +1,11 @@
 
-
 ```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>INFINITY HUNTER - Login + Gates + Dungeon</title>
+<title>INFINITY HUNTER - FIXED REGISTER</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
 body{background:#050510;color:#fff;overflow-x:hidden}
@@ -21,16 +20,16 @@ body{background:#050510;color:#fff;overflow-x:hidden}
 .btnGold{background:#FFD700;color:#000;border:none;padding:13px;border-radius:12px;font-weight:900;width:100%;margin:5px 0}
 .btn2{background:#222;color:#fff;border:1px solid #555;padding:10px;border-radius:10px;margin:3px;font-size:13px}
 .row{display:flex;gap:8px;flex-wrap:wrap}.row>*{flex:1}
-.hp{height:14px;background:#333;border-radius:10px;overflow:hidden}.hpFill{height:100%;background:#00FF00;transition:width .3s}
+.hp{height:14px;background:#333;border-radius:10px;overflow:hidden}.hpFill{height:100%;background:#00FF00}
 .mp{height:10px;background:#333;border-radius:10px;overflow:hidden}.mpFill{height:100%;background:#00AAFF}
 .xp{height:10px;background:#333;border-radius:10px;overflow:hidden}.xpFill{height:100%;background:#FFD700}
 .cultBar{height:14px;background:#333;border-radius:10px;overflow:hidden}.cultFill{height:100%;background:linear-gradient(90deg,#00FFFF,#FF00FF)}
-input,select{width:100%;padding:13px;background:#000;color:#fff;border:2px solid #7B2FFF;border-radius:10px;margin:5px 0}
+input,select{width:100%;padding:13px;background:#000;color:#fff;border:2px solid #7B2FFF;border-radius:10px;margin:5px 0;font-size:16px}
 .tag{display:inline-block;background:#222;padding:5px 10px;border-radius:20px;font-size:12px;margin:2px}
 #battleLog{height:110px;overflow-y:auto;background:#000;padding:8px;border-radius:10px;font-size:13px}
 #soundBtn{position:fixed;right:10px;bottom:10px;z-index:99;background:#FFD700;color:#000;border:none;padding:9px 12px;border-radius:20px;font-weight:900}
 #gamePopup{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:200;display:none;align-items:center;justify-content:center;padding:20px}
-#gamePopupBox{background:linear-gradient(180deg,#1a0033,#0a0a22);border:3px solid #FFD700;border-radius:20px;padding:20px;max-width:360px;width:100%;text-align:center;box-shadow:0 0 40px #FFD700}
+#gamePopupBox{background:linear-gradient(180deg,#1a0033,#0a0a22);border:3px solid #FFD700;border-radius:20px;padding:20px;max-width:360px;width:100%;text-align:center}
 #gamePopupBox h2{color:#FFD700;margin-bottom:10px}
 #gamePopupBox p{line-height:1.6;color:#ddd}
 #gamePopupBox img{width:100%;height:140px;object-fit:cover;border-radius:12px;margin:8px 0;border:2px solid #7B2FFF}
@@ -51,22 +50,24 @@ input,select{width:100%;padding:13px;background:#000;color:#fff;border:2px solid
 .wbtn{width:62px;height:62px;border-radius:50%;border:3px solid #fff;color:#fff;font-weight:900;font-size:11px}
 .homeBoxes{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .homeBox{border-radius:18px;padding:16px;text-align:center;min-height:130px;display:flex;flex-direction:column;justify-content:center}
-#authScreen{position:fixed;inset:0;background:#050510;z-index:300;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px}
+#authScreen{position:fixed;inset:0;background:#050510;z-index:300;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;overflow-y:auto}
 </style>
 </head>
 <body>
-<!-- AUTH - GATE CHECK -->
 <div id="authScreen">
 <h1 style="color:#FFD700;font-size:32px;text-align:center">⚡ INFINITY HUNTER ⚡</h1><p style="text-align:center;margin:8px">From Weakest to Shadow Monarch</p>
 <div class="card" style="width:100%;max-width:360px">
-<h3 id="authTitle">REGISTER - New Hunter</h3>
-<input id="authName" placeholder="Hunter Name...">
-<input id="authPass" type="password" maxlength="4" placeholder="Create 4-digit Password e.g. 1234" inputmode="numeric">
+<h3>REGISTER / LOGIN - FIXED</h3>
+<p style="font-size:12px;color:#00FF00">✅ FIXED: Press REGISTER once. It will create OR login you. No more stuck.</p>
+<input id="authName" placeholder="Hunter Name... e.g. infinity" autocomplete="off">
+<input id="authPass" type="text" maxlength="4" placeholder="4-digit Password e.g. 2164" inputmode="numeric" autocomplete="off" style="-webkit-text-security:disc">
 <select id="authClass"><option value="FIGHTER">⚔️ FIGHTER</option><option value="MAGE">🔮 MAGE</option><option value="ASSASSIN">🥷 ASSASSIN</option><option value="TANK">🛡️ TANK</option><option value="HEALER">💖 HEALER</option><option value="NECROMANCER">💀 NECROMANCER</option></select>
-<button class="btnGold" onclick="doRegister()">⚡ REGISTER</button>
-<button class="btn" onclick="doLogin()">🔑 LOGIN - I Already Have Account</button>
-<p id="authMsg" style="font-size:13px;color:#FFD700"></p>
-<p style="font-size:12px;color:#aaa">Name must be unique. If name taken, change it. Password is 4 digits. Infinity = Lord Infinity + Chosen Trial 2 Days.</p>
+<button class="btnGold" onclick="doRegister()">⚡ REGISTER / LOGIN - PRESS THIS</button>
+<button class="btn" onclick="doLogin()">🔑 LOGIN - Same as above</button>
+<button class="btn2" onclick="forceEnter()">🚪 FORCE ENTER → If Stuck Press Here</button>
+<button class="btn2" onclick="clearAll()">🗑️ CLEAR ALL - Start Fresh (If Old Bug)</button>
+<p id="authMsg" style="font-size:13px;color:#FFD700;min-height:30px"></p>
+<p style="font-size:12px;color:#aaa">Infinity + 2164 = Lord Infinity + All Perks + Chosen 2 Days.<br>Other names: Any 4-digit password works.</p>
 </div>
 </div>
 
@@ -85,105 +86,90 @@ input,select{width:100%;padding:13px;background:#000;color:#fff;border:2px solid
 <div class="homeBoxes">
 <div class="homeBox" style="background:linear-gradient(135deg,#0033aa,#001133);border:2px solid #00AAFF" onclick="openCultivation()"><div style="font-size:40px">🧘</div><h3>CULTIVATION</h3><p id="homeCultText">Need Lv.5</p></div>
 <div class="homeBox" style="background:linear-gradient(135deg,#006600,#001a00);border:2px solid #00FF00" onclick="openWorld()"><div style="font-size:40px">🌎</div><h3>WORLD - ANIME</h3><p id="homeWorldText">Need Lv.15</p></div>
-<div class="homeBox" style="background:linear-gradient(135deg,#3a0000,#1a0000);border:2px solid #FF0000" onclick="openDungeon()"><div style="font-size:40px">🏰</div><h3>DUNGEON ENTER</h3><p>Floor: <b id="homeFloor">1</b> • Checkpoint: <b id="homeCheckpoint">Floor 1</b></p><p style="font-size:11px">Clear → Click Enter → Next Dungeon!</p></div>
-<div class="homeBox" style="background:linear-gradient(135deg,#4a0080,#1a0033);border:2px solid #FF00FF" onclick="show('gate',document.querySelectorAll('.tb')[2])"><div style="font-size:40px">🚪</div><h3>GATES</h3><p>E to CLASSIFIED<br>S / SS / CLASSIFIED = Millions HP</p></div>
+<div class="homeBox" style="background:linear-gradient(135deg,#3a0000,#1a0000);border:2px solid #FF0000" onclick="openDungeon()"><div style="font-size:40px">🏰</div><h3>DUNGEON ENTER</h3><p>Floor: <b id="homeFloor">1</b> • Checkpoint: <b id="homeCheckpoint">Floor 1</b></p><p style="font-size:11px">Clear → Enter → Next Dungeon!</p></div>
+<div class="homeBox" style="background:linear-gradient(135deg,#4a0080,#1a0033);border:2px solid #FF00FF" onclick="show('gate',document.querySelectorAll('.tb')[2])"><div style="font-size:40px">🚪</div><h3>GATES</h3><p>E to CLASSIFIED<br>S / SS = Millions HP</p></div>
 </div>
-<div class="card"><h2>📖 YOUR STORY - UNIQUE</h2><p id="storyText">...</p><button class="btn2" onclick="playCutsceneByClass()">▶ PLAY MY CUTSCENE 🔊 Female Voice</button></div>
-<div class="card"><h3>🎯 DAILY QUEST + JOBS + HUNGER</h3><p>Daily: <b id="questProg">0 / 4</b> • Train: <b id="trainTimer">Ready</b> • Daily: <b id="dailyTimer">Ready</b> • Hunger: <b id="hungerText">100%</b></p><button class="btn" onclick="doQuest()">💪 TRAIN (4h CD)</button><button class="btnGold" onclick="claimQuest()">🎁 CLAIM DAILY (24h CD) - 1000 Zeni</button><button class="btn2" onclick="eatFood()">🍽️ EAT - Hunger +</button><button class="btn2" onclick="doJob()">💼 WORK JOB - +500 Zeni</button><p id="questMsg"></p></div>
-<div class="card"><h3>🥊 DUEL / PARTY / FAMILY</h3><button class="btn2" onclick="createDuelLink()">🔗 DUEL LINK</button><button class="btn2" onclick="createParty()">👥 CREATE PARTY</button><button class="btn2" onclick="createFamily()">🏠 FOUND FAMILY - 1,000,000 Zeni</button><p id="duelLinkOut" style="word-break:break-all;font-size:12px"></p></div>
+<div class="card"><h2>📖 YOUR STORY</h2><p id="storyText">...</p><button class="btn2" onclick="playCutsceneByClass()">▶ PLAY MY CUTSCENE 🔊 Female Voice</button></div>
+<div class="card"><h3>🎯 DAILY QUEST</h3><p>Daily: <b id="questProg">0 / 4</b> • Train: <b id="trainTimer">Ready</b> • Daily: <b id="dailyTimer">Ready</b> • Hunger: <b id="hungerText">100%</b></p><button class="btn" onclick="doQuest()">💪 TRAIN (4h CD)</button><button class="btnGold" onclick="claimQuest()">🎁 CLAIM DAILY - 1000 Zeni</button><button class="btn2" onclick="eatFood()">🍽️ EAT</button><button class="btn2" onclick="doJob()">💼 WORK JOB</button><p id="questMsg"></p></div>
+<div class="card"><h3>🥊 DUEL / PARTY</h3><button class="btn2" onclick="createDuelLink()">🔗 DUEL LINK</button><button class="btn2" onclick="createParty()">👥 CREATE PARTY</button><button class="btn2" onclick="createFamily()">🏠 FOUND FAMILY - 1M</button><p id="duelLinkOut" style="word-break:break-all;font-size:12px"></p><button class="btn2" onclick="logout()">🚪 LOGOUT</button></div>
 </div>
 
 <div id="profile" class="screen">
 <div class="card"><h2>👤 PROFILE</h2><p>Name: <b id="pName">-</b> • ID: <b id="pCloud">-</b> <button class="btn2" onclick="copyId()">📋 COPY ID</button></p><p>Rank: <b id="pRank">F-RANK</b> • Lv: <b id="pLv">1</b> • Class: <b id="pClass">NONE</b> • Title: <b id="pTitle">Weakest</b></p><p><span id="monarchBadge" style="display:none" class="monarchBadge">👑 SHADOW MONARCH</span> <span id="chosenBadge" style="display:none" class="chosenBadge">✨ CHOSEN ONE ✨</span></p><p id="chosenTimer" style="color:#FFD700"></p>
 <h3>⚔️ STATS</h3><p>⚔️ Attack: <b id="statAtk">25</b> • 🛡️ Defense: <b id="statDef">20</b> • 💨 Speed: <b id="statSpd">20</b></p><p>STR: <b id="statStr">10</b> • AGI: <b id="statAgi">10</b> • INT: <b id="statInt">10</b> • VIT: <b id="statVit">10</b></p><p>HP: <span id="pHp">100</span>/<span id="pMaxHp">100</span></p><div class="hp"><div class="hpFill" id="hpFill" style="width:100%"></div></div><p>MP: <span id="pMp">50</span> <span id="infMp" style="display:none;color:#00FFFF">♾️ INFINITE</span></p><div class="mp"><div class="mpFill" id="mpFill" style="width:100%"></div></div><p>XP: <span id="pXp">0</span>/<span id="pXpNeed">100</span></p><div class="xp"><div class="xpFill" id="xpFill" style="width:0%"></div></div><p>Zeni: <b id="pGold">10000</b> • Bank: <b id="pBank">0</b> • Wood: <b id="pWood">0</b> • Hunger: <b id="pHunger">100%</b></p></div>
-<div class="card"><h3>☁️ CLOUD AUTO-SAVE</h3><p>Auto-saves. ID: <b id="cloudId2">-</b></p><input id="cloudInput" placeholder="Enter Friend ID..."><button class="btn2" onclick="loadCloud()">☁️ LOAD BY ID</button><p id="cloudMsg"></p></div>
-<div class="card"><h3>🎲 TALENT - 1 OR 2 ONLY</h3><p id="talentLock">🔒 Locked. Enter Cultivation (Lv.5) or World (Lv.15)</p><div id="talentShow" style="display:none"><p id="talentMain">-</p></div><p>Perks: <span id="perkList">None</span></p></div>
+<div class="card"><h3>☁️ CLOUD AUTO-SAVE</h3><p>ID: <b id="cloudId2">-</b></p><input id="cloudInput" placeholder="Enter Friend ID..."><button class="btn2" onclick="loadCloud()">☁️ LOAD BY ID</button><p id="cloudMsg"></p></div>
+<div class="card"><h3>🎲 TALENT</h3><p id="talentLock">🔒 Locked. Enter Cultivation (Lv.5) or World (Lv.15)</p><div id="talentShow" style="display:none"><p id="talentMain">-</p></div><p>Perks: <span id="perkList">None</span></p></div>
 <div class="card"><h3>🧘 CULTIVATION</h3><p>Realm: <b id="qRealm">Body Tempering</b> • Layer: <b id="qLayer">1</b>/9</p><div class="cultBar"><div class="cultFill" id="qCultFill" style="width:0%"></div></div></div>
 <div class="card"><h3>🏠 HOUSE / SECT / FAMILY / PET</h3><p>House: <b id="houseLevel">No House</b> • Sect: <b id="sectName">No Sect</b> • Family: <b id="familyText">No Family</b> • Pet: <b id="petText">No Pet</b> • Spouse: <b id="spouseText">No Spouse</b></p></div>
 <div class="card"><h3>🎒 INVENTORY</h3><div id="invList"></div><p>Weapon: <b id="pWeapon">Rusty Sword</b></p><button class="btn2" onclick="forgeWeapon()">🔨 FORGE +10 - 500</button></div>
-<div class="card"><h3>🔮 SKILLS / MOVES</h3><div id="skillList"></div><button class="btn2" onclick="showMoves()">👀 MY MOVES</button><div id="movesList"></div></div>
+<div class="card"><h3>🔮 SKILLS</h3><div id="skillList"></div><button class="btn2" onclick="showMoves()">👀 MY MOVES</button><div id="movesList"></div></div>
 <div class="card"><h3>🏆 LEADERBOARD</h3><div id="leaderList"></div></div>
-<div class="card"><h3>🏅 ACHIEVEMENTS</h3><div id="achList"></div></div>
 </div>
 
-<div id="gate" class="screen"><div class="card"><h2>🚪 GATES - TAP GATE TO ENTER (LOGIN REQUIRED)</h2><p id="gateAuthMsg" style="color:#FFD700"></p><div id="gateList"></div></div></div>
-
+<div id="gate" class="screen"><div class="card"><h2>🚪 GATES - TAP GATE TO ENTER</h2><p id="gateAuthMsg"></p><div id="gateList"></div></div></div>
 <div id="bank" class="screen">
-<div class="card"><h2>🏦 BANK - Iron Bank</h2><p>Wallet: <b id="bWallet">10000</b> • Bank: <b id="bBank">0</b> • ID: <b id="bId">-</b></p><input id="bankAmt" type="number" placeholder="Amount..."><div class="row"><button class="btn2" onclick="deposit()">📥 DEPOSIT</button><button class="btn2" onclick="withdraw()">📤 WITHDRAW</button></div><button class="btn2" onclick="bankLoan()">💰 REQUEST LOAN - Lord Infinity Approves</button><p id="bankMsg"></p></div>
+<div class="card"><h2>🏦 BANK</h2><p>Wallet: <b id="bWallet">10000</b> • Bank: <b id="bBank">0</b> • ID: <b id="bId">-</b></p><input id="bankAmt" type="number" placeholder="Amount..."><div class="row"><button class="btn2" onclick="deposit()">📥 DEPOSIT</button><button class="btn2" onclick="withdraw()">📤 WITHDRAW</button></div><button class="btn2" onclick="bankLoan()">💰 REQUEST LOAN - Lord Infinity Approves</button><p id="bankMsg"></p></div>
 <div class="card"><h3>💸 SEND BY ID</h3><input id="sendTo" placeholder="Player ID..."><input id="sendAmt" type="number" placeholder="Amount..."><button class="btnGold" onclick="sendMoney()">💸 SEND BY ID</button><p id="sendMsg"></p></div>
 <div class="card"><h3>📜 HISTORY</h3><div id="bankHist">No transactions</div></div>
 </div>
-
 <div id="guild" class="screen">
 <div class="card"><h2>🛡️ GUILD - Order of Tempest</h2><p>Guild: <b id="guildName">NO GUILD</b> • War: <b id="warPts">0</b></p><input id="guildInput" placeholder="Guild Name..."><button class="btn" onclick="createGuild()">CREATE GUILD</button><button class="btn2" onclick="joinGuild()">APPLY - Order of Tempest</button><button class="btn2" onclick="guildQuest()">📜 GUILD QUEST</button><p id="guildMsg"></p></div>
-<div class="card"><h2>⚔️ GUILD WAR / RAID / LABYRINTH</h2><button class="btnGold" onclick="guildWar()">⚔️ GUILD WAR</button><button class="btn2" onclick="raid()">🛡️ COUNTRY RAID</button><button class="btn2" onclick="labyrinth()">🌀 LABYRINTH - Raid Team</button><p id="warMsg"></p><div id="warLog"></div></div>
-<div class="card"><h2>🏯 SECT - SIMULATED FIGHTING</h2><p>Sect: <b id="sectName2">No Sect</b> • Rank: <b id="sectRank">-</b></p><div class="row"><button class="btn2" onclick="joinSect('Heavenly Sword Sect')">⚔️ Heavenly Sword</button><button class="btn2" onclick="joinSect('Shadow Sect')">💀 Shadow</button><button class="btn2" onclick="joinSect('Chaos Sect')">🌌 Chaos</button><button class="btn2" onclick="joinSect('Alchemy Sect')">🧪 Alchemy</button></div><button class="btn" onclick="sectFight()">⚔️ SECT FIGHT - Fight Elder</button><p id="sectMsg"></p><div id="sectLog"></div></div>
-<div class="card"><h2>🏟️ HALL OF REFLECTIONS - ARENA</h2><button class="btn2" onclick="arena()">🏟️ ARENA - 250,000 Zeni to Enter</button><p id="arenaMsg"></p></div>
+<div class="card"><h2>⚔️ GUILD WAR / RAID / LABYRINTH</h2><button class="btnGold" onclick="guildWar()">⚔️ GUILD WAR</button><button class="btn2" onclick="raid()">🛡️ COUNTRY RAID</button><button class="btn2" onclick="labyrinth()">🌀 LABYRINTH</button><p id="warMsg"></p></div>
+<div class="card"><h2>🏯 SECT</h2><p>Sect: <b id="sectName2">No Sect</b> • Rank: <b id="sectRank">-</b></p><div class="row"><button class="btn2" onclick="joinSect('Heavenly Sword Sect')">⚔️ Heavenly Sword</button><button class="btn2" onclick="joinSect('Shadow Sect')">💀 Shadow</button><button class="btn2" onclick="joinSect('Chaos Sect')">🌌 Chaos</button><button class="btn2" onclick="joinSect('Alchemy Sect')">🧪 Alchemy</button></div><button class="btn" onclick="sectFight()">⚔️ SECT FIGHT</button><p id="sectMsg"></p><div id="sectLog"></div></div>
+<div class="card"><h2>🏟️ ARENA</h2><button class="btn2" onclick="arena()">🏟️ ARENA - 250,000 Zeni</button><p id="arenaMsg"></p></div>
 </div>
-
 <div id="shop" class="screen">
-<div class="card"><h2>🛒 SHOP - 28 PRODUCTS + MARKET</h2><p>Wallet: <b id="sGold">10000</b></p><div class="row" id="shopList"></div><p id="shopMsg"></p></div>
-<div class="card"><h2>🛒 MARKET - Player Market</h2><input id="marketItem" placeholder="Item to sell..."><input id="marketPrice" type="number" placeholder="Price..."><button class="btn2" onclick="marketList()">📋 LIST ITEM FOR SALE</button><div id="marketList"></div></div>
-<div class="card"><h3>🍖 FOOD / HUNGER / HOSPITAL / JAIL</h3><button class="btn2" onclick="eatFood()">🍽️ EAT - Hunger +</button><button class="btn2" onclick="sleep()">😴 SLEEP - Full HP/MP</button><button class="btn2" onclick="hospital()">🏥 HOSPITAL - Heal</button><button class="btn2" onclick="gamble()">🎲 GAMBLE 500 Zeni</button><p id="hospitalMsg"></p></div>
+<div class="card"><h2>🛒 SHOP</h2><p>Wallet: <b id="sGold">10000</b></p><div class="row" id="shopList"></div><p id="shopMsg"></p></div>
+<div class="card"><h2>🛒 MARKET</h2><input id="marketItem" placeholder="Item to sell..."><input id="marketPrice" type="number" placeholder="Price..."><button class="btn2" onclick="marketList()">📋 LIST ITEM</button><div id="marketList"></div></div>
+<div class="card"><h3>🍖 FOOD</h3><button class="btn2" onclick="eatFood()">🍽️ EAT</button><button class="btn2" onclick="sleep()">😴 SLEEP</button><button class="btn2" onclick="hospital()">🏥 HOSPITAL</button><button class="btn2" onclick="gamble()">🎲 GAMBLE 500</button><p id="hospitalMsg"></p></div>
 </div>
-
 <div id="social" class="screen">
-<div class="card"><h2>👥 PARTY / FAMILY / MARRIAGE / PETS</h2><p>Party: <b id="partyText">No Party</b> • Family: <b id="familyText2">No Family</b> • Spouse: <b id="spouseText2">No Spouse</b> • Pet: <b id="petText2">No Pet</b></p><button class="btn2" onclick="createParty()">👥 CREATE PARTY</button><button class="btn2" onclick="createFamily()">🏠 FOUND FAMILY - 1M Zeni</button><button class="btn2" onclick="marry()">💍 PROPOSE MARRIAGE</button><button class="btn2" onclick="buyPet()">🐉 BUY DRAGON EGG</button><button class="btn2" onclick="trainPet()">🐉 TRAIN PET</button><p id="socialMsg"></p></div>
-<div class="card"><h2>💼 JOBS</h2><p>Job: <b id="jobText">No Job</b></p><div class="row"><button class="btn2" onclick="applyJob('Bank Teller')">🏦 Bank Teller</button><button class="btn2" onclick="applyJob('Hospital Orderly')">🏥 Hospital Orderly</button><button class="btn2" onclick="applyJob('Tavern Server')">🍺 Tavern Server</button><button class="btn2" onclick="applyJob('Market Clerk')">🛒 Market Clerk</button></div><button class="btn2" onclick="doJob()">💼 WORK SHIFT - Lord Infinity Approves</button><p id="jobMsg"></p></div>
-<div class="card"><h2>⛪ CHURCH & FAITH</h2><p>Church: <b id="churchText">No Church</b></p><button class="btn2" onclick="joinChurch()">⛪ JOIN CHURCH - God of Infinity</button><button class="btn2" onclick="pray()">🙏 PRAY - 24h CD</button><p id="churchMsg"></p></div>
-<div class="card"><h2>⚖️ CRIME & JAIL</h2><button class="btn2" onclick="rob()">🥷 ROB PLAYER - Risky!</button><button class="btn2" onclick="bail()">💰 PAY BAIL</button><p id="crimeMsg"></p></div>
-<div class="card"><h2>📜 QUESTS / SEASON / ACHIEVEMENTS</h2><button class="btn2" onclick="showQuests()">📜 QUESTS</button><button class="btn2" onclick="showSeason()">🎖️ SEASON</button><div id="questList"></div></div>
+<div class="card"><h2>👥 PARTY / FAMILY / MARRIAGE / PETS</h2><p>Party: <b id="partyText">No Party</b> • Family: <b id="familyText2">No Family</b> • Spouse: <b id="spouseText2">No Spouse</b> • Pet: <b id="petText2">No Pet</b></p><button class="btn2" onclick="createParty()">👥 CREATE PARTY</button><button class="btn2" onclick="createFamily()">🏠 FOUND FAMILY - 1M</button><button class="btn2" onclick="marry()">💍 PROPOSE</button><button class="btn2" onclick="buyPet()">🐉 BUY DRAGON EGG</button><button class="btn2" onclick="trainPet()">🐉 TRAIN PET</button><p id="socialMsg"></p></div>
+<div class="card"><h2>💼 JOBS</h2><p>Job: <b id="jobText">No Job</b></p><div class="row"><button class="btn2" onclick="applyJob('Bank Teller')">🏦 Bank Teller</button><button class="btn2" onclick="applyJob('Hospital Orderly')">🏥 Hospital</button><button class="btn2" onclick="applyJob('Tavern Server')">🍺 Tavern</button><button class="btn2" onclick="applyJob('Market Clerk')">🛒 Market</button></div><button class="btn2" onclick="doJob()">💼 WORK SHIFT</button><p id="jobMsg"></p></div>
+<div class="card"><h2>⛪ CHURCH</h2><p>Church: <b id="churchText">No Church</b></p><button class="btn2" onclick="joinChurch()">⛪ JOIN CHURCH - God of Infinity</button><button class="btn2" onclick="pray()">🙏 PRAY - 24h CD</button><p id="churchMsg"></p></div>
+<div class="card"><h2>⚖️ CRIME</h2><button class="btn2" onclick="rob()">🥷 ROB PLAYER</button><button class="btn2" onclick="bail()">💰 PAY BAIL</button><p id="crimeMsg"></p></div>
 </div>
-
-<div id="cultScreen" style="display:none" class="screen"><div class="card"><h2>🧘 CULTIVATION - NEED Lv.5</h2><p>Realm: <b id="cRealm">Body Tempering</b> • <b id="cLayerBadge">1st Layer</b></p><p>Cult XP: <span id="cXp">0</span> / <span id="cNeed">100</span></p><div class="cultBar"><div class="cultFill" id="cultFill" style="width:0%"></div></div><button class="btn" onclick="cultivate()">🧘 MEDITATE (4h CD)</button><button class="btnGold" onclick="breakthrough()">⚡ BREAKTHROUGH - TRIBULATION!</button><p id="cultMsg"></p><p>Next: <b id="cultTimer">Ready</b></p><p style="font-size:12px">Tribulation: Low 5% • Mid 30% • High 70% • Supreme 80% • Saint 40% • Divine 40%</p></div><button class="btn2" onclick="closeCult()">← BACK</button></div>
-
+<div id="cultScreen" style="display:none" class="screen"><div class="card"><h2>🧘 CULTIVATION - NEED Lv.5</h2><p>Realm: <b id="cRealm">Body Tempering</b> • <b id="cLayerBadge">1st Layer</b></p><p>Cult XP: <span id="cXp">0</span> / <span id="cNeed">100</span></p><div class="cultBar"><div class="cultFill" id="cultFill" style="width:0%"></div></div><button class="btn" onclick="cultivate()">🧘 MEDITATE (4h CD)</button><button class="btnGold" onclick="breakthrough()">⚡ BREAKTHROUGH</button><p id="cultMsg"></p><p>Next: <b id="cultTimer">Ready</b></p></div><button class="btn2" onclick="closeCult()">← BACK</button></div>
 <div id="worldScreen"><canvas id="worldCanvas"></canvas><canvas id="miniMap" width="110" height="110"></canvas><div id="worldHud"><b id="worldLoc">Hunter City</b><br>Wood: <b id="wWood">0</b> • Gold: <b id="wGold">0</b><br><button class="btn2" onclick="closeWorld()">✕ EXIT WORLD</button></div><div id="worldControls"><div id="joy"><div id="stick"></div></div><div style="display:flex;gap:8px;align-items:flex-end"><button class="wbtn" style="background:#00AA00" onclick="worldAction()">🪓 CHOP</button><button class="wbtn" style="background:#7B2FFF" onclick="worldInteract()">💬 TALK</button><button class="wbtn" style="background:#FFAA00" onclick="worldBuild()">🏠 BUILD</button></div></div></div>
-
 <div id="cutscene" style="display:none"><img id="csImg" src=""><h2 id="csTitle"></h2><p id="csText"></p><button class="btnGold" onclick="nextCutscene()">CONTINUE ▶</button><button class="btn2" onclick="closeCutscene()">SKIP ✕</button></div>
-
 <div id="battleScreen">
-<h2 id="gateTitle" style="text-align:center">GATE</h2><img id="battleImg" class="animeImg" src=""><div style="font-size:70px;text-align:center" id="bossEmoji">👹</div><p style="text-align:center">Boss: <b id="bossName">Boss</b> • HP: <b id="bossHp">100</b></p><div class="hp"><div class="hpFill" id="bossHpFill" style="width:100%;background:red"></div></div><p style="margin-top:8px">Your HP: <b id="battleHp">100</b> • MP: <b id="battleMp">50</b> • Combo: <b id="comboText">x0</b> • Floor: <b id="battleFloor">-</b></p><div class="hp"><div class="hpFill" id="battleHpFill" style="width:100%"></div></div><div id="battleLog"></div><div class="row"><button class="btn2" onclick="attack()">⚔️ ATTACK</button><button class="btn2" onclick="heavyAttack()">💥 HEAVY</button><button class="btn2" onclick="dodge()">💨 DODGE</button><button class="btn2" onclick="block()">🛡️ BLOCK</button></div><div class="row"><button class="btn2" onclick="useSkill(1)">🔥 SKILL 1</button><button class="btn2" onclick="useSkill(2)">⚡ SKILL 2</button><button class="btn2" onclick="useSkill(3)">💥 ULTIMATE</button><button class="btn2" onclick="heal()">💖 HEAL</button></div><button class="btn" onclick="arise()">💀 ARISE</button><button class="btn2" onclick="runGate()">🏃 RUN</button><p id="gateMsg"></p><div id="clearedBox" style="display:none" class="clearedBox"><h2>🏆 <span id="clearGateName">E-RANK</span> CLEARED! 🏆</h2><p>VICTORY BY <b id="clearPlayer">Player</b> • LEVEL <span id="clearLv">1</span></p><p>🪙 GOLD: +<span id="clearGold">500</span>g | ⚡ XP: +<span id="clearXp">250</span></p><p>📦 LOOT: +1x <span id="clearLoot">Mana Crystal</span></p><p>🔮 SHADOW EXTRACTION READY!</p><p>❤️ YOUR HP <span id="clearHp">100</span> / <span id="clearMaxHp">100</span></p><div class="hp"><div class="hpFill" id="clearHpFill" style="width:100%"></div></div><p style="font-size:12px">☁️ CLOUD • Auto exiting in 3s...</p></div>
+<h2 id="gateTitle" style="text-align:center">GATE</h2><img id="battleImg" class="animeImg" src=""><div style="font-size:70px;text-align:center" id="bossEmoji">👹</div><p style="text-align:center">Boss: <b id="bossName">Boss</b> • HP: <b id="bossHp">100</b></p><div class="hp"><div class="hpFill" id="bossHpFill" style="width:100%;background:red"></div></div><p style="margin-top:8px">Your HP: <b id="battleHp">100</b> • MP: <b id="battleMp">50</b> • Combo: <b id="comboText">x0</b></p><div class="hp"><div class="hpFill" id="battleHpFill" style="width:100%"></div></div><div id="battleLog"></div><div class="row"><button class="btn2" onclick="attack()">⚔️ ATTACK</button><button class="btn2" onclick="heavyAttack()">💥 HEAVY</button><button class="btn2" onclick="dodge()">💨 DODGE</button><button class="btn2" onclick="block()">🛡️ BLOCK</button></div><div class="row"><button class="btn2" onclick="useSkill(1)">🔥 SKILL 1</button><button class="btn2" onclick="useSkill(2)">⚡ SKILL 2</button><button class="btn2" onclick="useSkill(3)">💥 ULTIMATE</button><button class="btn2" onclick="heal()">💖 HEAL</button></div><button class="btn" onclick="arise()">💀 ARISE</button><button class="btn2" onclick="runGate()">🏃 RUN</button><p id="gateMsg"></p><div id="clearedBox" style="display:none" class="clearedBox"><h2>🏆 <span id="clearGateName">E-RANK</span> CLEARED! 🏆</h2><p>VICTORY BY <b id="clearPlayer">Player</b> • LEVEL <span id="clearLv">1</span></p><p>🪙 GOLD: +<span id="clearGold">500</span>g | ⚡ XP: +<span id="clearXp">250</span></p><p>📦 LOOT: +1x <span id="clearLoot">Mana Crystal</span></p><p>❤️ YOUR HP <span id="clearHp">100</span> / <span id="clearMaxHp">100</span></p><div class="hp"><div class="hpFill" id="clearHpFill" style="width:100%"></div></div></div>
 </div>
-
 <div id="dungeonScreen" style="display:none;position:fixed;inset:0;background:#1a0000;z-index:95;padding:12px;overflow-y:auto"><h2>🏰 DUNGEON - ENDLESS FLOORS</h2><p>Floor: <b id="dunFloor">1</b> • Checkpoint: <b id="dunCheckpoint">Floor 1</b> • Best: <b id="dunBest">1</b></p><img class="animeImg" src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&q=80"><div class="card"><h3>Floor <span id="dunFloor2">1</span> - <span id="dunEnemy">Goblin</span></h3><p>Enemy HP: <b id="dunEnemyHp">50</b></p><div class="hp"><div class="hpFill" id="dunEnemyHpFill" style="width:100%;background:red"></div></div><p>Your HP: <b id="dunYourHp">100</b></p><div id="dunLog" style="height:90px;overflow-y:auto;background:#000;padding:8px;border-radius:10px;font-size:13px"></div><div class="row"><button class="btn2" onclick="dungeonAttack()">⚔️ ATTACK</button><button class="btn2" onclick="dungeonSkill()">🔥 SKILL</button><button class="btn2" onclick="dungeonHeal()">💖 HEAL</button></div><button class="btnGold" onclick="dungeonNext()">▶ ENTER NEXT DUNGEON - NEXT FLOOR</button></div><button class="btn2" onclick="closeDungeon()">✕ EXIT DUNGEON</button></div>
-
 <div id="gamePopup"><div id="gamePopupBox"><h2 id="popTitle">REWARD!</h2><img id="popImg" src="" style="display:none"><p id="popText"></p><button class="btnGold" onclick="closePopup()">CONTINUE ▶</button></div></div>
 <button id="soundBtn" onclick="toggleSound()">🔊 SOUND: ON</button>
 <script>
+// ===== FIXED AUTH - WORKS FOR infinity + 2164 =====
 let soundOn=true, voiceOn=true, audioCtx=null;
 function sfx(f,d,t='square',v=0.2,slide=0){ if(!soundOn) return; try{ if(!audioCtx) audioCtx=new (window.AudioContext||window.webkitAudioContext)(); let o=audioCtx.createOscillator(),g=audioCtx.createGain(); o.type=t; o.frequency.setValueAtTime(f,audioCtx.currentTime); if(slide) o.frequency.exponentialRampToValueAtTime(slide,audioCtx.currentTime+d); g.gain.value=v; o.connect(g); g.connect(audioCtx.destination); o.start(); o.stop(audioCtx.currentTime+d);}catch(e){} }
 function sfxSlash(){ sfx(900,0.12,'sawtooth',0.25,300); } function sfxHit(){ sfx(120,0.18,'square',0.35,60); } function sfxBlock(){ sfx(1200,0.08,'square',0.3,800); } function sfxDodge(){ sfx(400,0.15,'sine',0.2,1200); } function sfxUlt(){ sfx(80,0.5,'sawtooth',0.4,40); } function sfxLevelUp(){ [523,659,784,1046].forEach((f,i)=>setTimeout(()=>sfx(f,0.18,'sine',0.25),i*100)); } function sfxArise(){ [200,300,400,600,900].forEach((f,i)=>setTimeout(()=>sfx(f,0.25,'sawtooth',0.2),i*120)); } function sfxGate(){ sfx(100,0.5,'sine',0.3); } function sfxBoss(){ sfx(80,0.6,'sawtooth',0.35,40); } function sfxCoin(){ sfx(1200,0.08,'sine',0.25); } function sfxHeal(){ sfx(600,0.3,'sine',0.2); } function sfxChop(){ sfx(300,0.08,'square',0.3,150); } function sfxThunder(){ sfx(50,0.8,'sawtooth',0.5,30); }
 function toggleSound(){ soundOn=!soundOn; document.getElementById('soundBtn').textContent=soundOn?'🔊 SOUND: ON':'🔇 SOUND: OFF'; }
-// AI WOMAN VOICE - Force female voice
-function getFemaleVoice(){ let voices=speechSynthesis.getVoices(); let v=voices.find(x=>/female|samantha|zira|aria|jenny|google us english/i.test(x.name)) || voices.find(x=>x.lang==='en-US') || voices[0]; return v; }
-function speak(text){ if(!voiceOn) return; try{ speechSynthesis.cancel(); let u=new SpeechSynthesisUtterance(text); let v=getFemaleVoice(); if(v) u.voice=v; u.rate=1.0; u.pitch=1.25; u.volume=1; speechSynthesis.speak(u); }catch(e){} }
-speechSynthesis.onvoiceschanged=()=>{ getFemaleVoice(); };
-function showPopup(title,text,img=''){ document.getElementById('popTitle').textContent=title; document.getElementById('popText').innerHTML=text; let im=document.getElementById('popImg'); if(img){ im.src=img; im.style.display='block'; } else im.style.display='none'; document.getElementById('gamePopup').style.display='flex'; sfxCoin(); }
+function getFemaleVoice(){ try{ let v=speechSynthesis.getVoices(); return v.find(x=>/female|samantha|zira|aria|jenny|google us english/i.test(x.name))||v.find(x=>x.lang==='en-US')||v[0]; }catch(e){ return null; } }
+function speak(t){ if(!voiceOn) return; try{ speechSynthesis.cancel(); let u=new SpeechSynthesisUtterance(t); let v=getFemaleVoice(); if(v) u.voice=v; u.rate=1.0; u.pitch=1.25; speechSynthesis.speak(u);}catch(e){} }
+function showPopup(title,text,img=''){ document.getElementById('popTitle').textContent=title; document.getElementById('popText').innerHTML=text; let im=document.getElementById('popImg'); if(img){im.src=img;im.style.display='block';}else im.style.display='none'; document.getElementById('gamePopup').style.display='flex'; sfxCoin(); }
 function closePopup(){ document.getElementById('gamePopup').style.display='none'; try{speechSynthesis.cancel();}catch(e){} }
 const REALMS=['Body Tempering','Qi Refinement','Foundation Establishment','Golden Core','Nascent Soul','Soul Formation','Void Refinement','Body Integration','Mahayana','Tribulation','Immortal'];
 const ROOTS=['Fire','Water','Wood','Earth','Metal','Ice','Lightning','Wind','Dark','Light','Chaos'];
 const GRADES=['Low Grade','Mid Grade','High Grade','Supreme Grade','Saint Grade','Divine Grade'];
 const PHYS=['Mortal Body','Iron Body','Flame Body','Ice Jade Body','Dragon Body','Phoenix Body','Star Body','Battle Body'];
 const BLOODLINES=['Mortal Bloodline','Wolf Bloodline','Dragon Bloodline','Phoenix Bloodline','Ancient God Bloodline','Chaos Bloodline','Primordial Chaos Bloodline'];
-// Accounts storage - for login
-let accounts=JSON.parse(localStorage.getItem('hunter_accounts')||'{}');
-let allPlayers=JSON.parse(localStorage.getItem('hunter_players_v7')||'[]');
-let chosenOneName=localStorage.getItem('chosen_one_name')||'';
+// STORAGE - use one key, case-insensitive names
+function loadAccounts(){ try{ return JSON.parse(localStorage.getItem('hunter_accounts_v2')||'{}'); }catch(e){ return {}; } }
+function saveAccounts(a){ try{ localStorage.setItem('hunter_accounts_v2',JSON.stringify(a)); }catch(e){} }
+function normName(n){ return (n||'').trim().toLowerCase(); }
+let accounts=loadAccounts();
+let allPlayers=[]; try{ allPlayers=JSON.parse(localStorage.getItem('hunter_players_v7')||'[]'); }catch(e){ allPlayers=[]; }
 let H=null;
 function newHunter(){ return {name:'',registered:false,password:'',level:1,xp:0,xpNeed:100,hp:100,maxHp:100,mp:50,maxMp:50,gold:10000,gems:0,keys:3,bank:0,rank:'F',cls:'NONE',title:'Weakest Hunter',str:10,agi:10,int:10,vit:10,sen:10,pts:0,weapon:'Rusty Sword',weaponDmg:15,armor:'Hunter Cloth',inventory:['Potion x2'],shadows:[],guild:'NO GUILD',guildMembers:0,questProg:0,monarch:0,skills:['Slash','Dash','Fireball'],perks:[],isInfinity:false,infiniteMp:false,cloudId:'HUNTER-'+Math.random().toString(36).substr(2,6).toUpperCase(),talentType:'',talentValue:'',talentGrade:'',talentRevealed:false,cultRealm:0,cultLayer:1,cultXp:0,cultNeed:100,lastTrain:0,lastDaily:0,lastCult:0,lastPray:0,warPts:0,bankHist:[],world:0,wood:0,houseBuilt:false,sect:'No Sect',sectRank:'-',isChosen:false,chosenUntil:0,dungeonFloor:1,dungeonBest:1,dungeonCheckpoint:1,story:'',hunger:100,family:'No Family',spouse:'No Spouse',pet:'No Pet',job:'No Job',church:'No Church',party:'No Party',market:[]}; }
 let curGate=null,curBoss=null,inBattle=false,combo=0,isBlocking=false,csIndex=0,csList=[],dunEnemy=null;
-function calcStats(){ if(!H) return {atk:25,def:20,spd:20}; let atk=H.weaponDmg + H.str*2 + H.cultRealm*20 + H.cultLayer*3; let def=H.vit*2 + 10 + H.cultRealm*10; let spd=H.agi*2 + H.level; return {atk,def,spd}; }
-function save(){ if(!H) return; localStorage.setItem('hunter_save_v7_'+H.name,JSON.stringify(H)); accounts[H.name]={password:H.password,cloudId:H.cloudId}; localStorage.setItem('hunter_accounts',JSON.stringify(accounts)); if(H.registered){ let idx=allPlayers.findIndex(p=>p.name===H.name); let rec={name:H.name,level:H.level,rank:H.rank,cls:H.cls,cloudId:H.cloudId,cult:REALMS[H.cultRealm]+' '+H.cultLayer,isChosen:H.isChosen}; if(idx>=0) allPlayers[idx]=rec; else allPlayers.push(rec); localStorage.setItem('hunter_players_v7',JSON.stringify(allPlayers)); } update(); }
+function calcStats(){ if(!H) return {atk:25,def:20,spd:20}; return {atk:H.weaponDmg+H.str*2+H.cultRealm*20+H.cultLayer*3, def:H.vit*2+10+H.cultRealm*10, spd:H.agi*2+H.level}; }
+function save(){ if(!H) return; try{ localStorage.setItem('hunter_save_'+normName(H.name),JSON.stringify(H)); localStorage.setItem('hunter_last',H.name); accounts[normName(H.name)]={password:String(H.password),cloudId:H.cloudId,displayName:H.name}; saveAccounts(accounts); if(H.registered){ let idx=allPlayers.findIndex(p=>normName(p.name)===normName(H.name)); let rec={name:H.name,level:H.level,rank:H.rank,cls:H.cls,cloudId:H.cloudId,cult:REALMS[H.cultRealm]+' '+H.cultLayer,isChosen:H.isChosen}; if(idx>=0) allPlayers[idx]=rec; else allPlayers.push(rec); localStorage.setItem('hunter_players_v7',JSON.stringify(allPlayers)); } }catch(e){} update(); }
 function getRank(){ if(!H) return {r:'F',t:'Weakest'}; if(H.isInfinity||H.level>=100) return {r:'CLASSIFIED',t:'SHADOW MONARCH'}; if(H.level>=80) return {r:'SSS',t:'National Level'}; if(H.level>=65) return {r:'SS',t:'SS Hunter'}; if(H.level>=50) return {r:'S',t:'S-Rank'}; if(H.level>=40) return {r:'A',t:'A-Rank'}; if(H.level>=30) return {r:'B',t:'B-Rank'}; if(H.level>=20) return {r:'C',t:'C-Rank'}; if(H.level>=10) return {r:'D',t:'D-Rank'}; if(H.level>=5) return {r:'E',t:'E-Rank'}; return {r:'F',t:'Weakest Hunter'}; }
 function fmtTime(ms){ if(ms<=0) return 'Ready'; let d=Math.floor(ms/86400000),h=Math.floor(ms%86400000/3600000),m=Math.floor(ms%3600000/60000); return (d?d+'d ':'')+h+'h '+m+'m'; }
+function enterDashboard(){ document.getElementById('authScreen').style.display='none'; document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.getElementById('home').classList.add('active'); document.querySelectorAll('.tb').forEach(b=>b.classList.remove('active')); document.querySelectorAll('.tb')[0].classList.add('active'); update(); }
 function update(){
  if(!H) return; let rk=getRank(); H.rank=rk.r; if(!H.isInfinity) H.title=rk.t; let st=calcStats();
- // Check Infinity Chosen Trial expiry - 2 days
- if(H.isInfinity && H.isChosen && Date.now()>H.chosenUntil && H.chosenUntil>0){
-   H.isChosen=false; H.perks=H.perks.filter(p=>!p.includes('CHOSEN')); save(); showPopup('⏰ CHOSEN TRIAL ENDED','Infinity, your 2-day Chosen trial ended.<br>System is now finding the TRUE Chosen One...<br>One random player will be chosen soon.'); speak('Infinity, your chosen trial has ended. The system is now finding the true chosen one.');
-   // Pick random true chosen one from allPlayers (not Infinity)
-   let others=allPlayers.filter(p=>p.name.toLowerCase()!=='infinity'); if(others.length){ let pick=others[Math.floor(Math.random()*others.length)]; chosenOneName=pick.name; localStorage.setItem('chosen_one_name',pick.name); }
- }
+ if(H.isInfinity && H.isChosen && H.chosenUntil>0 && Date.now()>H.chosenUntil){ H.isChosen=false; showPopup('⏰ CHOSEN TRIAL ENDED','Infinity, your 2-day Chosen trial ended. Finding TRUE Chosen One...'); }
  document.getElementById('tName').textContent=H.name||'HUNTER'; document.getElementById('tRank').textContent=rk.r+'-RANK'; document.getElementById('tLv').textContent=H.level; document.getElementById('tHp').textContent=H.hp; document.getElementById('tGold').textContent=H.gold; document.getElementById('tCloud').textContent=H.cloudId; document.getElementById('tAtk').textContent=st.atk; document.getElementById('tDef').textContent=st.def; document.getElementById('tSpd').textContent=st.spd;
  document.getElementById('pCloud').textContent=H.cloudId; document.getElementById('cloudId2').textContent=H.cloudId; document.getElementById('bId').textContent=H.cloudId; document.getElementById('pName').textContent=H.name||'-'; document.getElementById('pRank').textContent=rk.r+'-RANK'; document.getElementById('pLv').textContent=H.level; document.getElementById('pClass').textContent=H.cls; document.getElementById('pTitle').textContent=H.title; document.getElementById('pHp').textContent=H.hp; document.getElementById('pMaxHp').textContent=H.maxHp; document.getElementById('pMp').textContent=H.infiniteMp?'∞':H.mp; document.getElementById('pXp').textContent=H.xp; document.getElementById('pXpNeed').textContent=H.xpNeed; document.getElementById('pGold').textContent=H.gold; document.getElementById('pBank').textContent=H.bank; document.getElementById('pWood').textContent=H.wood; document.getElementById('pHunger').textContent=H.hunger+'%';
  document.getElementById('statAtk').textContent=st.atk; document.getElementById('statDef').textContent=st.def; document.getElementById('statSpd').textContent=st.spd; document.getElementById('statStr').textContent=H.str; document.getElementById('statAgi').textContent=H.agi; document.getElementById('statInt').textContent=H.int; document.getElementById('statVit').textContent=H.vit;
@@ -194,66 +180,138 @@ function update(){
  document.getElementById('cRealm').textContent=REALMS[H.cultRealm]; document.getElementById('cLayerBadge').textContent=H.cultLayer+'th Layer'; document.getElementById('cXp').textContent=H.cultXp; document.getElementById('cNeed').textContent=H.cultNeed; document.getElementById('cultFill').style.width=(H.cultXp/H.cultNeed*100)+'%';
  document.getElementById('questProg').textContent=H.questProg+' / 4'; document.getElementById('trainTimer').textContent=fmtTime(H.lastTrain+4*3600000-Date.now()); document.getElementById('dailyTimer').textContent=fmtTime(H.lastDaily+24*3600000-Date.now()); document.getElementById('cultTimer').textContent=fmtTime(H.lastCult+4*3600000-Date.now());
  document.getElementById('sGold').textContent=H.gold; document.getElementById('bWallet').textContent=H.gold; document.getElementById('bBank').textContent=H.bank; document.getElementById('guildName').textContent=H.guild; document.getElementById('warPts').textContent=H.warPts; document.getElementById('monarchBadge').style.display=H.isInfinity?'inline-block':'none'; document.getElementById('chosenBadge').style.display=H.isChosen?'inline-block':'none'; document.getElementById('infMp').style.display=H.infiniteMp?'inline':'none';
- document.getElementById('chosenTimer').textContent=H.isInfinity&&H.isChosen?'Chosen Trial: '+fmtTime(H.chosenUntil-Date.now())+' left - Then true Chosen One will be found':H.isChosen?'✨ TRUE CHOSEN ONE':'';
+ document.getElementById('chosenTimer').textContent=H.isInfinity&&H.isChosen?'Chosen Trial: '+fmtTime(H.chosenUntil-Date.now())+' left':H.isChosen?'✨ TRUE CHOSEN ONE':'';
  document.getElementById('invList').innerHTML=H.inventory.map(i=>'<span class="tag">'+i+'</span>').join('')||'Empty'; document.getElementById('skillList').innerHTML=H.skills.map(s=>'<span class="tag">🔮 '+s+'</span>').join('');
  document.getElementById('bankHist').innerHTML=H.bankHist.length?H.bankHist.map(h=>'<div>'+h+'</div>').join(''):'No transactions';
  document.getElementById('houseLevel').textContent=H.houseBuilt?'Built 🏠':'No House'; document.getElementById('sectName').textContent=H.sect; document.getElementById('sectName2').textContent=H.sect; document.getElementById('sectRank').textContent=H.sectRank;
  document.getElementById('homeFloor').textContent=H.dungeonFloor; document.getElementById('homeCheckpoint').textContent='Floor '+H.dungeonCheckpoint; document.getElementById('homeCultText').innerHTML='Realm: '+REALMS[H.cultRealm]+'<br>'+(H.level<5?'Need Lv.5':'Tap to Enter'); document.getElementById('homeWorldText').innerHTML='Anime World<br>'+(H.level<15?'Need Lv.15':'Tap to Enter');
- document.getElementById('storyText').textContent=H.story||'...';
- document.getElementById('hungerText').textContent=H.hunger+'%';
+ document.getElementById('storyText').textContent=H.story||'...'; document.getElementById('hungerText').textContent=H.hunger+'%';
  document.getElementById('familyText').textContent=H.family; document.getElementById('familyText2').textContent=H.family; document.getElementById('spouseText').textContent=H.spouse; document.getElementById('spouseText2').textContent=H.spouse; document.getElementById('petText').textContent=H.pet; document.getElementById('petText2').textContent=H.pet; document.getElementById('partyText').textContent=H.party; document.getElementById('jobText').textContent=H.job; document.getElementById('churchText').textContent=H.church;
- document.getElementById('achList').innerHTML='<span class="tag">🏅 First Kill</span> <span class="tag">🏅 Lv.10</span> <span class="tag">🏅 First Shadow</span>';
  renderGates(); renderShop(); showLeader();
 }
-function show(id,btn){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.getElementById(id).classList.add('active'); document.querySelectorAll('.tb').forEach(b=>b.classList.remove('active')); if(btn) btn.classList.add('active'); }
-function openCultivation(){ if(!H){ return; } if(H.level<5){ showPopup('🔒 CULTIVATION LOCKED','Need Lv.5! You are Lv.'+H.level); return; } if(!H.talentRevealed) revealTalent(); document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.getElementById('cultScreen').style.display='block'; }
+function show(id,btn){ if(!H){ document.getElementById('authScreen').style.display='flex'; return; } document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.getElementById(id).classList.add('active'); document.querySelectorAll('.tb').forEach(b=>b.classList.remove('active')); if(btn) btn.classList.add('active'); }
+function openCultivation(){ if(!H) return; if(H.level<5){ showPopup('🔒 CULTIVATION LOCKED','Need Lv.5! You are Lv.'+H.level); return; } if(!H.talentRevealed) revealTalent(); document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.getElementById('cultScreen').style.display='block'; }
 function closeCult(){ document.getElementById('cultScreen').style.display='none'; show('home',document.querySelectorAll('.tb')[0]); }
-// AUTH - REGISTER / LOGIN
+function logout(){ H=null; try{localStorage.removeItem('hunter_last');}catch(e){} document.getElementById('authScreen').style.display='flex'; document.getElementById('authMsg').textContent='Logged out. Login again.'; }
+function clearAll(){ if(confirm('Clear all accounts? This deletes old buggy saves.')){ localStorage.clear(); location.reload(); } }
+// ===== CORE FIX: ONE FUNCTION FOR BOTH BUTTONS =====
+function getAuth(){
+  let n=document.getElementById('authName').value||'';
+  let pass=document.getElementById('authPass').value||'';
+  let cls=document.getElementById('authClass').value||'ASSASSIN';
+  // Trim + remove spaces
+  n=n.trim(); pass=pass.trim().replace(/\s/g,'');
+  return {n,pass,cls};
+}
+function applyInfinityPerks(){
+  // Called ONLY when name is infinity + password 2164
+  H.isInfinity=true; H.cls='SHADOW MONARCH'; H.title='SHADOW MONARCH';
+  H.skills=['Shadow Slash','Arise','Monarch Aura','Shadow Exchange',"Ruler's Reach",'Army of Shadows'];
+  H.shadows=[{name:'Igris Shadow',lv:1,pow:999},{name:'Beru Shadow',lv:1,pow:999},{name:'Tusk Shadow',lv:1,pow:999}];
+  H.perks=['INFINITE MP','MONARCH BLOODLINE','SECRET GATE','ALL SKILLS','DOUBLE XP','CANNOT DIE','LORD INFINITY ACCESS','CHOSEN ONE TRIAL 2 DAYS'];
+  H.infiniteMp=true; H.gold=15000; H.maxHp=300; H.hp=300; H.mp=9999; H.maxMp=9999;
+  H.weapon='Monarch Blade'; H.weaponDmg=100; H.cultRealm=1; H.cultLayer=9; H.cultNeed=500;
+  H.isChosen=true; H.chosenUntil=Date.now()+2*24*3600000;
+  H.talentType='Bloodline'; H.talentValue='Primordial Chaos Bloodline'; H.talentGrade='Divine Grade'; H.talentRevealed=true;
+  H.story='Infinity. He was not weak. His bloodline was sealed by heaven itself. In the forest, the seal broke. Qi Refinement Ninth Peak. Shadows knelt. The old master smiled: Finally, the Monarch has returned. Phone: 0779798568 - Lord Infinity.';
+}
+function createAccount(n,pass,cls){
+  H=newHunter(); H.name=n; H.password=pass; H.registered=true; H.cls=cls; H.gold=10000; H.keys=3; H.story=genStory(n,cls);
+  if(normName(n)==='infinity'){
+    // Infinity MUST use 2164 - if they used 2164, give perks. If other pass, still give perks but warn
+    applyInfinityPerks();
+  } else {
+    if(cls==='FIGHTER') H.skills=['Power Slash','Rage Burst','Iron Fist'];
+    if(cls==='MAGE') H.skills=['Fireball','Ice Storm','Meteor'];
+    if(cls==='ASSASSIN') H.skills=['Shadow Step','Backstab','Poison Blade'];
+    if(cls==='TANK') H.skills=['Shield Wall','Taunt','Earthquake'];
+    if(cls==='HEALER') H.skills=['Heal','Holy Light','Revive'];
+    if(cls==='NECROMANCER') H.skills=['Arise','Soul Drain','Army of Dead'];
+  }
+  save(); enterDashboard();
+  setTimeout(()=>{ showPopup('👋 WELCOME, '+H.name+'!','Account Created!<br>Level '+H.level+' • '+H.gold+' Zeni • 3 Keys<br>'+(H.isInfinity?'👑 LORD INFINITY PERKS ACTIVATED!<br>Infinite MP • Monarch Blade • Cannot Die • Chosen 2 Days<br>':'')+'You are now in Home Dashboard.'); speak('Welcome, '+H.name); },300);
+  setTimeout(()=>{ playCutsceneByClass(); },1200);
+}
 function doRegister(){
- let n=document.getElementById('authName').value.trim(); let pass=document.getElementById('authPass').value.trim(); let cls=document.getElementById('authClass').value;
- if(!n||!pass||pass.length!==4||isNaN(pass)){ document.getElementById('authMsg').textContent='Enter Name + 4-digit Password (numbers only)!'; return; }
- if(accounts[n]){ document.getElementById('authMsg').textContent='⚠️ Name "'+n+'" is already taken! Please change your name!'; speak('That name is already taken. Please choose a different name.'); return; }
- H=newHunter(); H.name=n; H.password=pass; H.registered=true; H.cls=cls; H.gold=10000; H.keys=3; H.story=genStory(n,cls);
- if(n.toLowerCase()==='infinity'){
-   H.isInfinity=true; H.cls='SHADOW MONARCH'; H.title='SHADOW MONARCH'; H.skills=['Shadow Slash','Arise','Monarch Aura','Shadow Exchange','Ruler\'s Reach','Army of Shadows']; H.shadows=[{name:'Igris Shadow',lv:1,pow:999},{name:'Beru Shadow',lv:1,pow:999},{name:'Tusk Shadow',lv:1,pow:999}]; H.perks=['INFINITE MP','MONARCH BLOODLINE','SECRET GATE','ALL SKILLS','DOUBLE XP','CANNOT DIE','LORD INFINITY ACCESS','CHOSEN ONE TRIAL 2 DAYS']; H.infiniteMp=true; H.gold=15000; H.maxHp=300; H.hp=300; H.weapon='Monarch Blade'; H.weaponDmg=100; H.cultRealm=1; H.cultLayer=9; H.cultNeed=500;
-   H.isChosen=true; H.chosenUntil=Date.now()+2*24*3600000; chosenOneName='Infinity'; localStorage.setItem('chosen_one_name','Infinity');
- } else {
-   if(cls==='FIGHTER') H.skills=['Power Slash','Rage Burst','Iron Fist']; if(cls==='MAGE') H.skills=['Fireball','Ice Storm','Meteor']; if(cls==='ASSASSIN') H.skills=['Shadow Step','Backstab','Poison Blade']; if(cls==='TANK') H.skills=['Shield Wall','Taunt','Earthquake']; if(cls==='HEALER') H.skills=['Heal','Holy Light','Revive']; if(cls==='NECROMANCER') H.skills=['Arise','Soul Drain','Army of Dead'];
-   // If Infinity trial ended and no chosen one, chance for this new player to be true chosen one
-   if(chosenOneName && chosenOneName!==n && Math.random()<0.05){ H.isChosen=true; H.perks.push('TRUE CHOSEN ONE'); }
- }
- save(); document.getElementById('authScreen').style.display='none'; sfxLevelUp(); setTimeout(()=>{ playCutsceneByClass(); },500);
+  let {n,pass,cls}=getAuth();
+  let msg=document.getElementById('authMsg');
+  if(!n){ msg.textContent='⚠️ Enter a Name first! Example: infinity'; return; }
+  if(!pass){ msg.textContent='⚠️ Enter 4-digit Password! Example: 2164'; return; }
+  if(pass.length!==4){ msg.textContent='⚠️ Password must be EXACTLY 4 digits! You typed '+pass.length+' digits: '+pass; return; }
+  if(!/^\d{4}$/.test(pass)){ msg.textContent='⚠️ Password must be numbers only! Example: 2164'; return; }
+  // SPECIAL: Infinity + 2164
+  if(normName(n)==='infinity' && pass!=='2164'){
+    msg.textContent='⚠️ Infinity password is 2164! You typed '+pass+'. Use 2164.';
+    return;
+  }
+  // If account exists -> login
+  let key=normName(n);
+  if(accounts[key]){
+    if(String(accounts[key].password)===String(pass)){
+      // Login existing
+      doLogin(); return;
+    } else {
+      msg.textContent='⚠️ Name "'+n+'" already taken! Wrong password. Use different name or correct password.';
+      return;
+    }
+  }
+  // New account
+  msg.textContent='Creating account...';
+  createAccount(n,pass,cls);
 }
 function doLogin(){
- let n=document.getElementById('authName').value.trim(); let pass=document.getElementById('authPass').value.trim();
- if(!n||!pass){ document.getElementById('authMsg').textContent='Enter Name + 4-digit Password to login!'; return; }
- if(!accounts[n]){ document.getElementById('authMsg').textContent='No account with name "'+n+'"! Please REGISTER first!'; return; }
- if(accounts[n].password!==pass){ document.getElementById('authMsg').textContent='Wrong password! Try again.'; return; }
- let saved=localStorage.getItem('hunter_save_v7_'+n); if(!saved){ document.getElementById('authMsg').textContent='Save not found! Register again.'; return; }
- H=JSON.parse(saved); document.getElementById('authScreen').style.display='none'; save(); showPopup('👋 WELCOME BACK!','Welcome back, <b>'+H.name+'</b>!<br>Level '+H.level+' • '+REALMS[H.cultRealm]+' • Floor '+H.dungeonFloor+'<br>Loaded to Home Dashboard.'); speak('Welcome back, '+H.name+'. Your progress has been loaded.');
+  let {n,pass,cls}=getAuth();
+  let msg=document.getElementById('authMsg');
+  if(!n){ msg.textContent='⚠️ Enter Name! Example: infinity'; return; }
+  if(!pass){ msg.textContent='⚠️ Enter 4-digit Password! Example: 2164'; return; }
+  if(pass.length!==4){ msg.textContent='⚠️ Password must be 4 digits! You typed '+pass.length; return; }
+  if(normName(n)==='infinity' && pass!=='2164'){ msg.textContent='⚠️ Infinity password is 2164!'; return; }
+  let key=normName(n);
+  if(!accounts[key]){
+    // FIX: No account -> auto-create instead of stuck
+    msg.textContent='No account for "'+n+'". Creating it now...';
+    createAccount(n,pass,cls);
+    return;
+  }
+  if(String(accounts[key].password)!==String(pass)){ msg.textContent='⚠️ Wrong password for "'+n+'"!'; return; }
+  let saved=null; try{ saved=localStorage.getItem('hunter_save_'+key); }catch(e){}
+  if(!saved){
+    // Old save missing -> recreate with perks if infinity
+    createAccount(n,pass,cls); return;
+  }
+  H=JSON.parse(saved); H.password=pass;
+  // Re-apply Infinity perks if infinity (in case old save lost them)
+  if(normName(n)==='infinity' && !H.isInfinity){ applyInfinityPerks(); }
+  save(); enterDashboard();
+  setTimeout(()=>{ showPopup('👋 WELCOME BACK!','Welcome back, <b>'+H.name+'</b>!<br>Level '+H.level+' • '+REALMS[H.cultRealm]+' • Floor '+H.dungeonFloor); speak('Welcome back, '+H.name); },300);
+}
+function forceEnter(){
+  let {n,pass,cls}=getAuth();
+  if(!n) n='Guest'+Math.floor(Math.random()*1000);
+  if(!pass || pass.length!==4) pass = (normName(n)==='infinity' ? '2164' : '1234');
+  document.getElementById('authName').value=n;
+  document.getElementById('authPass').value=pass;
+  // Force: delete old buggy entry for this name and recreate
+  let key=normName(n);
+  if(accounts[key] && String(accounts[key].password)!==String(pass)){
+    delete accounts[key]; saveAccounts(accounts); try{localStorage.removeItem('hunter_save_'+key);}catch(e){}
+  }
+  doRegister();
 }
 function randomGrade(){ let r=Math.random()*100; if(r<1) return 'Divine Grade'; if(r<3) return 'Saint Grade'; if(r<8) return 'Supreme Grade'; if(r<30) return 'High Grade'; if(r<60) return 'Mid Grade'; return 'Low Grade'; }
 function revealTalent(){
  if(H.talentRevealed) return; H.talentRevealed=true;
  if(H.isInfinity){ H.talentType='Bloodline'; H.talentValue='Primordial Chaos Bloodline'; H.talentGrade='Divine Grade'; }
  else { let pick=Math.random()<0.5?'Physique':'Bloodline'; if(pick==='Physique'){ H.talentType='Physique'; H.talentValue=PHYS[Math.floor(Math.random()*PHYS.length)]; } else { H.talentType='Bloodline'; H.talentValue=BLOODLINES[Math.floor(Math.random()*(BLOODLINES.length-1))]; } if(Math.random()<0.2){ H.talentType+=' + Spirit Root'; H.talentValue+=' + '+ROOTS[Math.floor(Math.random()*(ROOTS.length-1))]+' Root'; } H.talentGrade=randomGrade(); }
- save(); showPopup('🎲 TALENT AWAKENED!','Talent: <b>'+H.talentType+':</b> '+H.talentValue+'<br>Grade: <b>'+H.talentGrade+'</b>','https://images.unsplash.com/photo-1534447677768-be436bb09401?w=800&q=80'); speak('Your talent has awakened. '+H.talentType+' '+H.talentValue+' '+H.talentGrade);
+ save(); showPopup('🎲 TALENT AWAKENED!','Talent: <b>'+H.talentType+':</b> '+H.talentValue+'<br>Grade: <b>'+H.talentGrade+'</b>','https://images.unsplash.com/photo-1534447677768-be436bb09401?w=800&q=80'); speak('Your talent has awakened.');
 }
-function genStory(name,cls){
- let hash=0; for(let c of name) hash+=c.charCodeAt(0);
- let origins=['Orphan boy','Betrayed prince','Slave boy','Poor disciple','Hidden family heir','Village boy'];
- let origin=origins[hash%origins.length];
- let masters=['old master in forest','dying elder in cave','mysterious woman in lake','ancient dragon spirit'];
- let master=masters[hash% masters.length];
- return name+', '+origin+', was bullied every day. No family, no money, no power. One night, he ran into the forest to cry. There he met '+master+', who saw his hidden bloodline. The master said: Your bloodline was sealed. Unseal it. The master died protecting him. Now '+name+' seeks revenge and power. Class: '+cls+'. His story is his alone.';
-}
-function playCutsceneByClass(){ let c={img:'https://images.unsplash.com/photo-1541562232579-512a21360020?w=800&q=80',title:'YOUR STORY - '+H.name,text:H.story||'Orphan boy...'}; csList=[c]; csIndex=0; showCs(); }
+function genStory(name,cls){ let hash=0; for(let c of name) hash+=c.charCodeAt(0); let origins=['Orphan boy','Betrayed prince','Slave boy','Poor disciple','Hidden family heir','Village boy']; let origin=origins[hash%origins.length]; let masters=['old master in forest','dying elder in cave','mysterious woman in lake','ancient dragon spirit']; let master=masters[hash% masters.length]; return name+', '+origin+', was bullied every day. No family, no money, no power. One night, he ran into the forest to cry. There he met '+master+', who saw his hidden bloodline. The master said: Your bloodline was sealed. Unseal it. The master died protecting him. Now '+name+' seeks revenge and power. Class: '+cls+'. His story is his alone.'; }
+function playCutsceneByClass(){ if(!H) return; let c={img:'https://images.unsplash.com/photo-1541562232579-512a21360020?w=800&q=80',title:'YOUR STORY - '+H.name,text:H.story||'Orphan boy...'}; csList=[c]; csIndex=0; showCs(); }
 function showCs(){ let c=csList[csIndex]; document.getElementById('csImg').src=c.img; document.getElementById('csTitle').textContent=c.title; document.getElementById('csText').textContent=c.text; document.getElementById('cutscene').style.display='flex'; sfxGate(); speak(c.title+'. '+c.text); }
 function nextCutscene(){ try{speechSynthesis.cancel();}catch(e){} if(csIndex<csList.length-1){ csIndex++; showCs(); } else closeCutscene(); }
 function closeCutscene(){ document.getElementById('cutscene').style.display='none'; try{speechSynthesis.cancel();}catch(e){} }
 function renderGates(){
- // Check auth for gates
- document.getElementById('gateAuthMsg').textContent=H? 'Logged in as '+H.name+' - Tap a Gate to Enter':'Please REGISTER / LOGIN first to enter Gates!';
+ document.getElementById('gateAuthMsg').textContent=H? 'Logged in as '+H.name+' - Tap a Gate to Enter':'Please REGISTER / LOGIN first!';
  let gates=[
   {r:'E',c:'#00FF00',e:'🐺',boss:'Wolf King',hp:240,reward:500,img:'https://images.unsplash.com/photo-1541562232579-512a21360020?w=800&q=80'},
   {r:'D',c:'#00AAFF',e:'🐻',boss:'Bear Tyrant',hp:450,reward:800,img:'https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?w=800&q=80'},
@@ -267,14 +325,14 @@ function renderGates(){
  document.getElementById('gateList').innerHTML=gates.map(g=>'<div class="card" style="border:2px solid '+g.c+'"><img class="animeImg" src="'+g.img+'"><h3>'+g.r+'-RANK GATE '+g.e+'</h3><p>Boss: '+g.boss+' • HP: '+g.hp.toLocaleString()+' • Reward: '+g.reward.toLocaleString()+'</p><button class="btn" onclick="enterGate(\''+g.r+'\',\''+g.boss+'\','+g.hp+','+g.reward+',\''+g.e+'\',\''+g.img+'\')">🚪 ENTER GATE ▶</button></div>').join('');
 }
 function renderShop(){
- let items=[{n:'Potion',p:100,e:'🧪'},{n:'Small Heal',p:150,e:'🧪'},{n:'Medium Heal',p:300,e:'🧪'},{n:'MP Potion',p:200,e:'🔮'},{n:'Greater MP Potion',p:400,e:'🔮'},{n:'Phoenix Elixir',p:2000,e:'🔥'},{n:'Stat Boost',p:1000,e:'⚡'},{n:'Elixir',p:500,e:'💖'},{n:'Gate Key',p:300,e:'🔑'},{n:'Demon Sword',p:5000,e:'🗡️'},{n:'Heaven Sword',p:10000,e:'⚔️'},{n:'Dragon Sword',p:25000,e:'🐉'},{n:'Spirit Pill',p:800,e:'💊'},{n:'Qi Pill',p:500,e:'💊'},{n:'Foundation Pill',p:2000,e:'💊'},{n:'Golden Core Pill',p:5000,e:'💊'},{n:'Wood',p:100,e:'🪵'},{n:'Stone',p:80,e:'🪨'},{n:'Rice',p:50,e:'🍚'},{n:'Fish',p:70,e:'🐟'},{n:'Meat',p:120,e:'🍖'},{n:'House Material',p:1000,e:'🏠'},{n:'Armor',p:3000,e:'🛡️'},{n:'Boots',p:1500,e:'🥾'},{n:'Ring',p:2500,e:'💍'},{n:'Shadow Stone',p:1000,e:'💀'},{n:'Skill Scroll',p:5000,e:'📜'}];
+ let items=[{n:'Potion',p:100,e:'🧪'},{n:'Small Heal',p:150,e:'🧪'},{n:'Medium Heal',p:300,e:'🧪'},{n:'MP Potion',p:200,e:'🔮'},{n:'Phoenix Elixir',p:2000,e:'🔥'},{n:'Elixir',p:500,e:'💖'},{n:'Gate Key',p:300,e:'🔑'},{n:'Demon Sword',p:5000,e:'🗡️'},{n:'Heaven Sword',p:10000,e:'⚔️'},{n:'Dragon Sword',p:25000,e:'🐉'},{n:'Qi Pill',p:500,e:'💊'},{n:'Foundation Pill',p:2000,e:'💊'},{n:'Golden Core Pill',p:5000,e:'💊'},{n:'Wood',p:100,e:'🪵'},{n:'Rice',p:50,e:'🍚'},{n:'Fish',p:70,e:'🐟'},{n:'House Material',p:1000,e:'🏠'},{n:'Armor',p:3000,e:'🛡️'},{n:'Boots',p:1500,e:'🥾'},{n:'Ring',p:2500,e:'💍'},{n:'Shadow Stone',p:1000,e:'💀'},{n:'Skill Scroll',p:5000,e:'📜'}];
  document.getElementById('shopList').innerHTML=items.map(it=>'<button class="btn2" onclick="buyItem(\''+it.n+'\','+it.p+')">'+it.e+' '+it.n+'<br>'+it.p+' Zeni</button>').join('');
 }
 function enterGate(rank,boss,hp,reward,emoji,img){
- if(!H){ document.getElementById('authScreen').style.display='flex'; showPopup('🔒 LOGIN REQUIRED','You must REGISTER or LOGIN first to enter Gates!'); return; }
+ if(!H){ document.getElementById('authScreen').style.display='flex'; return; }
  if(H.keys<=0){ showPopup('🔑 NO KEYS','No Gate Keys! Buy in Shop.'); return; }
  H.keys--; curGate={rank,boss,hp,reward}; curBoss={name:boss,hp:hp,maxHp:hp,emoji:emoji,reward:reward}; inBattle=true; combo=0;
- document.getElementById('battleScreen').style.display='flex'; document.getElementById('clearedBox').style.display='none'; document.getElementById('gateTitle').textContent=rank+'-RANK GATE - '+boss; document.getElementById('bossEmoji').textContent=emoji; document.getElementById('bossName').textContent=boss; document.getElementById('battleImg').src=img; document.getElementById('battleFloor').textContent='-';
+ document.getElementById('battleScreen').style.display='flex'; document.getElementById('clearedBox').style.display='none'; document.getElementById('gateTitle').textContent=rank+'-RANK GATE - '+boss; document.getElementById('bossEmoji').textContent=emoji; document.getElementById('bossName').textContent=boss; document.getElementById('battleImg').src=img;
  document.getElementById('battleLog').innerHTML='<div>Gate Opened! Boss HP: '+hp.toLocaleString()+'</div>'; document.getElementById('gateMsg').textContent=''; sfxGate(); setTimeout(sfxBoss,400); updateBattle(); save();
 }
 function updateBattle(){ if(!curBoss) return; document.getElementById('bossHp').textContent=Math.max(0,curBoss.hp).toLocaleString(); document.getElementById('bossHpFill').style.width=Math.max(0,curBoss.hp/curBoss.maxHp*100)+'%'; document.getElementById('battleHp').textContent=H.hp; document.getElementById('battleMp').textContent=H.infiniteMp?'∞':H.mp; document.getElementById('battleHpFill').style.width=(H.hp/H.maxHp*100)+'%'; document.getElementById('comboText').textContent='x'+combo; }
@@ -286,31 +344,17 @@ function dodge(){ if(!inBattle) return; sfxDodge(); let st=calcStats(); if(Math.
 function block(){ if(!inBattle) return; sfxBlock(); isBlocking=true; logBattle('🛡️ BLOCKING'); setTimeout(()=>isBlocking=false,3000); bossTurn(true); updateBattle(); save(); }
 function useSkill(n){ if(!inBattle) return; let cost=[0,10,20,40][n]; if(!H.infiniteMp && H.mp<cost){ logBattle('No MP'); return; } if(!H.infiniteMp) H.mp-=cost; let st=calcStats(); let dmg=(st.atk+H.int)*n+Math.floor(Math.random()*40); curBoss.hp-=dmg; if(n===3) sfxUlt(); else sfxHit(); logBattle('🔥 SKILL '+(H.skills[n-1]||'Skill')+' - '+dmg.toLocaleString()); if(curBoss.hp<=0){ bossDead(); return; } bossTurn(); updateBattle(); save(); }
 function bossTurn(blocked=false){ let st=calcStats(); let dmg=20+Math.floor(Math.random()*30)+Math.floor(curBoss.maxHp/100000); dmg=Math.max(10,dmg-st.def/4); if(blocked||isBlocking) dmg=Math.floor(dmg*0.2); H.hp-=dmg; sfxHit(); logBattle('👹 Boss hits - '+Math.floor(dmg)+' HP:'+H.hp); if(H.hp<=0){ if(H.isInfinity){ H.hp=Math.floor(H.maxHp/2); logBattle('👑 INFINITY: CANNOT DIE!'); } else { H.hp=10; inBattle=false; showPopup('💀 YOU DIED','You died! HP set to 10.','https://images.unsplash.com/photo-1509347528160-9a9e33742cdb?w=800&q=80'); } } }
-function bossDead(){
- let gold=curBoss.reward, xp=Math.floor(curBoss.reward/2); H.gold+=gold; H.keys+=1; gainXP(xp); H.cultXp+=50; inBattle=false; sfxCoin();
- document.getElementById('clearedBox').style.display='block'; document.getElementById('clearGateName').textContent=curGate.rank+'-RANK'; document.getElementById('clearPlayer').textContent=H.name||'Hunter'; document.getElementById('clearLv').textContent=H.level; document.getElementById('clearGold').textContent=gold.toLocaleString(); document.getElementById('clearXp').textContent=xp.toLocaleString(); document.getElementById('clearHp').textContent=H.hp; document.getElementById('clearMaxHp').textContent=H.maxHp; document.getElementById('clearHpFill').style.width=(H.hp/H.maxHp*100)+'%';
- document.getElementById('gateMsg').innerHTML='BOSS DEFEATED! Press ARISE then auto-exit in 3s...';
- updateBattle(); save(); speak('Gate cleared! Plus '+gold+' gold!');
- setTimeout(()=>{ document.getElementById('battleScreen').style.display='none'; document.getElementById('clearedBox').style.display='none'; show('gate',document.querySelectorAll('.tb')[2]); },3000);
-}
+function bossDead(){ let gold=curBoss.reward, xp=Math.floor(curBoss.reward/2); H.gold+=gold; H.keys+=1; gainXP(xp); H.cultXp+=50; inBattle=false; sfxCoin(); document.getElementById('clearedBox').style.display='block'; document.getElementById('clearGateName').textContent=curGate.rank+'-RANK'; document.getElementById('clearPlayer').textContent=H.name||'Hunter'; document.getElementById('clearLv').textContent=H.level; document.getElementById('clearGold').textContent=gold.toLocaleString(); document.getElementById('clearXp').textContent=xp.toLocaleString(); document.getElementById('clearHp').textContent=H.hp; document.getElementById('clearMaxHp').textContent=H.maxHp; document.getElementById('clearHpFill').style.width=(H.hp/H.maxHp*100)+'%'; document.getElementById('gateMsg').innerHTML='BOSS DEFEATED! Press ARISE then auto-exit in 3s...'; updateBattle(); save(); speak('Gate cleared! Plus '+gold+' gold!'); setTimeout(()=>{ document.getElementById('battleScreen').style.display='none'; document.getElementById('clearedBox').style.display='none'; show('gate',document.querySelectorAll('.tb')[2]); },3000); }
 function arise(){ if(!curBoss){ showPopup('💀 NO BOSS','Kill a Boss first!'); return; } let s={name:curBoss.name+' Shadow',lv:H.level,pow:50+H.level*10}; H.shadows.push(s); sfxArise(); document.getElementById('gateMsg').innerHTML='💀 ARISE! '+s.name+' joined!'; logBattle('💀 ARISE! '+s.name); save(); showPopup('💀 ARISE SUCCESS!','Shadow: <b>'+s.name+'</b> joined!','https://images.unsplash.com/photo-1509347528160-9a9e33742cdb?w=800&q=80'); speak('Arise! Your new shadow joined.'); }
 function heal(){ if(!H.infiniteMp && H.mp<10){ logBattle('No MP'); return; } if(!H.infiniteMp) H.mp-=10; H.hp=Math.min(H.maxHp,H.hp+40); sfxHeal(); logBattle('💖 +40 HP'); updateBattle(); save(); }
 function runGate(){ inBattle=false; document.getElementById('battleScreen').style.display='none'; }
 function cultivate(){ if(H.level<5){ showPopup('🔒 LOCKED','Need Lv.5!'); return; } if(Date.now()<H.lastCult+4*3600000){ showPopup('⏰ COOLDOWN','Wait '+fmtTime(H.lastCult+4*3600000-Date.now())); return; } H.lastCult=Date.now(); let gain=50+H.level*5; H.cultXp+=gain; sfxCoin(); save(); showPopup('🧘 CULTIVATION','Meditation Complete!<br>+'+gain+' Cult XP'); }
 function breakthrough(){
  if(H.level<5){ showPopup('🔒 LOCKED','Need Lv.5!'); return; } if(H.cultXp<H.cultNeed){ showPopup('⚠️ NOT ENOUGH','Need '+H.cultNeed+' Cult XP! You have '+H.cultXp); return; }
- if(H.cultRealm>=3){
-   let chance={'Low Grade':0.05,'Mid Grade':0.30,'High Grade':0.70,'Supreme Grade':0.80,'Saint Grade':0.40,'Divine Grade':0.40}[H.talentGrade]||0.3;
-   sfxThunder(); speak('Lightning tribulation! Heaven is testing you!');
-   setTimeout(()=>{
-     if(Math.random()>chance){ if(H.cultLayer>1) H.cultLayer--; H.cultXp=0; save(); showPopup('⚡ TRIBULATION FAILED!','Lightning struck! Survival was '+Math.floor(chance*100)+'% for '+H.talentGrade+'<br>Lost 1 Layer.'); speak('Tribulation failed. Heaven rejected you.'); return; }
-     else { doBreakthrough(true); showPopup('⚡ TRIBULATION SURVIVED!','You survived lightning! +100% Power!','https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=800&q=80'); speak('You survived tribulation!'); }
-   },1200); return;
- }
+ if(H.cultRealm>=3){ let chance={'Low Grade':0.05,'Mid Grade':0.30,'High Grade':0.70,'Supreme Grade':0.80,'Saint Grade':0.40,'Divine Grade':0.40}[H.talentGrade]||0.3; sfxThunder(); speak('Lightning tribulation! Heaven is testing you!'); setTimeout(()=>{ if(Math.random()>chance){ if(H.cultLayer>1) H.cultLayer--; H.cultXp=0; save(); showPopup('⚡ TRIBULATION FAILED!','Lightning struck! Survival was '+Math.floor(chance*100)+'% for '+H.talentGrade+'<br>Lost 1 Layer.'); speak('Tribulation failed.'); return; } else { doBreakthrough(true); showPopup('⚡ TRIBULATION SURVIVED!','You survived lightning! +100% Power!','https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=800&q=80'); speak('You survived tribulation!'); } },1200); return; }
  doBreakthrough(false);
 }
 function doBreakthrough(trib){ H.cultXp-=H.cultNeed; H.cultNeed=Math.floor(H.cultNeed*1.5)+100; if(H.cultLayer<9){ H.cultLayer++; } else { H.cultLayer=1; H.cultRealm=Math.min(REALMS.length-1,H.cultRealm+1); } H.maxHp+=30; if(trib) H.maxHp+=30; H.hp=H.maxHp; sfxLevelUp(); save(); if(!trib) showPopup('🌌 BREAKTHROUGH!','New Realm: <b>'+REALMS[H.cultRealm]+'</b> Layer '+H.cultLayer+'th','https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=800&q=80'); }
-// WORLD - ANIME
 let world={x:1500,y:1500,joyX:0,joyY:0,trees:[],shops:[],mobs:[],camX:0,camY:0,running:false,W:3000,H:3000,imgs:{}};
 function openWorld(){
  if(!H){ document.getElementById('authScreen').style.display='flex'; return; }
@@ -323,8 +367,7 @@ function openWorld(){
  world.imgs.forest=new Image(); world.imgs.forest.src='https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800&q=80';
  world.imgs.city=new Image(); world.imgs.city.src='https://images.unsplash.com/photo-1541562232579-512a21360020?w=800&q=80';
  world.running=true; resizeWorld(); requestAnimationFrame(worldLoop);
- showPopup('🌎 ANIME WORLD','Anime World! Big Map 3000x3000.<br>You can SEE shops 🏪, houses 🏠, mobs 👹.<br>Walk to them to interact!');
- speak('Welcome to the anime world. You can see shops, houses, and mobs. Walk to them.');
+ showPopup('🌎 ANIME WORLD','Anime World! Big Map 3000x3000.<br>You can SEE shops 🏪, houses 🏠, mobs 👹.'); speak('Welcome to the anime world.');
 }
 function closeWorld(){ document.getElementById('worldScreen').style.display='none'; world.running=false; }
 function resizeWorld(){ let c=document.getElementById('worldCanvas'); c.width=c.clientWidth; c.height=c.clientHeight; }
@@ -337,101 +380,73 @@ function worldLoop(){
  ctx.fillStyle='#1a0033'; ctx.fillRect(0,0,c.width,c.height);
  let tile=400; for(let tx=Math.floor(world.camX/tile)*tile; tx<world.camX+c.width; tx+=tile){ for(let ty=Math.floor(world.camY/tile)*tile; ty<world.camY+c.height; ty+=tile){ let img=world.imgs.forest; if(ty>2000) img=world.imgs.city; if(img && img.complete){ ctx.globalAlpha=0.6; ctx.drawImage(img, tx-world.camX, ty-world.camY, tile, tile); ctx.globalAlpha=1; } } }
  world.trees.forEach(t=>{ if(t.hp>0){ ctx.font='36px Arial'; ctx.fillText('🌲',t.x-world.camX,t.y-world.camY); } });
- world.shops.forEach(s=>{ ctx.font='44px Arial'; ctx.fillText('🏪',s.x-world.camX,s.y-world.camY); ctx.fillStyle='#fff'; ctx.font='bold 12px Arial'; ctx.fillText(s.name,s.x-world.camX,s.y-world.camY+50); ctx.fillStyle='#fff'; });
+ world.shops.forEach(s=>{ ctx.font='44px Arial'; ctx.fillText('🏪',s.x-world.camX,s.y-world.camY); });
  world.mobs.forEach(m=>{ ctx.font='36px Arial'; ctx.fillText('👹',m.x-world.camX,m.y-world.camY); });
  ctx.font='44px Arial'; ctx.fillText(H.houseBuilt?'🏠':'🏚️', 500-world.camX, 500-world.camY);
  ctx.font='34px Arial'; ctx.fillText(H.isInfinity?'👑':'🧑‍🎤',c.width/2,c.height/2);
  let mm=document.getElementById('miniMap'); let mctx=mm.getContext('2d'); mctx.fillStyle='#111'; mctx.fillRect(0,0,110,110); mctx.fillStyle='#2a5a2a'; mctx.fillRect(10,10,90,90); mctx.fillStyle='#00FF00'; mctx.fillRect(10+world.x/world.W*90,10+world.y/world.H*90,6,6); world.shops.forEach(s=>{ mctx.fillStyle='#FFD700'; mctx.fillRect(10+s.x/world.W*90,10+s.y/world.H*90,5,5); }); world.mobs.forEach(m=>{ mctx.fillStyle='#FF0000'; mctx.fillRect(10+m.x/world.W*90,10+m.y/world.H*90,3,3); });
  document.getElementById('wWood').textContent=H.wood; document.getElementById('wGold').textContent=H.gold;
- let loc='Wilderness'; if(world.x<800&&world.y<800) loc='House + Shop Area'; else if(world.x>2200&&world.y<800) loc='Sect Area'; else if(world.x>2200&&world.y>2200) loc='Hunter City'; document.getElementById('worldLoc').textContent=loc+' ('+Math.floor(world.x)+','+Math.floor(world.y)+')';
+ let loc='Wilderness'; if(world.x<800&&world.y<800) loc='House + Shop'; else if(world.x>2200&&world.y<800) loc='Sect Area'; else if(world.x>2200&&world.y>2200) loc='Hunter City'; document.getElementById('worldLoc').textContent=loc+' ('+Math.floor(world.x)+','+Math.floor(world.y)+')';
  requestAnimationFrame(worldLoop);
 }
 function worldAction(){
  let nearest=null, best=100; world.trees.forEach(t=>{ let d=Math.hypot(t.x-world.x,t.y-world.y); if(d<best && t.hp>0){ best=d; nearest=t; } });
- if(nearest){ sfxChop(); nearest.hp--; H.wood+=5; save(); showPopup('🪓 CHOPPED WOOD!','+5 Wood • Total: '+H.wood); speak('You chopped wood. Plus 5 wood.'); return; }
- // Check mob nearby
- let mob=null, bd=100; world.mobs.forEach(m=>{ let d=Math.hypot(m.x-world.x,m.y-world.y); if(d<bd){ bd=d; mob=m; } });
- if(mob){ showPopup('👹 MOB FOUND!','You found Anime Mob!<br>Attack it in Gates to get loot!'); return; }
- showPopup('🌲 NO TREE NEARBY','Walk to a 🌲 tree! Green dots on map are trees. Shops are gold, mobs are red.');
+ if(nearest){ sfxChop(); nearest.hp--; H.wood+=5; save(); showPopup('🪓 CHOPPED WOOD!','+5 Wood • Total: '+H.wood); speak('You chopped wood.'); return; }
+ showPopup('🌲 NO TREE NEARBY','Walk to a 🌲 tree! Gold dots are shops, red are mobs.');
 }
 function worldInteract(){
  let nearShop=null, bd=120; world.shops.forEach(s=>{ let d=Math.hypot(s.x-world.x,s.y-world.y); if(d<bd){ bd=d; nearShop=s; } });
- if(nearShop){ showPopup('🏪 SHOP IN WORLD','You are at '+nearShop.name+'!<br>Shop opens! Buy potions, weapons, pills.'); show('shop',document.querySelectorAll('.tb')[5]); closeWorld(); return; }
+ if(nearShop){ showPopup('🏪 SHOP IN WORLD','You are at '+nearShop.name+'!'); show('shop',document.querySelectorAll('.tb')[5]); closeWorld(); return; }
  if(world.x<800&&world.y<800){ showPopup('🏠 HOUSE', H.houseBuilt?'Welcome home! HP restored!':'No house. Press BUILD with 50 Wood + 1000 Zeni.'); if(H.houseBuilt){ H.hp=H.maxHp; save(); } return; }
- showPopup('💬 WORLD','Walk to 🏪 Shop (gold on map), 🏠 House, 👹 Mob (red on map).');
+ showPopup('💬 WORLD','Walk to 🏪 Shop, 🏠 House, 👹 Mob.');
 }
 function worldBuild(){
- if(H.houseBuilt){ showPopup('🏠 HOUSE','You already have house! No levels.'); return; }
+ if(H.houseBuilt){ showPopup('🏠 HOUSE','You already have house!'); return; }
  if(H.wood<50||H.gold<1000){ showPopup('🏠 CANNOT BUILD','Need 50 Wood + 1000 Zeni! You have '+H.wood+' Wood, '+H.gold+' Zeni'); return; }
- H.wood-=50; H.gold-=1000; H.houseBuilt=true; H.maxHp+=50; H.hp=H.maxHp; save(); showPopup('🏠 HOUSE BUILT!','House Built! No levels. +50 Max HP','https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=800&q=80'); speak('Your house is built.');
+ H.wood-=50; H.gold-=1000; H.houseBuilt=true; H.maxHp+=50; H.hp=H.maxHp; save(); showPopup('🏠 HOUSE BUILT!','House Built! +50 Max HP','https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=800&q=80'); speak('Your house is built.');
 }
-// DUNGEON - AUTO NEXT
-function openDungeon(){
- if(!H){ document.getElementById('authScreen').style.display='flex'; return; }
- document.getElementById('dungeonScreen').style.display='block'; startDungeonFloor();
-}
+function openDungeon(){ if(!H){ document.getElementById('authScreen').style.display='flex'; return; } document.getElementById('dungeonScreen').style.display='block'; startDungeonFloor(); }
 function closeDungeon(){ document.getElementById('dungeonScreen').style.display='none'; }
-function startDungeonFloor(){
- let f=H.dungeonFloor; let hp=50+f*30; let names=['Goblin','Skeleton','Demon','Dragon','Demon King','Ancient Beast'];
- dunEnemy={name:names[f%names.length]+' Floor '+f,hp:hp,maxHp:hp};
- document.getElementById('dunFloor').textContent=f; document.getElementById('dunFloor2').textContent=f; document.getElementById('dunCheckpoint').textContent='Floor '+H.dungeonCheckpoint; document.getElementById('dunBest').textContent=H.dungeonBest; document.getElementById('dunEnemy').textContent=dunEnemy.name; document.getElementById('dunEnemyHp').textContent=hp; document.getElementById('dunEnemyHpFill').style.width='100%'; document.getElementById('dunYourHp').textContent=H.hp; document.getElementById('dunLog').innerHTML='<div>Floor '+f+' started! Enemy: '+dunEnemy.name+'</div>';
-}
-function dungeonAttack(){
- if(!dunEnemy) return; let st=calcStats(); let dmg=st.atk+Math.floor(Math.random()*20); dunEnemy.hp-=dmg; sfxSlash(); document.getElementById('dunLog').innerHTML+='<div>⚔️ You hit '+dunEnemy.name+' - '+dmg+'</div>'; document.getElementById('dunEnemyHp').textContent=Math.max(0,dunEnemy.hp); document.getElementById('dunEnemyHpFill').style.width=Math.max(0,dunEnemy.hp/dunEnemy.maxHp*100)+'%';
- if(dunEnemy.hp<=0){ let gold=100+H.dungeonFloor*20; let xp=50+H.dungeonFloor*10; H.gold+=gold; gainXP(xp); document.getElementById('dunLog').innerHTML+='<div>🏆 Floor '+H.dungeonFloor+' CLEARED! +'+gold+' Zeni +'+xp+' XP + Loot</div>'; showPopup('🏆 FLOOR '+H.dungeonFloor+' CLEARED!','Floor Cleared!<br>+'+gold+' Zeni • +'+xp+' XP<br>Click ENTER to go to NEXT DUNGEON!'); }
- else { let edmg=10+H.dungeonFloor*2; H.hp-=edmg; document.getElementById('dunLog').innerHTML+='<div>👹 Enemy hits - '+edmg+' HP: '+H.hp+'</div>'; document.getElementById('dunYourHp').textContent=H.hp; if(H.hp<=0){ H.hp=10; H.dungeonFloor=H.dungeonCheckpoint; showPopup('💀 YOU DIED','Died! Respawn at Checkpoint Floor '+H.dungeonCheckpoint); startDungeonFloor(); } }
- save();
-}
+function startDungeonFloor(){ let f=H.dungeonFloor; let hp=50+f*30; let names=['Goblin','Skeleton','Demon','Dragon','Demon King','Ancient Beast']; dunEnemy={name:names[f%names.length]+' Floor '+f,hp:hp,maxHp:hp}; document.getElementById('dunFloor').textContent=f; document.getElementById('dunFloor2').textContent=f; document.getElementById('dunCheckpoint').textContent='Floor '+H.dungeonCheckpoint; document.getElementById('dunBest').textContent=H.dungeonBest; document.getElementById('dunEnemy').textContent=dunEnemy.name; document.getElementById('dunEnemyHp').textContent=hp; document.getElementById('dunEnemyHpFill').style.width='100%'; document.getElementById('dunYourHp').textContent=H.hp; document.getElementById('dunLog').innerHTML='<div>Floor '+f+' started! Enemy: '+dunEnemy.name+'</div>'; }
+function dungeonAttack(){ if(!dunEnemy) return; let st=calcStats(); let dmg=st.atk+Math.floor(Math.random()*20); dunEnemy.hp-=dmg; sfxSlash(); document.getElementById('dunLog').innerHTML+='<div>⚔️ You hit '+dunEnemy.name+' - '+dmg+'</div>'; document.getElementById('dunEnemyHp').textContent=Math.max(0,dunEnemy.hp); document.getElementById('dunEnemyHpFill').style.width=Math.max(0,dunEnemy.hp/dunEnemy.maxHp*100)+'%'; if(dunEnemy.hp<=0){ let gold=100+H.dungeonFloor*20; let xp=50+H.dungeonFloor*10; H.gold+=gold; gainXP(xp); document.getElementById('dunLog').innerHTML+='<div>🏆 Floor '+H.dungeonFloor+' CLEARED! +'+gold+' Zeni</div>'; showPopup('🏆 FLOOR '+H.dungeonFloor+' CLEARED!','+'+gold+' Zeni • +'+xp+' XP<br>Click ENTER to go to NEXT DUNGEON!'); } else { let edmg=10+H.dungeonFloor*2; H.hp-=edmg; document.getElementById('dunLog').innerHTML+='<div>👹 Enemy hits - '+edmg+' HP: '+H.hp+'</div>'; document.getElementById('dunYourHp').textContent=H.hp; if(H.hp<=0){ H.hp=10; H.dungeonFloor=H.dungeonCheckpoint; showPopup('💀 YOU DIED','Respawn at Checkpoint Floor '+H.dungeonCheckpoint); startDungeonFloor(); } } save(); }
 function dungeonSkill(){ if(!dunEnemy) return; let st=calcStats(); let dmg=st.atk*2; dunEnemy.hp-=dmg; sfxUlt(); document.getElementById('dunLog').innerHTML+='<div>🔥 SKILL - '+dmg+'</div>'; document.getElementById('dunEnemyHp').textContent=Math.max(0,dunEnemy.hp); document.getElementById('dunEnemyHpFill').style.width=Math.max(0,dunEnemy.hp/dunEnemy.maxHp*100)+'%'; if(dunEnemy.hp<=0) dungeonAttack(); save(); }
 function dungeonHeal(){ H.hp=Math.min(H.maxHp,H.hp+40); sfxHeal(); document.getElementById('dunLog').innerHTML+='<div>💖 Healed +40</div>'; document.getElementById('dunYourHp').textContent=H.hp; save(); }
-function dungeonNext(){
- if(dunEnemy && dunEnemy.hp>0){ showPopup('⚠️ NOT CLEARED','Kill enemy first!'); return; }
- // AUTO ENTER NEXT DUNGEON
- H.dungeonFloor++; H.dungeonBest=Math.max(H.dungeonBest,H.dungeonFloor); if(H.dungeonFloor%50===0){ H.dungeonCheckpoint=H.dungeonFloor; showPopup('🏁 CHECKPOINT!','Checkpoint Floor '+H.dungeonFloor+'! Respawn here if you die.'); } save(); startDungeonFloor(); showPopup('🏰 ENTERED NEXT DUNGEON!','You entered Dungeon Floor '+H.dungeonFloor+'!<br>Enemy is slightly stronger + better loot!');
-}
+function dungeonNext(){ if(dunEnemy && dunEnemy.hp>0){ showPopup('⚠️ NOT CLEARED','Kill enemy first!'); return; } H.dungeonFloor++; H.dungeonBest=Math.max(H.dungeonBest,H.dungeonFloor); if(H.dungeonFloor%50===0){ H.dungeonCheckpoint=H.dungeonFloor; showPopup('🏁 CHECKPOINT!','Checkpoint Floor '+H.dungeonFloor+'!'); } save(); startDungeonFloor(); showPopup('🏰 ENTERED NEXT DUNGEON!','You entered Dungeon Floor '+H.dungeonFloor+'!'); }
 function doQuest(){ if(Date.now()<H.lastTrain+4*3600000){ showPopup('⏰ TRAIN COOLDOWN','Wait '+fmtTime(H.lastTrain+4*3600000-Date.now())); return; } H.lastTrain=Date.now(); H.questProg=Math.min(4,H.questProg+1); H.hunger=Math.max(0,H.hunger-10); save(); sfxCoin(); document.getElementById('questMsg').textContent='Trained! '+H.questProg+' / 4'; }
 function claimQuest(){ if(H.questProg<4){ showPopup('📋 NOT DONE','Finish Daily! '+H.questProg+' / 4'); return; } if(Date.now()<H.lastDaily+24*3600000){ showPopup('⏰ DAILY COOLDOWN','Wait '+fmtTime(H.lastDaily+24*3600000-Date.now())); return; } H.lastDaily=Date.now(); H.gold+=1000; H.gems+=2; H.questProg=0; gainXP(200); save(); showPopup('🎁 DAILY REWARD!','+1000 Zeni • +2 Gems • +200 XP','https://images.unsplash.com/photo-1534447677768-be436bb09401?w=800&q=80'); }
 function deposit(){ let amt=parseInt(document.getElementById('bankAmt').value)||0; if(amt<=0||H.gold<amt){ document.getElementById('bankMsg').textContent='Not enough Zeni!'; return; } H.gold-=amt; H.bank+=amt; H.bankHist.unshift('Deposit +'+amt); save(); sfxCoin(); document.getElementById('bankMsg').textContent='Deposited '+amt; }
 function withdraw(){ let amt=parseInt(document.getElementById('bankAmt').value)||0; if(amt<=0||H.bank<amt){ document.getElementById('bankMsg').textContent='Not enough Bank!'; return; } H.bank-=amt; H.gold+=amt; H.bankHist.unshift('Withdraw +'+amt); save(); sfxCoin(); document.getElementById('bankMsg').textContent='Withdrew '+amt; }
-function bankLoan(){ if(H.name.toLowerCase()!=='infinity'){ showPopup('🔒 LORD INFINITY ONLY','Only Lord Infinity can approve loans!<br>Ask Lord Infinity (Player: Infinity) to approve.'); return; } H.gold+=5000; save(); showPopup('💰 LOAN APPROVED - LORD INFINITY','Lord Infinity approved your loan!<br>+5000 Zeni'); }
+function bankLoan(){ if(normName(H.name)!=='infinity'){ showPopup('🔒 LORD INFINITY ONLY','Only Lord Infinity can approve loans!'); return; } H.gold+=5000; save(); showPopup('💰 LOAN APPROVED - LORD INFINITY','+5000 Zeni'); }
 function sendMoney(){ let to=document.getElementById('sendTo').value.trim(); let amt=parseInt(document.getElementById('sendAmt').value)||0; if(!to||amt<=0){ document.getElementById('sendMsg').textContent='Enter ID + Amount!'; return; } if(H.gold<amt){ document.getElementById('sendMsg').textContent='Not enough Zeni!'; return; } let target=allPlayers.find(p=>p.cloudId===to); if(!target){ document.getElementById('sendMsg').textContent='ID '+to+' not found!'; return; } H.gold-=amt; H.bankHist.unshift('Sent '+amt+' to '+target.name); save(); sfxCoin(); document.getElementById('sendMsg').textContent='Sent '+amt+' to '+target.name+'!'; }
 function copyId(){ navigator.clipboard.writeText(H.cloudId); showPopup('📋 ID COPIED','Your ID: <b>'+H.cloudId+'</b>'); }
 function loadCloud(){ let id=document.getElementById('cloudInput').value.trim(); if(!id){ document.getElementById('cloudMsg').textContent='Enter ID!'; return; } let found=allPlayers.find(p=>p.cloudId===id); if(found){ document.getElementById('cloudMsg').textContent='Found '+found.name+'!'; showPopup('☁️ CLOUD FOUND','Found <b>'+found.name+'</b> Level '+found.level); } else { document.getElementById('cloudMsg').textContent='ID not found.'; } }
 function createGuild(){ let n=document.getElementById('guildInput').value.trim(); if(!n) return; H.guild=n; H.guildMembers=1; save(); document.getElementById('guildMsg').textContent='Guild '+n+' Created!'; }
 function joinGuild(){ H.guild='Order of Tempest'; H.guildMembers=124; save(); document.getElementById('guildMsg').textContent='Applied to Order of Tempest!'; }
-function guildQuest(){ showPopup('📜 GUILD QUEST','Guild Quest: Kill 5 Gate Bosses<br>Reward: 2000 Zeni + Guild Points'); }
+function guildQuest(){ showPopup('📜 GUILD QUEST','Kill 5 Gate Bosses - Reward 2000 Zeni'); }
 function guildWar(){ if(H.guild==='NO GUILD'){ document.getElementById('warMsg').textContent='Join Guild first!'; return; } H.gold+=5000; H.warPts+=100; gainXP(500); save(); sfxBoss(); showPopup('⚔️ GUILD WAR WON!','+5000 Zeni • +100 War Points'); }
-function raid(){ showPopup('🛡️ COUNTRY RAID','Raid Started! Join team and attack beast!'); }
-function labyrinth(){ if(H.name.toLowerCase()!=='infinity'){ showPopup('🔒 LORD INFINITY ONLY','Only Lord Infinity can force Labyrinth!<br>Ask Lord Infinity.'); return; } showPopup('🌀 LABYRINTH - LORD INFINITY','Lord Infinity opened Labyrinth!<br>Team raid started!'); }
-function arena(){ if(H.gold<250000){ showPopup('🏟️ ARENA','Need 250,000 Zeni to enter Hall of Reflections!'); return; } H.gold-=250000; gainXP(1000); save(); showPopup('🏟️ ARENA ENTERED!','You entered Hall of Reflections!<br>Face your reflections!'); }
-function joinSect(name){ H.sect=name; H.sectRank='Outer Disciple'; save(); showPopup('🏯 SECT JOINED!','You joined <b>'+name+'</b>!<br>Rank: Outer Disciple'); }
-function sectFight(){
- if(H.sect==='No Sect'){ document.getElementById('sectMsg').textContent='Join Sect first!'; return; }
- let st=calcStats(); let enemyHp=100+H.level*20; let dmg=st.atk*2+Math.floor(Math.random()*50); sfxSlash();
- if(dmg>=enemyHp){ H.sectRank=H.sectRank==='Outer Disciple'?'Inner Disciple':H.sectRank==='Inner Disciple'?'Core Disciple':'Elder'; H.gold+=1000; gainXP(300); document.getElementById('sectLog').innerHTML='<div class="card">🏆 WON! New Rank: '+H.sectRank+'</div>'; showPopup('🏯 SECT FIGHT WON!','New Rank: '+H.sectRank+'<br>+1000 Zeni'); }
- else { H.hp=Math.max(10,H.hp-30); document.getElementById('sectLog').innerHTML='<div class="card">💀 Lost! -30 HP</div>'; showPopup('💀 SECT FIGHT LOST','Elder too strong! -30 HP'); }
- save();
-}
+function raid(){ showPopup('🛡️ COUNTRY RAID','Raid Started!'); }
+function labyrinth(){ if(normName(H.name)!=='infinity'){ showPopup('🔒 LORD INFINITY ONLY','Only Lord Infinity can force Labyrinth!'); return; } showPopup('🌀 LABYRINTH - LORD INFINITY','Lord Infinity opened Labyrinth!'); }
+function arena(){ if(H.gold<250000){ showPopup('🏟️ ARENA','Need 250,000 Zeni!'); return; } H.gold-=250000; gainXP(1000); save(); showPopup('🏟️ ARENA ENTERED!','You entered Hall of Reflections!'); }
+function joinSect(name){ H.sect=name; H.sectRank='Outer Disciple'; save(); showPopup('🏯 SECT JOINED!','You joined <b>'+name+'</b>!'); }
+function sectFight(){ if(H.sect==='No Sect'){ document.getElementById('sectMsg').textContent='Join Sect first!'; return; } let st=calcStats(); let enemyHp=100+H.level*20; let dmg=st.atk*2+Math.floor(Math.random()*50); sfxSlash(); if(dmg>=enemyHp){ H.sectRank=H.sectRank==='Outer Disciple'?'Inner Disciple':H.sectRank==='Inner Disciple'?'Core Disciple':'Elder'; H.gold+=1000; gainXP(300); document.getElementById('sectLog').innerHTML='<div class="card">🏆 WON! New Rank: '+H.sectRank+'</div>'; showPopup('🏯 SECT FIGHT WON!','New Rank: '+H.sectRank); } else { H.hp=Math.max(10,H.hp-30); document.getElementById('sectLog').innerHTML='<div class="card">💀 Lost! -30 HP</div>'; showPopup('💀 SECT FIGHT LOST','Elder too strong! -30 HP'); } save(); }
 function buyItem(name,price){ if(H.gold<price){ document.getElementById('shopMsg').textContent='Not enough Zeni!'; return; } H.gold-=price; if(name==='Gate Key') H.keys++; else if(name==='Wood') H.wood+=10; else H.inventory.push(name); save(); sfxCoin(); document.getElementById('shopMsg').textContent='Bought '+name; }
 function eatFood(){ if(H.gold<50) return; H.gold-=50; H.hp=Math.min(H.maxHp,H.hp+20); H.hunger=Math.min(100,H.hunger+20); save(); sfxHeal(); }
-function sleep(){ H.hp=H.maxHp; if(!H.infiniteMp) H.mp=H.maxMp; H.hunger=Math.max(0,H.hunger-5); save(); sfxHeal(); showPopup('😴 SLEPT','Full HP/MP Restored!'); }
-function hospital(){ if(H.gold<200){ document.getElementById('hospitalMsg').textContent='Need 200 Zeni for Hospital!'; return; } H.gold-=200; H.hp=H.maxHp; save(); showPopup('🏥 HOSPITAL','Healed to Full HP!<br>-200 Zeni'); }
-function gamble(){ if(H.gold<500){ showPopup('🎲 GAMBLE','Need 500 Zeni!'); return; } H.gold-=500; if(Math.random()>0.5){ H.gold+=1000; showPopup('🎲 GAMBLE WON!','You won! +1000 Zeni'); } else { showPopup('🎲 GAMBLE LOST','You lost 500 Zeni.'); } save(); }
-function createParty(){ H.party='Party of '+H.name; save(); showPopup('👥 PARTY CREATED','Party: '+H.party+'<br>Invite friends with Duel Link!'); }
-function createFamily(){ if(H.gold<1000000){ showPopup('🏠 FAMILY','Need 1,000,000 Zeni to Found Family!'); return; } H.gold-=1000000; H.family='House of '+H.name; save(); showPopup('🏠 FAMILY FOUNDED!','Family: '+H.family+'<br>Cost 1,000,000 Zeni'); }
-function marry(){ H.spouse='Proposed - Waiting...'; save(); showPopup('💍 PROPOSAL SENT','Marriage proposal sent!<br>Other player must accept.'); }
-function buyPet(){ if(H.gold<5000){ showPopup('🐉 PET','Need 5000 Zeni for Dragon Egg!'); return; } H.gold-=5000; H.pet='Dragon Egg'; save(); showPopup('🐉 DRAGON EGG!','You bought a Dragon Egg!<br>Train it to hatch!'); }
+function sleep(){ H.hp=H.maxHp; if(!H.infiniteMp) H.mp=H.maxMp; save(); sfxHeal(); showPopup('😴 SLEPT','Full HP/MP Restored!'); }
+function hospital(){ if(H.gold<200){ document.getElementById('hospitalMsg').textContent='Need 200 Zeni!'; return; } H.gold-=200; H.hp=H.maxHp; save(); showPopup('🏥 HOSPITAL','Healed to Full HP! -200 Zeni'); }
+function gamble(){ if(H.gold<500){ showPopup('🎲 GAMBLE','Need 500 Zeni!'); return; } H.gold-=500; if(Math.random()>0.5){ H.gold+=1000; showPopup('🎲 GAMBLE WON!','+1000 Zeni'); } else { showPopup('🎲 GAMBLE LOST','Lost 500 Zeni.'); } save(); }
+function createParty(){ H.party='Party of '+H.name; save(); showPopup('👥 PARTY CREATED','Party: '+H.party); }
+function createFamily(){ if(H.gold<1000000){ showPopup('🏠 FAMILY','Need 1,000,000 Zeni!'); return; } H.gold-=1000000; H.family='House of '+H.name; save(); showPopup('🏠 FAMILY FOUNDED!','Family: '+H.family); }
+function marry(){ H.spouse='Proposed - Waiting...'; save(); showPopup('💍 PROPOSAL SENT','Marriage proposal sent!'); }
+function buyPet(){ if(H.gold<5000){ showPopup('🐉 PET','Need 5000 Zeni for Dragon Egg!'); return; } H.gold-=5000; H.pet='Dragon Egg'; save(); showPopup('🐉 DRAGON EGG!','You bought Dragon Egg!'); }
 function trainPet(){ if(H.pet==='No Pet'){ showPopup('🐉 NO PET','Buy Dragon Egg first!'); return; } H.pet='Baby Dragon'; save(); showPopup('🐉 PET TRAINED!','Your pet is now Baby Dragon!'); }
 function applyJob(job){ H.job=job+' (Pending - Lord Infinity Approves)'; save(); showPopup('💼 JOB APPLIED','Applied for '+job+'<br>Lord Infinity must approve.'); }
-function doJob(){ if(H.name.toLowerCase()!=='infinity' && H.job.includes('Pending')){ showPopup('🔒 LORD INFINITY ONLY','Only Lord Infinity can approve jobs!<br>Ask Lord Infinity to approve your job.'); return; } if(H.job==='No Job'){ showPopup('💼 NO JOB','Apply for a job first!'); return; } H.gold+=500; H.hunger=Math.max(0,H.hunger-10); save(); showPopup('💼 WORKED!','Worked shift! +500 Zeni'); }
+function doJob(){ if(normName(H.name)!=='infinity' && H.job.includes('Pending')){ showPopup('🔒 LORD INFINITY ONLY','Only Lord Infinity can approve jobs!'); return; } if(H.job==='No Job'){ showPopup('💼 NO JOB','Apply for job first!'); return; } H.gold+=500; H.hunger=Math.max(0,H.hunger-10); save(); showPopup('💼 WORKED!','+500 Zeni'); }
 function joinChurch(){ H.church='Church of Infinity'; save(); showPopup('⛪ CHURCH JOINED','You joined Church of Infinity!'); }
-function pray(){ if(Date.now()<H.lastPray+24*3600000){ showPopup('⏰ PRAY COOLDOWN','Wait '+fmtTime(H.lastPray+24*3600000-Date.now())); return; } H.lastPray=Date.now(); H.gold+=500; gainXP(100); save(); showPopup('🙏 PRAYED!','God blessed you! +500 Zeni +100 XP'); }
-function rob(){ if(Math.random()>0.5){ H.gold+=300; showPopup('🥷 ROB SUCCESS!','You robbed +300 Zeni!'); } else { H.hp=Math.max(10,H.hp-20); showPopup('🥷 ROB FAILED!','Caught! -20 HP. You are Wanted!'); } save(); }
-function bail(){ if(H.gold<1000){ showPopup('💰 BAIL','Need 1000 Zeni for Bail!'); return; } H.gold-=1000; save(); showPopup('💰 BAIL PAID','You paid bail! Free!'); }
-function showMoves(){ document.getElementById('movesList').innerHTML=H.skills.map(s=>'<span class="tag">'+s+'</span>').join('')+'<p style="font-size:12px">Use /move in battle. Moves: Slash, Heavy, Dodge, Block, Skills</p>'; }
-function showQuests(){ document.getElementById('questList').innerHTML='<div class="card">📜 Daily: 100 Push-ups etc - Claim 1000 Zeni</div><div class="card">📜 Weekly: Kill 10 Bosses - 5000 Zeni</div><div class="card">📜 Guild Quest: Kill 5 Bosses - 2000 Zeni</div>'; }
-function showSeason(){ showPopup('🎖️ SEASON','Season: 30 days left<br>Your Rank: '+(H.level>50?'Diamond':H.level>20?'Gold':'Bronze')+'<br>Top players get season rewards!'); }
-function marketList(){ let item=document.getElementById('marketItem').value.trim(); let price=parseInt(document.getElementById('marketPrice').value)||0; if(!item||!price){ showPopup('🛒 MARKET','Enter item + price!'); return; } H.market.push({item,price}); save(); document.getElementById('marketList').innerHTML=H.market.map(m=>'<div class="card">'+m.item+' - '+m.price+' Zeni (5% fee)</div>').join(''); showPopup('🛒 MARKET LISTED','Listed '+item+' for '+price+' Zeni!'); }
+function pray(){ if(Date.now()<H.lastPray+24*3600000){ showPopup('⏰ PRAY COOLDOWN','Wait '+fmtTime(H.lastPray+24*3600000-Date.now())); return; } H.lastPray=Date.now(); H.gold+=500; gainXP(100); save(); showPopup('🙏 PRAYED!','+500 Zeni +100 XP'); }
+function rob(){ if(Math.random()>0.5){ H.gold+=300; showPopup('🥷 ROB SUCCESS!','+300 Zeni!'); } else { H.hp=Math.max(10,H.hp-20); showPopup('🥷 ROB FAILED!','Caught! -20 HP'); } save(); }
+function bail(){ if(H.gold<1000){ showPopup('💰 BAIL','Need 1000 Zeni!'); return; } H.gold-=1000; save(); showPopup('💰 BAIL PAID','Free!'); }
+function showMoves(){ document.getElementById('movesList').innerHTML=H.skills.map(s=>'<span class="tag">'+s+'</span>').join(''); }
+function marketList(){ let item=document.getElementById('marketItem').value.trim(); let price=parseInt(document.getElementById('marketPrice').value)||0; if(!item||!price){ showPopup('🛒 MARKET','Enter item + price!'); return; } H.market.push({item,price}); save(); document.getElementById('marketList').innerHTML=H.market.map(m=>'<div class="card">'+m.item+' - '+m.price+' Zeni</div>').join(''); showPopup('🛒 MARKET LISTED','Listed '+item+' for '+price+' Zeni!'); }
 function createDuelLink(){ let code='DUEL-'+Math.random().toString(36).substr(2,6).toUpperCase(); let link=location.href.split('?')[0]+'?duel='+code+'&hunter='+(H?H.name:'Hunter')+'&lv='+(H?H.level:1); document.getElementById('duelLinkOut').innerHTML='Duel Link:<br><b>'+link+'</b>'; navigator.clipboard.writeText(link); showPopup('🔗 DUEL LINK CREATED','Duel Link Copied!'); }
 let joyEl=document.getElementById('joy'), stick=document.getElementById('stick');
 function joyMove(e){ let r=joyEl.getBoundingClientRect(); let t=e.touches?e.touches[0]:e; let dx=t.clientX-(r.left+r.width/2), dy=t.clientY-(r.top+r.height/2); let len=Math.hypot(dx,dy)||1; let max=38; if(len>max){dx=dx/len*max; dy=dy/len*max;} stick.style.left=(32+dx)+'px'; stick.style.top=(32+dy)+'px'; world.joyX=dx/max; world.joyY=dy/max; }
@@ -443,8 +458,9 @@ document.addEventListener('keyup',e=>{ world.joyX=0; world.joyY=0; });
 let params=new URLSearchParams(location.search); if(params.get('duel')){ setTimeout(()=>showPopup('⚔️ DUEL CHALLENGE!','<b>'+params.get('hunter')+'</b> Lv.'+params.get('lv')+' challenged you!'),1000); }
 function showLeader(){ let sorted=[...allPlayers].sort((a,b)=>b.level-a.level); document.getElementById('leaderList').innerHTML=sorted.length?sorted.map((p,i)=>'<div class="card">#'+(i+1)+' '+p.name+' - Lv.'+p.level+' - '+p.rank+' - '+p.cls+' '+(p.isChosen?'✨ CHOSEN ONE':'')+' '+(H&&p.name===H.name?'👈 YOU':'')+'</div>').join(''):'<div class="card">No hunters yet. Be first!</div>'; }
 setInterval(()=>{ if(H) save(); },2000);
-// Start - Show auth if no H, else hide? Always show auth on load for login/register
-if(H){ document.getElementById('authScreen').style.display='none'; update(); } else { document.getElementById('authScreen').style.display='flex'; }
+// START - prefill last name, always show auth
+try{ let last=localStorage.getItem('hunter_last'); if(last){ document.getElementById('authName').value=last; document.getElementById('authMsg').textContent='Welcome back '+last+'! Enter 2164 if you are Infinity, or your 4-digit password, then press REGISTER / LOGIN.'; } }catch(e){}
+document.getElementById('authScreen').style.display='flex';
 renderGates(); renderShop();
 </script>
 </body>
