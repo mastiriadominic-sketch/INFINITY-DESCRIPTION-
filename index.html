@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INFINITY DECRYPT - My Body Is Hardware. My Mind Is Software. My Soul Is Infinity.</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#000;color:#00FF00;font-family:monospace}button{cursor:pointer}
+.topbar{display:flex;justify-content:space-between;align-items:center;background:#111;padding:10px;font-size:14px;flex-wrap:wrap}
+.topbar b{color:#FFD700}.tabs{display:flex;background:#111;border-top:2px solid #00FF00}
+.tabs button{flex:1;background:#111;color:#fff;border:none;padding:12px;font-weight:bold}.tabs button.active{background:#00FF00;color:#000}
+.screen{display:none;padding:12px}.screen.active{display:block}
+.card{background:#111;border:1px solid #222;padding:14px;border-radius:12px;margin:8px 0}
+.bigcode{font-size:32px;letter-spacing:2px;word-break:break-all;background:#000;border:2px solid #00FF00;padding:14px;border-radius:12px}
+input{width:100%;padding:14px;font-size:18px;background:#000;color:#fff;border:2px solid #00FF00;border-radius:10px}
+.btn{background:#00FF00;color:#000;border:none;padding:14px;font-size:18px;font-weight:bold;border-radius:10px;width:100%;margin:6px 0}
+.btn2{background:#222;color:#fff;border:1px solid #444;padding:10px;border-radius:10px;margin:4px}
+.tool{background:#222;color:#fff;border:1px solid #444;padding:10px;border-radius:10px;margin:3px}
+.hint{color:#fff}.story{color:#C084FC}.know{color:#22D3EE}.good{color:#00FF00}.bad{color:#FF4444}
+.row{display:flex;gap:8px;flex-wrap:wrap}.row>*{flex:1}
+@media (orientation:portrait){.rotate{background:red;color:#fff;padding:12px;text-align:center;font-weight:bold}}
+@media (orientation:landscape){.rotate{background:#00FF00;color:#000;padding:8px;text-align:center;font-weight:bold}}
+.leader{display:flex;justify-content:space-between;background:#111;padding:10px;margin:5px 0;border-radius:10px}
+.badge{background:#FFD700;color:#000;padding:2px 8px;border-radius:20px;font-size:12px}
+</style>
+</head>
+<body>
+<div class="rotate">⚠️ TURN PHONE SIDEWAYS - LANDSCAPE MODE - FOR BEST DECRYPTION - INFINITY DECRYPT</div>
+<div class="topbar"><span>LEVEL <b id="topLevel">1</b></span><span>⏱ <b id="topTimer">60</b>s</span><span>⚡ <b id="topEnergy">100</b></span><span>🪙 <b id="topCoins">5000</b></span><span>💎 <b id="topGems">10</b></span><span>🔑 <b id="topKeys">2</b></span></div>
+
+<div class="tabs">
+<button class="tabBtn active" onclick="showTab('home',this)">HOME</button>
+<button class="tabBtn" onclick="showTab('game',this)">PLAY ▶</button>
+<button class="tabBtn" onclick="showTab('leader',this)">LEADER</button>
+<button class="tabBtn" onclick="showTab('bank',this)">BANK</button>
+<button class="tabBtn" onclick="showTab('notify',this)">NOTIFY</button>
+</div>
+
+<!-- HOME -->
+<div id="home" class="screen active">
+<div class="card"><h1 style="margin:0">INFINITY ∞ DECRYPT</h1><p>My Body Is Hardware. My Mind Is Software. My Soul Is Infinity, Coded To Live.</p><p>👤 <b id="homeName">KABWE</b> • 🇿🇲 Zambia • Rank: <span class="badge" id="homeRank">DECRYPTOR</span></p><p>Streak: <b id="homeStreak">7 Days</b> • Solved: <b id="homeSolved">0</b> / 1000</p><button class="btn" onclick="showTab('game',document.querySelectorAll('.tabBtn')[1])">DECRYPT NOW - TURN SIDEWAYS ▶</button></div>
+<div class="card"><h3>🎯 DAILY MISSION</h3><p>Solve 5 Levels Today - Reward 500 Coins</p><p id="dailyProgress">Progress: 0 / 5</p><button class="btn2" onclick="claimDaily()">CLAIM DAILY 100 COINS</button></div>
+<div class="card"><h3>📖 STORY</h3><p class="story">Your heart is beeping... beep... beep-beep... beep... That's Morse for S.O.S. Someone locked your code. Mama Infinity says: Decrypt level by level. You are Infinity.</p></div>
+<div class="card"><h3>🎮 GAME MODES</h3><div class="row"><button class="btn2" onclick="setMode('story')">STORY 1000 Levels</button><button class="btn2" onclick="setMode('daily')">DAILY DECRYPT</button><button class="btn2" onclick="setMode('vs')">VS BATTLE 60s</button><button class="btn2" onclick="setMode('infinity')">INFINITY MODE - HARD</button><button class="btn2" onclick="setMode('creator')">CREATOR MODE</button><button class="btn2" onclick="setMode('classroom')">CLASSROOM</button></div><p id="modeText">Mode: STORY</p></div>
+</div>
+
+<!-- GAME - LANDSCAPE SPLIT -->
+<div id="game" class="screen">
+<div class="row">
+<div class="card" style="flex:1.5"><h3 id="levelTitle">LEVEL 1 - Caesar 101</h3><p>Cipher: <b id="cipherType">Caesar</b> • World: <b id="worldName">BODY</b> • Difficulty: <b id="diff">⭐</b></p><div class="bigcode" id="codeText">KHOOR</div><p class="hint">HINT: <span id="hintText">Shift 3</span></p><p class="story" id="storyText">Your heart is beeping... S.O.S.</p><p id="feedback"></p><p class="know" id="knowText"></p></div>
+<div class="card" style="flex:1"><h3>🧰 TOOLS</h3><button class="tool" onclick="useTool('caesar')">Caesar Shift 3</button><button class="tool" onclick="useTool('reverse')">Reverse</button><button class="tool" onclick="useTool('atbash')">Atbash A=Z</button><button class="tool" onclick="useTool('binary')">Binary</button><button class="tool" onclick="useTool('morse')">Morse</button><button class="tool" onclick="useTool('brute')">Brute Force All Shifts</button><input id="answerInput" placeholder="TYPE ANSWER HERE..."><button class="btn" onclick="checkAnswer()">DECRYPT ✅</button><div class="row"><button class="btn2" onclick="buyHint()">HINT -100 Coins</button><button class="btn2" onclick="skipLevel()">SKIP -500 Coins</button></div><p style="font-size:12px;color:#FF4444">INFINITY MODE: No hints, 30s, 5x coins</p><button class="btn2" onclick="shareGame()">SHARE TO WHATSAPP 📲</button></div>
+</div>
+<div class="card"><h3>🎲 CUSTOM KEYBOARD - LANDSCAPE</h3><div id="keyboard"></div></div>
+</div>
+
+<!-- LEADER -->
+<div id="leader" class="screen"><div class="card"><h3>🏆 LEADERBOARD - Top Decryptors</h3><div id="leaderList"></div><button class="btn2" onclick="challengeFriend()">CHALLENGE FRIEND - VS BATTLE</button></div></div>
+
+<!-- BANK -->
+<div id="bank" class="screen"><div class="card"><h3>🏦 BANK</h3><p>Coins: <b id="bankCoins">5000</b> • Gems: <b id="bankGems">10</b> • Keys: <b id="bankKeys">2</b> • Energy: <b id="bankEnergy">100</b></p></div><div class="row"><div class="card"><b>Hint</b><p>Reveals 1 letter</p><button class="btn2" onclick="buyItem(100,'Hint')">BUY 100 Coins</button></div><div class="card"><b>Extra Time +30s</b><p>More time</p><button class="btn2" onclick="buyItem(150,'Extra Time')">BUY 150</button></div><div class="card"><b>Energy Refill</b><p>+50 Energy</p><button class="btn2" onclick="buyItem(200,'Energy')">BUY 200</button></div><div class="card"><b>Binary Eye</b><p>Decode Binary</p><button class="btn2" onclick="buyItem(500,'Binary Eye')">BUY 500</button></div><div class="card"><b>Morse Ear</b><p>Decode Morse</p><button class="btn2" onclick="buyItem(800,'Morse Ear')">BUY 800</button></div><div class="card"><b>X-Ray</b><p>Shows 1 letter</p><button class="btn2" onclick="buyItem(1500,'X-Ray')">BUY 1500</button></div><div class="card"><b>Time Freeze</b><p>Stops timer 30s</p><button class="btn2" onclick="buyItem(2000,'Time Freeze')">BUY 2000</button></div><div class="card"><b>Brute Force</b><p>Tries all shifts</p><button class="btn2" onclick="buyItem(5000,'Brute Force')">BUY 5000</button></div></div><button class="btn" onclick="watchAd()">WATCH AD +50 COINS 📺</button><p style="font-size:12px">History: <span id="bankHistory">No transactions yet</span></p></div>
+
+<!-- NOTIFY -->
+<div id="notify" class="screen"><div class="card"><h3>🔔 NOTIFY</h3><div id="notifyList"></div><button class="btn2" onclick="markRead()">MARK ALL READ</button></div><div class="card"><h3>👩‍🏫 CLASSROOM MODE</h3><p>Teacher Code: <b>ZAMBIA123</b></p><input id="classCode" placeholder="Enter Teacher Code"><button class="btn2" onclick="joinClass()">JOIN CLASS</button><p id="classMsg"></p></div><div class="card"><h3>✍️ CREATOR MODE - Create Your Own Code</h3><input id="creatorWord" placeholder="Write a word e.g. HELLO"><button class="btn2" onclick="createCode()">CREATE CODE FOR OTHERS</button><p id="creatorOut"></p></div></div>
+
+<script>
+// ============ INFINITY DECRYPT - ALL CODES IN ONE FILE - JS + JSON + PYTHON LOGIC + DART LOGIC ============
+// CIPHER ENGINE - From Dart + Python + JS merged
+function caesarDecode(t,s){let r="";for(let c of t){if(c>='A'&&c<='Z')r+=String.fromCharCode((c.charCodeAt(0)-65-s+26)%26+65);else if(c>='a'&&c<='z')r+=String.fromCharCode((c.charCodeAt(0)-97-s+26)%26+97);else r+=c;}return r;}
+function caesarEncode(t,s){let r="";for(let c of t){if(c>='A'&&c<='Z')r+=String.fromCharCode((c.charCodeAt(0)-65+s)%26+65);else if(c>='a'&&c<='z')r+=String.fromCharCode((c.charCodeAt(0)-97+s)%26+97);else r+=c;}return r;}
+function atbashDecode(t){let r="";for(let c of t.toUpperCase()){if(c>='A'&&c<='Z')r+=String.fromCharCode(155-c.charCodeAt(0));else r+=c;}return r;}
+function reverseDecode(t){return t.split('').reverse().join('');}
+function binaryDecode(b){try{return b.split(' ').map(x=>String.fromCharCode(parseInt(x,2))).join('');}catch(e){return '';}}
+function binaryEncode(t){return t.split('').map(c=>c.charCodeAt(0).toString(2).padStart(8,'0')).join(' ');}
+const morseMap={'.-':'A','-...':'B','-.-.':'C','-..':'D','.':'E','..-.':'F','--.':'G','....':'H','..':'I','.---':'J','-.-':'K','.-..':'L','--':'M','-.':'N','---':'O','.--.':'P','--.-':'Q','.-.':'R','...':'S','-':'T','..-':'U','...-':'V','.--':'W','-..-':'X','-.--':'Y','--..':'Z','/':' '};
+const morseRev={}; for(let k in morseMap) morseRev[morseMap[k]]=k;
+function morseDecode(m){return m.split(' ').map(x=>morseMap[x]||'').join('');}
+function morseEncode(t){return t.toUpperCase().split('').map(c=>morseRev[c]||'').join(' ');}
+function numberDecode(n){return n.split('-').map(x=>String.fromCharCode(parseInt(x)+64)).join('');}
+function numberEncode(t){return t.split('').map(c=>c.charCodeAt(0)-64).join('-');}
+
+// JSON - LEVELS + WORLDS - 1000 LEVELS GENERATED FROM 20 WORDS
+const WORDS=["HELLO","WORLD","BODY","HEART","BRAIN","BLOOD","SKIN","BONES","LOVE","GOD","INFINITY","CODE","HUMAN","MONEY","DREAM","ZAMBIA","LUSAKA","MAMA","NOVA","ZERO"];
+const KNOWS=["Caesar was used by Julius Caesar 2000 years ago.","Your body has 206 bones.","Your heart beats 100,000 times per day.","Your brain has 86 billion neurons.","DNA is 3 billion letters long.","Morse was used in Titanic SOS.","Computer only knows 0 and 1.","Love is the hardest code - it has no logic.","Rich people know the code: Save, Invest, Multiply.","God is Infinity - Alpha and Omega."];
+const WORLDS=[{id:1,name:"BODY"},{id:2,name:"MIND"},{id:3,name:"BANK"},{id:4,name:"LOVE"},{id:5,name:"DARK WEB"},{id:6,name:"BODY 2.0"},{id:7,name:"TIME"},{id:8,name:"BIBLE"},{id:9,name:"INFINITY"},{id:10,name:"YOU"}];
+let levels=[];
+for(let i=0;i<1000;i++){
+  let w=WORDS[i%WORDS.length];
+  let typeIdx=i%6; let code="", cipher="", hint="";
+  if(typeIdx==0){code=caesarEncode(w,3);cipher="Caesar";hint="Shift 3";}
+  else if(typeIdx==1){code=reverseDecode(w);cipher="Reverse";hint="Reverse it";}
+  else if(typeIdx==2){code=atbashDecode(w);cipher="Atbash";hint="A=Z, B=Y";}
+  else if(typeIdx==3){code=binaryEncode(w);cipher="Binary";hint="Computer speaks this";}
+  else if(typeIdx==4){code=morseEncode(w);cipher="Morse";hint="Morse Code - . -";}
+  else{code=numberEncode(w);cipher="Number";hint="A=1, B=2";}
+  let world=WORLDS[Math.floor(i/100)%10];
+  let boss=(i+1)%100===0;
+  levels.push({id:i+1, world:world.name, title:(boss?"BOSS - ":"Level ")+(i+1), cipher:cipher, code:code, answer:w, hint:hint, difficulty:boss?5:Math.min(5,Math.floor(i/200)+1), reward:boss?5000:100+Math.floor(i/100)*50, time:boss?60:(i<50?0:60), boss:boss, know:KNOWS[i%KNOWS.length]});
+}
+// Extra hand-made Bible / Love / Programmer levels - first 30 override
+levels[0]={id:1,world:"BODY",title:"Level 1 - Caesar 101",cipher:"Caesar",code:"KHOOR",answer:"HELLO",hint:"Shift 3",difficulty:1,reward:100,time:0,boss:false,know:KNOWS[0]};
+levels[1]={id:2,world:"BODY",title:"Level 2 - Caesar 102",cipher:"Caesar",code:"ZRUOG",answer:"WORLD",hint:"Shift 3",difficulty:1,reward:100,time:0,boss:false,know:KNOWS[1]};
+levels[2]={id:3,world:"BODY",title:"Level 3 - Riddle",cipher:"Riddle",code:"I pump without rest, I am red, in your chest. What am I?",answer:"HEART",hint:"Think body",difficulty:2,reward:200,time:60,boss:false,know:"Heart is a pump."};
+levels[3]={id:4,world:"BIBLE",title:"Level 4 - Bible",cipher:"Caesar",code:"MRKQ",answer:"JOHN",hint:"Shift 3",difficulty:2,reward:200,time:60,boss:false,know:"John 3:16 - For God so loved the world."};
+levels[4]={id:5,world:"LOVE",title:"Level 5 - Love",cipher:"Caesar",code:"ORYH",answer:"LOVE",hint:"Shift 3",difficulty:2,reward:200,time:60,boss:false,know:"Love grows when shared."};
+
+// STATE - Saved in browser (localStorage) = Bank + Save System
+let state=JSON.parse(localStorage.getItem('infinity_save')||'null')||{level:1,coins:5000,gems:10,keys:2,energy:100,solved:0,daily:0,mode:'story',infinity:false};
+let timerVal=60, timerInt=null;
+function save(){localStorage.setItem('infinity_save',JSON.stringify(state)); updateUI();}
+function updateUI(){
+  document.getElementById('topLevel').innerText=state.level; document.getElementById('topCoins').innerText=state.coins; document.getElementById('topGems').innerText=state.gems; document.getElementById('topKeys').innerText=state.keys; document.getElementById('topEnergy').innerText=state.energy;
+  document.getElementById('bankCoins').innerText=state.coins; document.getElementById('bankGems').innerText=state.gems; document.getElementById('bankKeys').innerText=state.keys; document.getElementById('bankEnergy').innerText=state.energy;
+  document.getElementById('homeSolved').innerText=state.solved; document.getElementById('homeRank').innerText=state.level>=1000?"INFINITY":state.level>=500?"MASTER":state.level>=100?"DECRYPTOR":"BEGINNER";
+  document.getElementById('dailyProgress').innerText="Progress: "+state.daily+" / 5";
+  document.getElementById('topTimer').innerText=timerVal;
+}
+function showTab(id,btn){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.tabBtn').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  if(id==='leader') renderLeader();
+  if(id==='notify') renderNotify();
+  if(id==='game') loadLevel();
+}
+function setMode(m){state.mode=m; state.infinity=(m==='infinity'); document.getElementById('modeText').innerText="Mode: "+m.toUpperCase()+(m==='infinity'?" - HARD: No hints, 30s, 5x coins":""); save(); showTab('game',document.querySelectorAll('.tabBtn')[1]);}
+function loadLevel(){
+  let l=levels[state.level-1]||levels[0];
+  document.getElementById('levelTitle').innerText="LEVEL "+l.id+" - "+l.title;
+  document.getElementById('cipherType').innerText=l.cipher; document.getElementById('worldName').innerText=l.world; document.getElementById('diff').innerText="⭐".repeat(l.difficulty);
+  document.getElementById('codeText').innerText=l.code; document.getElementById('hintText').innerText=l.hint; document.getElementById('storyText').innerText=l.boss?"BOSS! 3 layers! You have "+l.time+" seconds!":"Your heart is beeping... S.O.S. - "+l.know;
+  document.getElementById('answerInput').value=""; document.getElementById('feedback').innerText=""; document.getElementById('knowText').innerText="";
+  timerVal=state.infinity?30:(l.time||60); if(timerInt) clearInterval(timerInt);
+  if(timerVal>0){ timerInt=setInterval(()=>{ timerVal--; updateUI(); if(timerVal<=0){ clearInterval(timerInt); document.getElementById('feedback').innerHTML="<span class='bad'>TIME UP! You lost 5 Energy. Try again.</span>"; state.energy=Math.max(0,state.energy-5); save(); } },1000); }
+  buildKeyboard(); updateUI();
+}
+function checkAnswer(){
+  let l=levels[state.level-1]; let user=document.getElementById('answerInput').value.toUpperCase().trim();
+  if(!user) return;
+  if(user===l.answer){
+    let reward=state.infinity?l.reward*5:l.reward;
+    state.coins+=reward; state.solved++; state.daily++; state.energy=Math.max(0,state.energy-5);
+    document.getElementById('feedback').innerHTML="<span class='good'>CORRECT! +"+reward+" Coins! You are a genius! 🎉</span>";
+    document.getElementById('knowText').innerText="DID YOU KNOW? "+l.know;
+    if(timerInt) clearInterval(timerInt);
+    save();
+    setTimeout(()=>{ if(state.level<1000){ state.level++; save(); loadLevel(); } else { document.getElementById('feedback').innerHTML="<span class='good'>🏆 YOU ARE INFINITY! You decrypted all 1000 levels! Your body is hardware. Your mind is software. Your soul is infinity!</span>"; } },1800);
+  } else {
+    state.energy=Math.max(0,state.energy-5);
+    document.getElementById('feedback').innerHTML="<span class='bad'>WRONG! Try again. Hint: "+l.hint+"</span>";
+    save();
+  }
+}
+function useTool(t){
+  let l=levels[state.level-1]; let r="";
+  if(t==='caesar') r=caesarDecode(l.code,3);
+  if(t==='reverse') r=reverseDecode(l.code);
+  if(t==='atbash') r=atbashDecode(l.code);
+  if(t==='binary') r=binaryDecode(l.code);
+  if(t==='morse') r=morseDecode(l.code);
+  if(t==='brute'){ let arr=[]; for(let s=0;s<26;s++) arr.push("Shift "+s+": "+caesarDecode(l.code,s)); r=arr.join(" | "); }
+  document.getElementById('feedback').innerText="TOOL "+t+": "+r;
+}
+function buyHint(){ if(state.infinity){ document.getElementById('feedback').innerText="INFINITY MODE: No hints!"; return; } if(state.coins>=100){ state.coins-=100; let l=levels[state.level-1]; document.getElementById('feedback').innerText="HINT: First letter is "+l.answer[0]; save(); } else document.getElementById('feedback').innerText="Not enough coins! Watch Ad for +50."; }
+function skipLevel(){ if(state.infinity){ document.getElementById('feedback').innerText="INFINITY MODE: No skip!"; return; } if(state.coins>=500){ state.coins-=500; state.level++; save(); loadLevel(); } else document.getElementById('feedback').innerText="Not enough coins!"; }
+function buyItem(price,name){ if(state.coins>=price){ state.coins-=price; if(name==='Energy') state.energy=Math.min(100,state.energy+50); document.getElementById('bankHistory').innerText="Bought "+name+" for "+price+" Coins"; save(); } else alert("Not enough coins! Watch Ad."); }
+function watchAd(){ state.coins+=50; state.energy=Math.min(100,state.energy+20); document.getElementById('bankHistory').innerText="Watched Ad +50 Coins +20 Energy"; save(); alert("Ad watched! +50 Coins +20 Energy"); }
+function claimDaily(){ state.coins+=100; state.daily++; save(); alert("Daily claimed! +100 Coins"); }
+function renderLeader(){
+  let leaders=[{n:"MAMA INFINITY",l:1000,c:999999},{n:"ZERO",l:500,c:150000},{n:"NOVA",l:300,c:90000},{n:"KABWE (YOU)",l:state.level,c:state.coins},{n:"JOHN",l:47,c:5000},{n:"MARY",l:32,c:3200}].sort((a,b)=>b.l-a.l);
+  document.getElementById('leaderList').innerHTML=leaders.map((p,i)=>"<div class='leader'><span>#"+(i+1)+" "+p.n+"</span><span>Level "+p.l+" • "+p.c+" coins "+(i==0?"🏆":"")+"</span></div>").join('');
+}
+function renderNotify(){
+  let notes=["Your friend John just beat you on Leaderboard!","New Boss Code dropped! You have 24 hours!","Tournament starts in 1 hour!","MAMA INFINITY sent you a gift!","NOVA sent you a love letter - Decode it!","Your Energy is full! Come back and Decrypt!"];
+  document.getElementById('notifyList').innerHTML=notes.map(n=>"<div class='card'>🔔 "+n+"</div>").join('');
+}
+function markRead(){ alert("All notifications marked read!"); }
+function challengeFriend(){ alert("Challenge sent! Your friend has 60 seconds to beat your level!"); }
+function shareGame(){ let txt="I am Level "+state.level+" in INFINITY DECRYPT! Can you beat me? My body is hardware, my mind is software, my soul is infinity! Play here: "+location.href; if(navigator.share) navigator.share({text:txt}); else { navigator.clipboard.writeText(txt); alert("Link copied! Share to WhatsApp!"); } }
+function joinClass(){ let code=document.getElementById('classCode').value; if(code==="ZAMBIA123"){ document.getElementById('classMsg').innerText="Welcome to Class! Teacher: 10 levels about Maths, Bible, Science. Good luck!"; } else document.getElementById('classMsg').innerText="Wrong code. Ask teacher for code."; }
+function createCode(){ let w=document.getElementById('creatorWord').value.toUpperCase().trim(); if(!w) return; let c=caesarEncode(w,3); document.getElementById('creatorOut').innerText="Your code for others: "+c+" (Caesar Shift 3). Share it! If 100 people solve it, you get Creator Badge +5000 Coins!"; }
+function buildKeyboard(){
+  let keys="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.-".split('');
+  document.getElementById('keyboard').innerHTML=keys.map(k=>"<button class='tool' onclick=\"document.getElementById('answerInput').value+='"+k+"'\">"+k+"</button>").join('')+"<button class='tool' onclick=\"document.getElementById('answerInput').value=document.getElementById('answerInput').value.slice(0,-1)\">⌫ DEL</button> <button class='tool' onclick=\"document.getElementById('answerInput').value=''\">CLEAR</button>";
+}
+// Energy refill every 5 min simulation
+setInterval(()=>{ if(state.energy<100){ state.energy++; save(); } },300000);
+renderLeader(); renderNotify(); updateUI(); loadLevel();
+</script>
+</body>
+</html>
