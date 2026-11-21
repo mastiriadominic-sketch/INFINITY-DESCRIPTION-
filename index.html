@@ -2,190 +2,212 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>INFINITY DECRYPT - My Body Is Hardware. My Mind Is Software. My Soul Is Infinity.</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>INFINITY STRIKE - Action Fighting Shooting</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#000;color:#00FF00;font-family:monospace}button{cursor:pointer}
-.topbar{display:flex;justify-content:space-between;align-items:center;background:#111;padding:10px;font-size:14px;flex-wrap:wrap}
-.topbar b{color:#FFD700}.tabs{display:flex;background:#111;border-top:2px solid #00FF00}
-.tabs button{flex:1;background:#111;color:#fff;border:none;padding:12px;font-weight:bold}.tabs button.active{background:#00FF00;color:#000}
-.screen{display:none;padding:12px}.screen.active{display:block}
-.card{background:#111;border:1px solid #222;padding:14px;border-radius:12px;margin:8px 0}
-.bigcode{font-size:32px;letter-spacing:2px;word-break:break-all;background:#000;border:2px solid #00FF00;padding:14px;border-radius:12px}
-input{width:100%;padding:14px;font-size:18px;background:#000;color:#fff;border:2px solid #00FF00;border-radius:10px}
-.btn{background:#00FF00;color:#000;border:none;padding:14px;font-size:18px;font-weight:bold;border-radius:10px;width:100%;margin:6px 0}
-.btn2{background:#222;color:#fff;border:1px solid #444;padding:10px;border-radius:10px;margin:4px}
-.tool{background:#222;color:#fff;border:1px solid #444;padding:10px;border-radius:10px;margin:3px}
-.hint{color:#fff}.story{color:#C084FC}.know{color:#22D3EE}.good{color:#00FF00}.bad{color:#FF4444}
-.row{display:flex;gap:8px;flex-wrap:wrap}.row>*{flex:1}
-@media (orientation:portrait){.rotate{background:red;color:#fff;padding:12px;text-align:center;font-weight:bold}}
-@media (orientation:landscape){.rotate{background:#00FF00;color:#000;padding:8px;text-align:center;font-weight:bold}}
-.leader{display:flex;justify-content:space-between;background:#111;padding:10px;margin:5px 0;border-radius:10px}
-.badge{background:#FFD700;color:#000;padding:2px 8px;border-radius:20px;font-size:12px}
+*{box-sizing:border-box;margin:0;padding:0;touch-action:none;user-select:none;-webkit-user-select:none}
+body{background:#000;color:#fff;font-family:Arial, sans-serif;overflow:hidden}
+#gameCanvas{width:100vw;height:100vh;display:block;background:#0a0a1a}
+#hud{position:fixed;top:0;left:0;right:0;display:flex;justify-content:space-between;padding:10px;z-index:10;pointer-events:none;font-weight:bold;text-shadow:2px 2px 0 #000}
+#hud span{background:rgba(0,0,0,.6);padding:6px 10px;border-radius:20px}
+#hpBar{width:120px;height:12px;background:#333;border-radius:10px;overflow:hidden;display:inline-block;vertical-align:middle}
+#hpFill{height:100%;background:#00FF00;width:100%;transition:width .2s}
+#bossBar{position:fixed;top:48px;left:50%;transform:translateX(-50%);width:60%;height:14px;background:#333;border-radius:10px;overflow:hidden;display:none;z-index:10;border:2px solid red}
+#bossFill{height:100%;background:red;width:100%}
+#controls{position:fixed;bottom:12px;left:0;right:0;display:flex;justify-content:space-between;padding:0 12px;z-index:20}
+#joy{width:120px;height:120px;background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.4);border-radius:50%;position:relative}
+#stick{width:50px;height:50px;background:#00FF00;border-radius:50%;position:absolute;left:35px;top:35px;box-shadow:0 0 20px #00FF00}
+.btn{width:68px;height:68px;border-radius:50%;border:3px solid #fff;color:#fff;font-weight:900;font-size:13px;box-shadow:0 0 15px rgba(0,0,0,.5)}
+#btnShoot{background:#FF2200}#btnPunch{background:#FFAA00}#btnDash{background:#00AAFF}#btnSpecial{background:#AA00FF;width:80px;height:80px}
+#btns{display:flex;gap:10px;align-items:flex-end}
+#centerMsg{position:fixed;top:38%;left:0;right:0;text-align:center;font-size:42px;font-weight:900;text-shadow:4px 4px 0 #000;z-index:30;pointer-events:none}
+#startScreen{position:fixed;inset:0;background:radial-gradient(#1a0033,#000);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:50;text-align:center;padding:20px}
+#startScreen h1{font-size:48px;color:#00FF00;text-shadow:0 0 20px #00FF00}
+#startScreen p{margin:8px 0;color:#ccc}
+.startBtn{background:#00FF00;color:#000;border:none;padding:18px 40px;font-size:22px;font-weight:900;border-radius:30px;margin-top:16px;box-shadow:0 0 30px #00FF00}
+#rotate{position:fixed;top:0;left:0;right:0;background:#00FF00;color:#000;text-align:center;font-weight:900;padding:4px;z-index:60;font-size:12px}
 </style>
 </head>
 <body>
-<div class="rotate">⚠️ TURN PHONE SIDEWAYS - LANDSCAPE MODE - FOR BEST DECRYPTION - INFINITY DECRYPT</div>
-<div class="topbar"><span>LEVEL <b id="topLevel">1</b></span><span>⏱ <b id="topTimer">60</b>s</span><span>⚡ <b id="topEnergy">100</b></span><span>🪙 <b id="topCoins">5000</b></span><span>💎 <b id="topGems">10</b></span><span>🔑 <b id="topKeys">2</b></span></div>
-
-<div class="tabs">
-<button class="tabBtn active" onclick="showTab('home',this)">HOME</button>
-<button class="tabBtn" onclick="showTab('game',this)">PLAY ▶</button>
-<button class="tabBtn" onclick="showTab('leader',this)">LEADER</button>
-<button class="tabBtn" onclick="showTab('bank',this)">BANK</button>
-<button class="tabBtn" onclick="showTab('notify',this)">NOTIFY</button>
+<div id="rotate">TURN PHONE SIDEWAYS - LANDSCAPE - INFINITY STRIKE</div>
+<canvas id="gameCanvas"></canvas>
+<div id="hud">
+<span>❤️ <span id="hpBar"><span id="hpFill"></span></span> <span id="hpText">100</span></span>
+<span>🏆 SCORE <span id="score">0</span></span>
+<span>🌊 WAVE <span id="wave">1</span></span>
+<span>🔫 <span id="weapon">PISTOL</span></span>
+<span>💥 KILLS <span id="kills">0</span></span>
 </div>
-
-<!-- HOME -->
-<div id="home" class="screen active">
-<div class="card"><h1 style="margin:0">INFINITY ∞ DECRYPT</h1><p>My Body Is Hardware. My Mind Is Software. My Soul Is Infinity, Coded To Live.</p><p>👤 <b id="homeName">KABWE</b> • 🇿🇲 Zambia • Rank: <span class="badge" id="homeRank">DECRYPTOR</span></p><p>Streak: <b id="homeStreak">7 Days</b> • Solved: <b id="homeSolved">0</b> / 1000</p><button class="btn" onclick="showTab('game',document.querySelectorAll('.tabBtn')[1])">DECRYPT NOW - TURN SIDEWAYS ▶</button></div>
-<div class="card"><h3>🎯 DAILY MISSION</h3><p>Solve 5 Levels Today - Reward 500 Coins</p><p id="dailyProgress">Progress: 0 / 5</p><button class="btn2" onclick="claimDaily()">CLAIM DAILY 100 COINS</button></div>
-<div class="card"><h3>📖 STORY</h3><p class="story">Your heart is beeping... beep... beep-beep... beep... That's Morse for S.O.S. Someone locked your code. Mama Infinity says: Decrypt level by level. You are Infinity.</p></div>
-<div class="card"><h3>🎮 GAME MODES</h3><div class="row"><button class="btn2" onclick="setMode('story')">STORY 1000 Levels</button><button class="btn2" onclick="setMode('daily')">DAILY DECRYPT</button><button class="btn2" onclick="setMode('vs')">VS BATTLE 60s</button><button class="btn2" onclick="setMode('infinity')">INFINITY MODE - HARD</button><button class="btn2" onclick="setMode('creator')">CREATOR MODE</button><button class="btn2" onclick="setMode('classroom')">CLASSROOM</button></div><p id="modeText">Mode: STORY</p></div>
+<div id="bossBar"><div id="bossFill"></div></div>
+<div id="centerMsg"></div>
+<div id="controls">
+<div id="joy"><div id="stick"></div></div>
+<div id="btns">
+<button class="btn" id="btnDash">DASH</button>
+<button class="btn" id="btnPunch">PUNCH</button>
+<button class="btn" id="btnShoot">SHOOT</button>
+<button class="btn" id="btnSpecial">💥 SPECIAL</button>
 </div>
-
-<!-- GAME - LANDSCAPE SPLIT -->
-<div id="game" class="screen">
-<div class="row">
-<div class="card" style="flex:1.5"><h3 id="levelTitle">LEVEL 1 - Caesar 101</h3><p>Cipher: <b id="cipherType">Caesar</b> • World: <b id="worldName">BODY</b> • Difficulty: <b id="diff">⭐</b></p><div class="bigcode" id="codeText">KHOOR</div><p class="hint">HINT: <span id="hintText">Shift 3</span></p><p class="story" id="storyText">Your heart is beeping... S.O.S.</p><p id="feedback"></p><p class="know" id="knowText"></p></div>
-<div class="card" style="flex:1"><h3>🧰 TOOLS</h3><button class="tool" onclick="useTool('caesar')">Caesar Shift 3</button><button class="tool" onclick="useTool('reverse')">Reverse</button><button class="tool" onclick="useTool('atbash')">Atbash A=Z</button><button class="tool" onclick="useTool('binary')">Binary</button><button class="tool" onclick="useTool('morse')">Morse</button><button class="tool" onclick="useTool('brute')">Brute Force All Shifts</button><input id="answerInput" placeholder="TYPE ANSWER HERE..."><button class="btn" onclick="checkAnswer()">DECRYPT ✅</button><div class="row"><button class="btn2" onclick="buyHint()">HINT -100 Coins</button><button class="btn2" onclick="skipLevel()">SKIP -500 Coins</button></div><p style="font-size:12px;color:#FF4444">INFINITY MODE: No hints, 30s, 5x coins</p><button class="btn2" onclick="shareGame()">SHARE TO WHATSAPP 📲</button></div>
 </div>
-<div class="card"><h3>🎲 CUSTOM KEYBOARD - LANDSCAPE</h3><div id="keyboard"></div></div>
+<div id="startScreen">
+<h1>INFINITY ⚡ STRIKE</h1>
+<p>🔥 Fighting + Shooting + Explosions + Bosses</p>
+<p>Move with joystick • Punch close • Shoot far • Dash to dodge</p>
+<p>Kill enemies • Pick up weapons • Beat Boss every 5 waves</p>
+<p style="color:#FFD700">Weapons: Pistol → Rifle → Shotgun → Laser → Bazooka</p>
+<button class="startBtn" onclick="startGame()">▶ PLAY NOW</button>
+<p style="font-size:12px">Best on Landscape • Sound On • Made in Zambia 🇿🇲</p>
 </div>
-
-<!-- LEADER -->
-<div id="leader" class="screen"><div class="card"><h3>🏆 LEADERBOARD - Top Decryptors</h3><div id="leaderList"></div><button class="btn2" onclick="challengeFriend()">CHALLENGE FRIEND - VS BATTLE</button></div></div>
-
-<!-- BANK -->
-<div id="bank" class="screen"><div class="card"><h3>🏦 BANK</h3><p>Coins: <b id="bankCoins">5000</b> • Gems: <b id="bankGems">10</b> • Keys: <b id="bankKeys">2</b> • Energy: <b id="bankEnergy">100</b></p></div><div class="row"><div class="card"><b>Hint</b><p>Reveals 1 letter</p><button class="btn2" onclick="buyItem(100,'Hint')">BUY 100 Coins</button></div><div class="card"><b>Extra Time +30s</b><p>More time</p><button class="btn2" onclick="buyItem(150,'Extra Time')">BUY 150</button></div><div class="card"><b>Energy Refill</b><p>+50 Energy</p><button class="btn2" onclick="buyItem(200,'Energy')">BUY 200</button></div><div class="card"><b>Binary Eye</b><p>Decode Binary</p><button class="btn2" onclick="buyItem(500,'Binary Eye')">BUY 500</button></div><div class="card"><b>Morse Ear</b><p>Decode Morse</p><button class="btn2" onclick="buyItem(800,'Morse Ear')">BUY 800</button></div><div class="card"><b>X-Ray</b><p>Shows 1 letter</p><button class="btn2" onclick="buyItem(1500,'X-Ray')">BUY 1500</button></div><div class="card"><b>Time Freeze</b><p>Stops timer 30s</p><button class="btn2" onclick="buyItem(2000,'Time Freeze')">BUY 2000</button></div><div class="card"><b>Brute Force</b><p>Tries all shifts</p><button class="btn2" onclick="buyItem(5000,'Brute Force')">BUY 5000</button></div></div><button class="btn" onclick="watchAd()">WATCH AD +50 COINS 📺</button><p style="font-size:12px">History: <span id="bankHistory">No transactions yet</span></p></div>
-
-<!-- NOTIFY -->
-<div id="notify" class="screen"><div class="card"><h3>🔔 NOTIFY</h3><div id="notifyList"></div><button class="btn2" onclick="markRead()">MARK ALL READ</button></div><div class="card"><h3>👩‍🏫 CLASSROOM MODE</h3><p>Teacher Code: <b>ZAMBIA123</b></p><input id="classCode" placeholder="Enter Teacher Code"><button class="btn2" onclick="joinClass()">JOIN CLASS</button><p id="classMsg"></p></div><div class="card"><h3>✍️ CREATOR MODE - Create Your Own Code</h3><input id="creatorWord" placeholder="Write a word e.g. HELLO"><button class="btn2" onclick="createCode()">CREATE CODE FOR OTHERS</button><p id="creatorOut"></p></div></div>
-
 <script>
-// ============ INFINITY DECRYPT - ALL CODES IN ONE FILE - JS + JSON + PYTHON LOGIC + DART LOGIC ============
-// CIPHER ENGINE - From Dart + Python + JS merged
-function caesarDecode(t,s){let r="";for(let c of t){if(c>='A'&&c<='Z')r+=String.fromCharCode((c.charCodeAt(0)-65-s+26)%26+65);else if(c>='a'&&c<='z')r+=String.fromCharCode((c.charCodeAt(0)-97-s+26)%26+97);else r+=c;}return r;}
-function caesarEncode(t,s){let r="";for(let c of t){if(c>='A'&&c<='Z')r+=String.fromCharCode((c.charCodeAt(0)-65+s)%26+65);else if(c>='a'&&c<='z')r+=String.fromCharCode((c.charCodeAt(0)-97+s)%26+97);else r+=c;}return r;}
-function atbashDecode(t){let r="";for(let c of t.toUpperCase()){if(c>='A'&&c<='Z')r+=String.fromCharCode(155-c.charCodeAt(0));else r+=c;}return r;}
-function reverseDecode(t){return t.split('').reverse().join('');}
-function binaryDecode(b){try{return b.split(' ').map(x=>String.fromCharCode(parseInt(x,2))).join('');}catch(e){return '';}}
-function binaryEncode(t){return t.split('').map(c=>c.charCodeAt(0).toString(2).padStart(8,'0')).join(' ');}
-const morseMap={'.-':'A','-...':'B','-.-.':'C','-..':'D','.':'E','..-.':'F','--.':'G','....':'H','..':'I','.---':'J','-.-':'K','.-..':'L','--':'M','-.':'N','---':'O','.--.':'P','--.-':'Q','.-.':'R','...':'S','-':'T','..-':'U','...-':'V','.--':'W','-..-':'X','-.--':'Y','--..':'Z','/':' '};
-const morseRev={}; for(let k in morseMap) morseRev[morseMap[k]]=k;
-function morseDecode(m){return m.split(' ').map(x=>morseMap[x]||'').join('');}
-function morseEncode(t){return t.toUpperCase().split('').map(c=>morseRev[c]||'').join(' ');}
-function numberDecode(n){return n.split('-').map(x=>String.fromCharCode(parseInt(x)+64)).join('');}
-function numberEncode(t){return t.split('').map(c=>c.charCodeAt(0)-64).join('-');}
-
-// JSON - LEVELS + WORLDS - 1000 LEVELS GENERATED FROM 20 WORDS
-const WORDS=["HELLO","WORLD","BODY","HEART","BRAIN","BLOOD","SKIN","BONES","LOVE","GOD","INFINITY","CODE","HUMAN","MONEY","DREAM","ZAMBIA","LUSAKA","MAMA","NOVA","ZERO"];
-const KNOWS=["Caesar was used by Julius Caesar 2000 years ago.","Your body has 206 bones.","Your heart beats 100,000 times per day.","Your brain has 86 billion neurons.","DNA is 3 billion letters long.","Morse was used in Titanic SOS.","Computer only knows 0 and 1.","Love is the hardest code - it has no logic.","Rich people know the code: Save, Invest, Multiply.","God is Infinity - Alpha and Omega."];
-const WORLDS=[{id:1,name:"BODY"},{id:2,name:"MIND"},{id:3,name:"BANK"},{id:4,name:"LOVE"},{id:5,name:"DARK WEB"},{id:6,name:"BODY 2.0"},{id:7,name:"TIME"},{id:8,name:"BIBLE"},{id:9,name:"INFINITY"},{id:10,name:"YOU"}];
-let levels=[];
-for(let i=0;i<1000;i++){
-  let w=WORDS[i%WORDS.length];
-  let typeIdx=i%6; let code="", cipher="", hint="";
-  if(typeIdx==0){code=caesarEncode(w,3);cipher="Caesar";hint="Shift 3";}
-  else if(typeIdx==1){code=reverseDecode(w);cipher="Reverse";hint="Reverse it";}
-  else if(typeIdx==2){code=atbashDecode(w);cipher="Atbash";hint="A=Z, B=Y";}
-  else if(typeIdx==3){code=binaryEncode(w);cipher="Binary";hint="Computer speaks this";}
-  else if(typeIdx==4){code=morseEncode(w);cipher="Morse";hint="Morse Code - . -";}
-  else{code=numberEncode(w);cipher="Number";hint="A=1, B=2";}
-  let world=WORLDS[Math.floor(i/100)%10];
-  let boss=(i+1)%100===0;
-  levels.push({id:i+1, world:world.name, title:(boss?"BOSS - ":"Level ")+(i+1), cipher:cipher, code:code, answer:w, hint:hint, difficulty:boss?5:Math.min(5,Math.floor(i/200)+1), reward:boss?5000:100+Math.floor(i/100)*50, time:boss?60:(i<50?0:60), boss:boss, know:KNOWS[i%KNOWS.length]});
-}
-// Extra hand-made Bible / Love / Programmer levels - first 30 override
-levels[0]={id:1,world:"BODY",title:"Level 1 - Caesar 101",cipher:"Caesar",code:"KHOOR",answer:"HELLO",hint:"Shift 3",difficulty:1,reward:100,time:0,boss:false,know:KNOWS[0]};
-levels[1]={id:2,world:"BODY",title:"Level 2 - Caesar 102",cipher:"Caesar",code:"ZRUOG",answer:"WORLD",hint:"Shift 3",difficulty:1,reward:100,time:0,boss:false,know:KNOWS[1]};
-levels[2]={id:3,world:"BODY",title:"Level 3 - Riddle",cipher:"Riddle",code:"I pump without rest, I am red, in your chest. What am I?",answer:"HEART",hint:"Think body",difficulty:2,reward:200,time:60,boss:false,know:"Heart is a pump."};
-levels[3]={id:4,world:"BIBLE",title:"Level 4 - Bible",cipher:"Caesar",code:"MRKQ",answer:"JOHN",hint:"Shift 3",difficulty:2,reward:200,time:60,boss:false,know:"John 3:16 - For God so loved the world."};
-levels[4]={id:5,world:"LOVE",title:"Level 5 - Love",cipher:"Caesar",code:"ORYH",answer:"LOVE",hint:"Shift 3",difficulty:2,reward:200,time:60,boss:false,know:"Love grows when shared."};
-
-// STATE - Saved in browser (localStorage) = Bank + Save System
-let state=JSON.parse(localStorage.getItem('infinity_save')||'null')||{level:1,coins:5000,gems:10,keys:2,energy:100,solved:0,daily:0,mode:'story',infinity:false};
-let timerVal=60, timerInt=null;
-function save(){localStorage.setItem('infinity_save',JSON.stringify(state)); updateUI();}
-function updateUI(){
-  document.getElementById('topLevel').innerText=state.level; document.getElementById('topCoins').innerText=state.coins; document.getElementById('topGems').innerText=state.gems; document.getElementById('topKeys').innerText=state.keys; document.getElementById('topEnergy').innerText=state.energy;
-  document.getElementById('bankCoins').innerText=state.coins; document.getElementById('bankGems').innerText=state.gems; document.getElementById('bankKeys').innerText=state.keys; document.getElementById('bankEnergy').innerText=state.energy;
-  document.getElementById('homeSolved').innerText=state.solved; document.getElementById('homeRank').innerText=state.level>=1000?"INFINITY":state.level>=500?"MASTER":state.level>=100?"DECRYPTOR":"BEGINNER";
-  document.getElementById('dailyProgress').innerText="Progress: "+state.daily+" / 5";
-  document.getElementById('topTimer').innerText=timerVal;
-}
-function showTab(id,btn){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  document.querySelectorAll('.tabBtn').forEach(b=>b.classList.remove('active'));
-  if(btn) btn.classList.add('active');
-  if(id==='leader') renderLeader();
-  if(id==='notify') renderNotify();
-  if(id==='game') loadLevel();
-}
-function setMode(m){state.mode=m; state.infinity=(m==='infinity'); document.getElementById('modeText').innerText="Mode: "+m.toUpperCase()+(m==='infinity'?" - HARD: No hints, 30s, 5x coins":""); save(); showTab('game',document.querySelectorAll('.tabBtn')[1]);}
-function loadLevel(){
-  let l=levels[state.level-1]||levels[0];
-  document.getElementById('levelTitle').innerText="LEVEL "+l.id+" - "+l.title;
-  document.getElementById('cipherType').innerText=l.cipher; document.getElementById('worldName').innerText=l.world; document.getElementById('diff').innerText="⭐".repeat(l.difficulty);
-  document.getElementById('codeText').innerText=l.code; document.getElementById('hintText').innerText=l.hint; document.getElementById('storyText').innerText=l.boss?"BOSS! 3 layers! You have "+l.time+" seconds!":"Your heart is beeping... S.O.S. - "+l.know;
-  document.getElementById('answerInput').value=""; document.getElementById('feedback').innerText=""; document.getElementById('knowText').innerText="";
-  timerVal=state.infinity?30:(l.time||60); if(timerInt) clearInterval(timerInt);
-  if(timerVal>0){ timerInt=setInterval(()=>{ timerVal--; updateUI(); if(timerVal<=0){ clearInterval(timerInt); document.getElementById('feedback').innerHTML="<span class='bad'>TIME UP! You lost 5 Energy. Try again.</span>"; state.energy=Math.max(0,state.energy-5); save(); } },1000); }
-  buildKeyboard(); updateUI();
-}
-function checkAnswer(){
-  let l=levels[state.level-1]; let user=document.getElementById('answerInput').value.toUpperCase().trim();
-  if(!user) return;
-  if(user===l.answer){
-    let reward=state.infinity?l.reward*5:l.reward;
-    state.coins+=reward; state.solved++; state.daily++; state.energy=Math.max(0,state.energy-5);
-    document.getElementById('feedback').innerHTML="<span class='good'>CORRECT! +"+reward+" Coins! You are a genius! 🎉</span>";
-    document.getElementById('knowText').innerText="DID YOU KNOW? "+l.know;
-    if(timerInt) clearInterval(timerInt);
-    save();
-    setTimeout(()=>{ if(state.level<1000){ state.level++; save(); loadLevel(); } else { document.getElementById('feedback').innerHTML="<span class='good'>🏆 YOU ARE INFINITY! You decrypted all 1000 levels! Your body is hardware. Your mind is software. Your soul is infinity!</span>"; } },1800);
-  } else {
-    state.energy=Math.max(0,state.energy-5);
-    document.getElementById('feedback').innerHTML="<span class='bad'>WRONG! Try again. Hint: "+l.hint+"</span>";
-    save();
+const canvas=document.getElementById('gameCanvas'); const ctx=canvas.getContext('2d');
+let W,H; function resize(){W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight;} resize(); window.addEventListener('resize',resize);
+let game={started:false,score:0,kills:0,wave:1,shake:0,slow:0,over:false};
+let player={x:200,y:300,w:44,h:52,hp:100,maxHp:100,speed:5,face:1,shootCd:0,punchCd:0,dashCd:0,dashTime:0,invincible:0,weapon:'PISTOL',weaponLevel:0, special:100};
+let joy={active:false,dx:0,dy:0};
+let bullets=[], enemies=[], particles=[], pickups=[], enemyBullets=[], floatTexts=[];
+let keys={};
+const weapons=[{name:'PISTOL',dmg:12,rate:14,spread:0,bullets:1,speed:12,color:'#FFFF00'},{name:'RIFLE',dmg:10,rate:7,spread:0.06,bullets:1,speed:14,color:'#00FF00'},{name:'SHOTGUN',dmg:8,rate:22,spread:0.25,bullets:5,speed:11,color:'#FF8800'},{name:'LASER',dmg:22,rate:10,spread:0,bullets:1,speed:20,color:'#00FFFF'},{name:'BAZOOKA',dmg:60,rate:45,spread:0,bullets:1,speed:9,color:'#FF00FF'}];
+function showMsg(t,ms=1500){let el=document.getElementById('centerMsg'); el.textContent=t; setTimeout(()=>el.textContent='',ms);}
+function spawnWave(){
+  let n=4+game.wave*2; let isBoss=game.wave%5===0;
+  if(isBoss){ enemies.push({x:W-80,y:H/2,w:90,h:110,hp:300+game.wave*80,maxHp:300+game.wave*80,speed:1.2,type:'boss',shootCd:0,flash:0}); document.getElementById('bossBar').style.display='block'; showMsg('⚠️ BOSS WAVE '+game.wave+' ⚠️',2000); }
+  else { document.getElementById('bossBar').style.display='none';
+    for(let i=0;i<n;i++){ let type=Math.random()<0.5?'runner':'shooter'; enemies.push({x:W+Math.random()*200,y:60+Math.random()*(H-140),w:38,h:48,hp:30+game.wave*10,maxHp:30+game.wave*10,speed:1+Math.random()*1.5+game.wave*0.1,type:type,shootCd:60+Math.random()*80,flash:0}); }
   }
 }
-function useTool(t){
-  let l=levels[state.level-1]; let r="";
-  if(t==='caesar') r=caesarDecode(l.code,3);
-  if(t==='reverse') r=reverseDecode(l.code);
-  if(t==='atbash') r=atbashDecode(l.code);
-  if(t==='binary') r=binaryDecode(l.code);
-  if(t==='morse') r=morseDecode(l.code);
-  if(t==='brute'){ let arr=[]; for(let s=0;s<26;s++) arr.push("Shift "+s+": "+caesarDecode(l.code,s)); r=arr.join(" | "); }
-  document.getElementById('feedback').innerText="TOOL "+t+": "+r;
+function startGame(){ document.getElementById('startScreen').style.display='none'; game.started=true; player.hp=100; game.score=0; game.kills=0; game.wave=1; enemies=[]; bullets=[]; particles=[]; pickups=[]; spawnWave(); showMsg('WAVE 1 - FIGHT!',1500); }
+function explode(x,y,color,count=20,power=1){ for(let i=0;i<count;i++){ let a=Math.random()*Math.PI*2, s=(1+Math.random()*4)*power; particles.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,life:30+Math.random()*20,size:3+Math.random()*5,color:color||['#FF2200','#FFAA00','#FFFF00','#FFFFFF'][Math.floor(Math.random()*4)]}); } game.shake=Math.min(18,game.shake+6*power); }
+function addFloat(x,y,t,color='#fff'){ floatTexts.push({x,y,t,color,life:40}); }
+function shoot(){
+  if(player.shootCd>0||game.over) return; let w=weapons[player.weaponLevel]; player.shootCd=w.rate;
+  for(let i=0;i<w.bullets;i++){ let ang=(player.face===1?0:Math.PI)+(Math.random()-0.5)*w.spread*2; bullets.push({x:player.x+player.w/2,y:player.y+player.h/2,vx:Math.cos(ang)*w.speed,vy:Math.sin(ang)*w.speed,dmg:w.dmg,color:w.color,size:w.name==='BAZOOKA'?10:5}); }
+  player.x-=player.face*3; // recoil
 }
-function buyHint(){ if(state.infinity){ document.getElementById('feedback').innerText="INFINITY MODE: No hints!"; return; } if(state.coins>=100){ state.coins-=100; let l=levels[state.level-1]; document.getElementById('feedback').innerText="HINT: First letter is "+l.answer[0]; save(); } else document.getElementById('feedback').innerText="Not enough coins! Watch Ad for +50."; }
-function skipLevel(){ if(state.infinity){ document.getElementById('feedback').innerText="INFINITY MODE: No skip!"; return; } if(state.coins>=500){ state.coins-=500; state.level++; save(); loadLevel(); } else document.getElementById('feedback').innerText="Not enough coins!"; }
-function buyItem(price,name){ if(state.coins>=price){ state.coins-=price; if(name==='Energy') state.energy=Math.min(100,state.energy+50); document.getElementById('bankHistory').innerText="Bought "+name+" for "+price+" Coins"; save(); } else alert("Not enough coins! Watch Ad."); }
-function watchAd(){ state.coins+=50; state.energy=Math.min(100,state.energy+20); document.getElementById('bankHistory').innerText="Watched Ad +50 Coins +20 Energy"; save(); alert("Ad watched! +50 Coins +20 Energy"); }
-function claimDaily(){ state.coins+=100; state.daily++; save(); alert("Daily claimed! +100 Coins"); }
-function renderLeader(){
-  let leaders=[{n:"MAMA INFINITY",l:1000,c:999999},{n:"ZERO",l:500,c:150000},{n:"NOVA",l:300,c:90000},{n:"KABWE (YOU)",l:state.level,c:state.coins},{n:"JOHN",l:47,c:5000},{n:"MARY",l:32,c:3200}].sort((a,b)=>b.l-a.l);
-  document.getElementById('leaderList').innerHTML=leaders.map((p,i)=>"<div class='leader'><span>#"+(i+1)+" "+p.n+"</span><span>Level "+p.l+" • "+p.c+" coins "+(i==0?"🏆":"")+"</span></div>").join('');
+function punch(){
+  if(player.punchCd>0) return; player.punchCd=18; let hit=false;
+  enemies.forEach(e=>{ if(Math.abs(e.x-player.x)<70 && Math.abs(e.y-player.y)<60){ e.hp-=25; e.flash=8; hit=true; explode(e.x,e.y,'#FFAA00',8,0.7); addFloat(e.x,e.y,'-25 PUNCH','#FFAA00'); if(e.hp<=0) killEnemy(e); }});
+  if(hit) game.shake+=4; else { // air punch effect
+    particles.push({x:player.x+player.face*40,y:player.y+20,vx:player.face*6,vy:0,life:10,size:10,color:'#FFAA00'});
+  }
 }
-function renderNotify(){
-  let notes=["Your friend John just beat you on Leaderboard!","New Boss Code dropped! You have 24 hours!","Tournament starts in 1 hour!","MAMA INFINITY sent you a gift!","NOVA sent you a love letter - Decode it!","Your Energy is full! Come back and Decrypt!"];
-  document.getElementById('notifyList').innerHTML=notes.map(n=>"<div class='card'>🔔 "+n+"</div>").join('');
+function dash(){ if(player.dashCd>0) return; player.dashCd=50; player.dashTime=12; player.invincible=12; for(let i=0;i<12;i++) particles.push({x:player.x,y:player.y+Math.random()*40,vx:-player.face*3,vy:0,life:20,size:6,color:'#00AAFF'}); }
+function special(){
+  if(player.special<100) return; player.special=0; showMsg('💥 INFINITY BLAST! 💥',1200); game.shake=20;
+  enemies.forEach(e=>{ e.hp-=100; e.flash=10; explode(e.x,e.y,'#AA00FF',15,1.2); });
+  for(let i=0;i<80;i++){ let a=i/80*Math.PI*2; particles.push({x:player.x+20,y:player.y+25,vx:Math.cos(a)*9,vy:Math.sin(a)*9,life:35,size:5,color:'#AA00FF'}); }
 }
-function markRead(){ alert("All notifications marked read!"); }
-function challengeFriend(){ alert("Challenge sent! Your friend has 60 seconds to beat your level!"); }
-function shareGame(){ let txt="I am Level "+state.level+" in INFINITY DECRYPT! Can you beat me? My body is hardware, my mind is software, my soul is infinity! Play here: "+location.href; if(navigator.share) navigator.share({text:txt}); else { navigator.clipboard.writeText(txt); alert("Link copied! Share to WhatsApp!"); } }
-function joinClass(){ let code=document.getElementById('classCode').value; if(code==="ZAMBIA123"){ document.getElementById('classMsg').innerText="Welcome to Class! Teacher: 10 levels about Maths, Bible, Science. Good luck!"; } else document.getElementById('classMsg').innerText="Wrong code. Ask teacher for code."; }
-function createCode(){ let w=document.getElementById('creatorWord').value.toUpperCase().trim(); if(!w) return; let c=caesarEncode(w,3); document.getElementById('creatorOut').innerText="Your code for others: "+c+" (Caesar Shift 3). Share it! If 100 people solve it, you get Creator Badge +5000 Coins!"; }
-function buildKeyboard(){
-  let keys="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.-".split('');
-  document.getElementById('keyboard').innerHTML=keys.map(k=>"<button class='tool' onclick=\"document.getElementById('answerInput').value+='"+k+"'\">"+k+"</button>").join('')+"<button class='tool' onclick=\"document.getElementById('answerInput').value=document.getElementById('answerInput').value.slice(0,-1)\">⌫ DEL</button> <button class='tool' onclick=\"document.getElementById('answerInput').value=''\">CLEAR</button>";
+function killEnemy(e){
+  game.kills++; game.score+=100+game.wave*20; player.special=Math.min(100,player.special+15);
+  explode(e.x+e.w/2,e.y+e.h/2, e.type==='boss'?'#FF0000':'#FF4400', e.type==='boss'?60:25, e.type==='boss'?2:1);
+  addFloat(e.x,e.y,'+'+(100+game.wave*20),'#00FF00');
+  if(e.type==='boss'){ game.score+=1000; showMsg('BOSS DEFEATED! +1000',2000); pickups.push({x:e.x,y:e.y,type:'weapon'}); pickups.push({x:e.x+30,y:e.y,type:'health'}); }
+  else if(Math.random()<0.18){ pickups.push({x:e.x,y:e.y,type:Math.random()<0.5?'weapon':'health'}); }
+  enemies=enemies.filter(en=>en!==e);
+  if(enemies.length===0){ game.wave++; document.getElementById('wave').textContent=game.wave; showMsg('WAVE '+game.wave+' CLEAR! +500',1800); game.score+=500; setTimeout(spawnWave,1200); }
 }
-// Energy refill every 5 min simulation
-setInterval(()=>{ if(state.energy<100){ state.energy++; save(); } },300000);
-renderLeader(); renderNotify(); updateUI(); loadLevel();
+function update(){
+  if(!game.started||game.over) return;
+  if(game.slow>0) game.slow--;
+  let speed=player.speed;
+  let mx=0,my=0;
+  if(joy.active){mx=joy.dx;my=joy.dy;} 
+  if(keys['a']||keys['ArrowLeft']) mx=-1; if(keys['d']||keys['ArrowRight']) mx=1; if(keys['w']||keys['ArrowUp']) my=-1; if(keys['s']||keys['ArrowDown']) my=1;
+  if(mx!==0||my!==0){ let len=Math.hypot(mx,my)||1; mx/=len; my/=len; if(mx!==0) player.face=mx>0?1:-1; }
+  let dashMult=player.dashTime>0?2.8:1;
+  player.x+=mx*speed*dashMult; player.y+=my*speed*dashMult;
+  player.x=Math.max(0,Math.min(W-player.w,player.x)); player.y=Math.max(60,Math.min(H-player.h-20,player.y));
+  if(player.shootCd>0) player.shootCd--; if(player.punchCd>0) player.punchCd--; if(player.dashCd>0) player.dashCd--; if(player.dashTime>0) player.dashTime--; if(player.invincible>0) player.invincible--;
+  if(player.special<100) player.special+=0.15;
+  // Auto shoot if holding
+  if(keys[' ']) shoot();
+  // Bullets
+  bullets.forEach(b=>{ b.x+=b.vx; b.y+=b.vy; });
+  bullets=bullets.filter(b=>b.x>0&&b.x<W&&b.y>0&&b.y<H);
+  // Enemies
+  enemies.forEach(e=>{
+    if(e.flash>0) e.flash--;
+    let dx=player.x-e.x, dy=player.y-e.y; let d=Math.hypot(dx,dy)||1;
+    if(e.type==='boss'){ e.x+=dx/d*e.speed*0.7; e.y+=dy/d*e.speed*0.7; e.shootCd--; if(e.shootCd<=0){ e.shootCd=40; for(let i=0;i<5;i++){ let a=(i/5)*Math.PI*2; enemyBullets.push({x:e.x+40,y:e.y+50,vx:Math.cos(a)*3,vy:Math.sin(a)*3}); } } document.getElementById('bossFill').style.width=(e.hp/e.maxHp*100)+'%'; }
+    else if(e.type==='runner'){ e.x+=dx/d*e.speed; e.y+=dy/d*e.speed*0.6; }
+    else { // shooter keeps distance
+      if(d>260){ e.x+=dx/d*e.speed; e.y+=dy/d*e.speed; } else if(d<160){ e.x-=dx/d*e.speed; e.y-=dy/d*e.speed; }
+      e.shootCd--; if(e.shootCd<=0){ e.shootCd=90; enemyBullets.push({x:e.x,y:e.y+20,vx:dx/d*4,vy:dy/d*4}); }
+    }
+    // Touch damage
+    if(Math.abs(e.x-player.x)<40 && Math.abs(e.y-player.y)<44 && player.invincible<=0 && player.dashTime<=0){ player.hp-=8; player.invincible=30; game.shake+=8; explode(player.x,player.y,'#FF0000',10,0.8); if(player.hp<=0){ game.over=true; showMsg('💀 GAME OVER - SCORE '+game.score+' - TAP TO RETRY',3000); setTimeout(()=>{ if(confirm('Game Over! Score '+game.score+'\nPlay Again?')){ location.reload(); } },1200); } }
+  });
+  // Bullet vs enemy
+  bullets.forEach(b=>{
+    enemies.forEach(e=>{ if(b.x>e.x-10&&b.x<e.x+e.w+10&&b.y>e.y-10&&b.y<e.y+e.h+10){ e.hp-=b.dmg; e.flash=4; b.x=-9999; if(b.color==='#FF00FF') explode(b.x,b.y,'#FF00FF',12,1); if(e.hp<=0) killEnemy(e); }});
+  });
+  bullets=bullets.filter(b=>b.x!==-9999);
+  // Enemy bullets vs player
+  enemyBullets.forEach(b=>{ b.x+=b.vx; b.y+=b.vy; if(Math.abs(b.x-player.x)<24&&Math.abs(b.y-player.y)<30&&player.invincible<=0){ player.hp-=6; player.invincible=20; game.shake+=4; b.x=-9999; }});
+  enemyBullets=enemyBullets.filter(b=>b.x!==-9999&&b.x>0&&b.x<W&&b.y>0&&b.y<H);
+  // Pickups
+  pickups.forEach(p=>{ if(Math.abs(p.x-player.x)<40&&Math.abs(p.y-player.y)<40){ if(p.type==='health'){ player.hp=Math.min(player.maxHp,player.hp+30); addFloat(player.x,player.y,'+30 HP','#00FF00'); } else { player.weaponLevel=Math.min(4,player.weaponLevel+1); player.weapon=weapons[player.weaponLevel].name; addFloat(player.x,player.y,'NEW WEAPON: '+player.weapon,'#FFD700'); showMsg('🔫 NEW WEAPON: '+player.weapon,1200); } pickups=pickups.filter(pp=>pp!==p); }});
+  // Particles
+  particles.forEach(p=>{ p.x+=p.vx; p.y+=p.vy; p.vx*=0.96; p.vy*=0.96; p.life--; });
+  particles=particles.filter(p=>p.life>0);
+  floatTexts.forEach(f=>{ f.y-=1; f.life--; }); floatTexts=floatTexts.filter(f=>f.life>0);
+  if(game.shake>0) game.shake--;
+  // HUD
+  document.getElementById('score').textContent=game.score; document.getElementById('kills').textContent=game.kills; document.getElementById('wave').textContent=game.wave; document.getElementById('weapon').textContent=player.weapon; document.getElementById('hpText').textContent=Math.max(0,Math.floor(player.hp)); document.getElementById('hpFill').style.width=player.hp+'%'; document.getElementById('hpFill').style.background=player.hp>50?'#00FF00':player.hp>25?'#FFAA00':'#FF0000'; document.getElementById('topCoins').textContent=game.score;
+}
+function draw(){
+  ctx.save();
+  if(game.shake>0) ctx.translate((Math.random()-0.5)*game.shake,(Math.random()-0.5)*game.shake);
+  // Background - city + ground
+  ctx.fillStyle='#0a0a1a'; ctx.fillRect(-20,-20,W+40,H+40);
+  ctx.fillStyle='#111133'; ctx.fillRect(0,0,W,70);
+  for(let i=0;i<10;i++){ ctx.fillStyle='#1a1a44'; ctx.fillRect(i*130,10,90,60); ctx.fillStyle='#FFFF88'; for(let y=0;y<3;y++) for(let x=0;x<3;x++) if(Math.random()<0.3) ctx.fillRect(i*130+10+x*25,15+y*18,12,10); }
+  ctx.fillStyle='#222244'; ctx.fillRect(0,H-40,W,40);
+  ctx.fillStyle='#00FF00'; ctx.fillRect(0,H-40,W,4);
+  // Pickups
+  pickups.forEach(p=>{ ctx.font='28px Arial'; ctx.fillText(p.type==='health'?'❤️':'🔫',p.x,p.y); });
+  // Enemy bullets
+  enemyBullets.forEach(b=>{ ctx.fillStyle='#FF0000'; ctx.beginPath(); ctx.arc(b.x,b.y,7,0,Math.PI*2); ctx.fill(); ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(b.x,b.y,3,0,Math.PI*2); ctx.fill(); });
+  // Enemies
+  enemies.forEach(e=>{
+    let flash=e.flash>0?'#FFFFFF':'';
+    if(e.type==='boss'){ ctx.fillStyle=flash||'#AA0000'; ctx.fillRect(e.x,e.y,e.w,e.h); ctx.font='60px Arial'; ctx.fillText('👹',e.x+10,e.y+70); ctx.fillStyle='#000'; ctx.fillRect(e.x,e.y-12,e.w,8); ctx.fillStyle='red'; ctx.fillRect(e.x,e.y-12,e.w*(e.hp/e.maxHp),8); }
+    else if(e.type==='runner'){ ctx.fillStyle=flash||'#FF4400'; ctx.fillRect(e.x,e.y,e.w,e.h); ctx.font='30px Arial'; ctx.fillText('😡',e.x+2,e.y+34); }
+    else { ctx.fillStyle=flash||'#8800FF'; ctx.fillRect(e.x,e.y,e.w,e.h); ctx.font='30px Arial'; ctx.fillText('🤖',e.x+2,e.y+34); }
+    ctx.fillStyle='#000'; ctx.fillRect(e.x,e.y-10,e.w,6); ctx.fillStyle='#FF0000'; ctx.fillRect(e.x,e.y-10,e.w*(e.hp/e.maxHp),6);
+  });
+  // Player - with dash trail + punch
+  if(player.invincible>0 && Math.floor(Date.now()/100)%2===0){ ctx.globalAlpha=0.5; }
+  let pColor=player.dashTime>0?'#00AAFF':'#00FF00';
+  ctx.fillStyle=pColor; ctx.fillRect(player.x,player.y,player.w,player.h);
+  ctx.font='36px Arial'; ctx.fillText(player.face===1?'🦸':'🦸‍♂️',player.x+2,player.y+38);
+  if(player.punchCd>10){ ctx.fillStyle='#FFAA00'; ctx.beginPath(); ctx.arc(player.x+player.face*50,player.y+25,16,0,Math.PI*2); ctx.fill(); }
+  ctx.globalAlpha=1;
+  // Bullets
+  bullets.forEach(b=>{ ctx.fillStyle=b.color; ctx.shadowColor=b.color; ctx.shadowBlur=12; ctx.beginPath(); ctx.arc(b.x,b.y,b.size,0,Math.PI*2); ctx.fill(); ctx.shadowBlur=0; });
+  // Particles
+  particles.forEach(p=>{ ctx.globalAlpha=p.life/40; ctx.fillStyle=p.color; ctx.fillRect(p.x,p.y,p.size,p.size); }); ctx.globalAlpha=1;
+  // Float texts
+  floatTexts.forEach(f=>{ ctx.fillStyle=f.color; ctx.font='bold 16px Arial'; ctx.fillText(f.t,f.x,f.y); });
+  ctx.restore();
+}
+function loop(){ update(); draw(); requestAnimationFrame(loop); } loop();
+// CONTROLS - Touch joystick
+const joyEl=document.getElementById('joy'); const stick=document.getElementById('stick');
+function joyMove(e){ let r=joyEl.getBoundingClientRect(); let t=e.touches?e.touches[0]:e; let dx=t.clientX-(r.left+r.width/2), dy=t.clientY-(r.top+r.height/2); let len=Math.hypot(dx,dy)||1; let max=38; if(len>max){dx=dx/len*max; dy=dy/len*max;} stick.style.left=(35+dx)+'px'; stick.style.top=(35+dy)+'px'; joy.active=true; joy.dx=dx/max; joy.dy=dy/max; }
+function joyEnd(){ stick.style.left='35px'; stick.style.top='35px'; joy.active=false; joy.dx=0; joy.dy=0; }
+joyEl.addEventListener('touchstart',joyMove); joyEl.addEventListener('touchmove',joyMove); joyEl.addEventListener('touchend',joyEnd);
+joyEl.addEventListener('mousedown',e=>{joyMove(e); let mv=ev=>joyMove(ev); let up=()=>{joyEnd(); document.removeEventListener('mousemove',mv); document.removeEventListener('mouseup',up);}; document.addEventListener('mousemove',mv); document.addEventListener('mouseup',up);});
+// Buttons
+document.getElementById('btnShoot').addEventListener('touchstart',e=>{e.preventDefault(); shoot();});
+document.getElementById('btnShoot').addEventListener('mousedown',shoot);
+document.getElementById('btnPunch').addEventListener('touchstart',e=>{e.preventDefault(); punch();});
+document.getElementById('btnPunch').addEventListener('mousedown',punch);
+document.getElementById('btnDash').addEventListener('touchstart',e=>{e.preventDefault(); dash();});
+document.getElementById('btnDash').addEventListener('mousedown',dash);
+document.getElementById('btnSpecial').addEventListener('touchstart',e=>{e.preventDefault(); special();});
+document.getElementById('btnSpecial').addEventListener('mousedown',special);
+document.addEventListener('keydown',e=>{keys[e.key.toLowerCase()]=true; if(e.key===' ')shoot(); if(e.key==='j'||e.key==='J')punch(); if(e.key==='k'||e.key==='K')dash(); if(e.key==='l'||e.key==='L')special();});
+document.addEventListener('keyup',e=>{keys[e.key.toLowerCase()]=false;});
 </script>
 </body>
 </html>
