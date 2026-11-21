@@ -3,264 +3,264 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>INFINITY HUNTER - Shadow Monarch</title>
+<title>INFINITY HUNTER - Cultivation World + Chosen One</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
 body{background:#050510;color:#fff;overflow-x:hidden}
 #top{display:flex;justify-content:space-between;padding:10px;background:#0a0a22;border-bottom:2px solid #7B2FFF;font-size:12px;flex-wrap:wrap;position:sticky;top:0;z-index:20}
 #top b{color:#FFD700}
-.tabs{display:flex;background:#0a0a22;position:sticky;top:34px;z-index:20}
-.tabs button{flex:1;background:#111;color:#fff;border:none;padding:11px 2px;font-size:11px;font-weight:900}
+.tabs{display:flex;background:#0a0a22;position:sticky;top:34px;z-index:20;overflow-x:auto}
+.tabs button{flex:1;background:#111;color:#fff;border:none;padding:11px 2px;font-size:11px;font-weight:900;min-width:62px}
 .tabs button.active{background:#7B2FFF}
-.screen{display:none;padding:10px;padding-bottom:80px}.screen.active{display:block}
+.screen{display:none;padding:10px;padding-bottom:90px}.screen.active{display:block}
 .card{background:#111128;border:1px solid #333;padding:12px;border-radius:16px;margin:8px 0}
-.btn{background:#7B2FFF;color:#fff;border:none;padding:13px;border-radius:12px;font-weight:900;width:100%;margin:5px 0;font-size:15px}
+.btn{background:#7B2FFF;color:#fff;border:none;padding:13px;border-radius:12px;font-weight:900;width:100%;margin:5px 0}
 .btnGold{background:#FFD700;color:#000;border:none;padding:13px;border-radius:12px;font-weight:900;width:100%;margin:5px 0}
 .btn2{background:#222;color:#fff;border:1px solid #555;padding:10px;border-radius:10px;margin:3px;font-size:13px}
 .row{display:flex;gap:8px;flex-wrap:wrap}.row>*{flex:1}
 .hp{height:14px;background:#333;border-radius:10px;overflow:hidden}.hpFill{height:100%;background:#00FF00;transition:width .3s}
 .mp{height:10px;background:#333;border-radius:10px;overflow:hidden}.mpFill{height:100%;background:#00AAFF}
 .xp{height:10px;background:#333;border-radius:10px;overflow:hidden}.xpFill{height:100%;background:#FFD700}
-input{width:100%;padding:13px;background:#000;color:#fff;border:2px solid #7B2FFF;border-radius:10px;margin:5px 0;font-size:16px}
+.cultBar{height:14px;background:#333;border-radius:10px;overflow:hidden}.cultFill{height:100%;background:linear-gradient(90deg,#00FFFF,#FF00FF)}
+input,select{width:100%;padding:13px;background:#000;color:#fff;border:2px solid #7B2FFF;border-radius:10px;margin:5px 0}
 .tag{display:inline-block;background:#222;padding:5px 10px;border-radius:20px;font-size:12px;margin:2px}
-#battleLog{height:130px;overflow-y:auto;background:#000;padding:8px;border-radius:10px;font-size:13px;line-height:1.5}
+#battleLog{height:110px;overflow-y:auto;background:#000;padding:8px;border-radius:10px;font-size:13px}
 #soundBtn{position:fixed;right:10px;bottom:10px;z-index:99;background:#FFD700;color:#000;border:none;padding:9px 12px;border-radius:20px;font-weight:900}
+/* GAME POPUP - NOT BROWSER ALERT */
+#gamePopup{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:200;display:none;align-items:center;justify-content:center;padding:20px}
+#gamePopupBox{background:linear-gradient(180deg,#1a0033,#0a0a22);border:3px solid #FFD700;border-radius:20px;padding:20px;max-width:360px;width:100%;text-align:center;box-shadow:0 0 40px #FFD700}
+#gamePopupBox h2{color:#FFD700;margin-bottom:10px}
+#gamePopupBox p{line-height:1.6;color:#ddd}
+#gamePopupBox img{width:100%;height:140px;object-fit:cover;border-radius:12px;margin:8px 0;border:2px solid #7B2FFF}
 #cutscene{position:fixed;inset:0;background:#000;z-index:100;display:none;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center}
 #cutscene img{width:100%;max-width:360px;height:220px;object-fit:cover;border-radius:16px;border:2px solid #7B2FFF}
-#cutscene h2{margin:12px 0;color:#FFD700;font-size:22px}
-#cutscene p{color:#ddd;line-height:1.6}
 #battleScreen{position:fixed;inset:0;background:linear-gradient(#1a0033,#000);z-index:90;display:none;flex-direction:column;padding:12px;overflow-y:auto}
 .animeImg{width:100%;height:180px;object-fit:cover;border-radius:14px;border:2px solid #7B2FFF}
-.bossBig{font-size:80px;text-align:center}
-.rankSSS{color:#fff;text-shadow:0 0 12px gold}.rankClass{color:#FF0000;text-shadow:0 0 14px red}
+.clearedBox{border:3px solid #00FF00;background:#001100;padding:14px;border-radius:12px;margin:10px 0}
 .monarchBadge{background:linear-gradient(90deg,#FFD700,#FF00FF);color:#000;padding:4px 10px;border-radius:20px;font-weight:900;font-size:12px}
-.shake{animation:shake .3s}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
-.dmgFloat{position:fixed;left:50%;top:40%;font-size:32px;font-weight:900;color:#FF2200;text-shadow:2px 2px 0 #000;z-index:95;pointer-events:none}
+.chosenBadge{background:linear-gradient(90deg,#FFD700,#FFF700);color:#000;padding:4px 10px;border-radius:20px;font-weight:900;font-size:12px;box-shadow:0 0 15px gold}
+.mapGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mapCell{background:#1a1a44;border:2px solid #444;padding:14px;border-radius:14px;text-align:center}
+.mapCell.active{border-color:#FFD700;background:#2a2a00}
+.gradeLow{color:#aaa}.gradeMid{color:#00FF00}.gradeHigh{color:#00AAFF}.gradeSupreme{color:#FFAA00}.gradeSaint{color:#FF00FF}.gradeDivine{color:#FFD700;text-shadow:0 0 10px gold}
 </style>
 </head>
 <body>
-<div id="top"><span>👤 <b id="tName">HUNTER</b> • <span id="tRank">E-RANK</span> • Lv.<b id="tLv">1</b></span><span>❤️ <span id="tHp">100</span></span><span>🪙 <b id="tGold">10000</b></span><span>🔑 <b id="tKey">3</b></span></div>
+<div id="top"><span>👤 <b id="tName">HUNTER</b> • <span id="tRank">F-RANK</span> • Lv.<b id="tLv">1</b></span><span>❤️ <span id="tHp">100</span></span><span>🪙 <b id="tGold">10000</b></span><span>☁️ <b id="tCloud">-</b></span></div>
 <div class="tabs">
 <button class="tb active" onclick="show('home',this)">🏠 HOME</button>
 <button class="tb" onclick="show('profile',this)">👤 PROFILE</button>
 <button class="tb" onclick="show('gate',this)">🚪 GATES</button>
-<button class="tb" onclick="show('shadow',this)">💀 SHADOWS</button>
-<button class="tb" onclick="show('shop',this)">🛒 SHOP</button>
+<button class="tb" onclick="show('cult',this)">🧘 CULTIV.</button>
+<button class="tb" onclick="show('world',this)">🌎 WORLD</button>
+<button class="tb" onclick="show('bank',this)">🏦 BANK</button>
 <button class="tb" onclick="show('guild',this)">🛡️ GUILD</button>
-<button class="tb" onclick="show('quest',this)">📋 QUEST</button>
+<button class="tb" onclick="show('shop',this)">🛒 SHOP</button>
 </div>
 
 <div id="home" class="screen active">
-<div id="registerBox" class="card" style="border:2px solid #FFD700"><h2>⚡ SYSTEM: REGISTER HUNTER</h2><p>Enter your Hunter Name to awaken the System.</p><p style="font-size:12px;color:#FFD700">Secret: Register as <b>Infinity</b> for Shadow Monarch Perk at Lv.1</p><input id="hunterName" placeholder="Enter Hunter Name... e.g. Infinity"><button class="btnGold" onclick="registerHunter()">⚡ AWAKEN SYSTEM - REGISTER</button><p id="regMsg"></p><p style="font-size:12px;color:#aaa">Start Bonus: 10,000 Gold • 3 Gate Keys • 100 HP • 50 MP</p></div>
-<div class="card"><h2>📖 STORY - CUTSCENE 1: THE WEAKEST</h2><img class="animeImg" src="https://images.unsplash.com/photo-1541562232579-512a21360020?w=800&q=80" alt="Anime Hunter"><p>Everyone laughed at you. F-Rank. E-Rank. The Weakest Hunter. You went into a Gate with a party, they left you to die...</p><button class="btn2" onclick="playCutscene(0)">▶ PLAY CUTSCENE 1</button><button class="btn2" onclick="playCutscene(1)">▶ CUTSCENE 2: DOUBLE DUNGEON</button><button class="btn2" onclick="playCutscene(2)">▶ CUTSCENE 3: SYSTEM AWAKENS</button><button class="btn2" onclick="playCutscene(3)">▶ CUTSCENE 4: FIRST ARISE</button><button class="btn2" onclick="playCutscene(4)">▶ CUTSCENE 5: MONARCH AWAKENS</button></div>
-<div class="card"><h3>🎯 DAILY QUEST - SYSTEM QUEST</h3><p>100 Push-ups • 100 Sit-ups • 100 Squats • 10km Run</p><p>Progress: <b id="questProg">0 / 4</b> • Fail = Penalty Zone</p><button class="btn" onclick="doQuest()">💪 DO TRAINING +</button><button class="btnGold" onclick="claimQuest()">🎁 CLAIM REWARD</button></div>
-<div class="card"><h3>🥊 2-PLAYER DUEL LINK</h3><p>Create your Duel Link and send to a friend. Friend opens link, fights you live.</p><button class="btn" onclick="createDuelLink()">🔗 CREATE DUEL LINK</button><p id="duelLinkOut" style="word-break:break-all;font-size:12px"></p><button class="btn2" onclick="copyDuel()">📋 COPY DUEL LINK</button></div>
+<div id="registerBox" class="card" style="border:2px solid #FFD700"><h2>⚡ REGISTER HUNTER</h2><p>Pick Class — Cutscene changes by Class. Random Talent + Random Spirit Root Grade.</p><input id="hunterName" placeholder="Hunter Name... e.g. Infinity"><select id="regClass"><option value="FIGHTER">⚔️ FIGHTER</option><option value="MAGE">🔮 MAGE</option><option value="ASSASSIN">🥷 ASSASSIN</option><option value="TANK">🛡️ TANK</option><option value="HEALER">💖 HEALER</option><option value="NECROMANCER">💀 NECROMANCER</option></select><button class="btnGold" onclick="registerHunter()">⚡ AWAKEN - REGISTER</button><p id="regMsg"></p><p style="font-size:12px">Start: 10,000 Gold • 3 Keys • Talent Random<br>Chosen One: 1 in 100 chance - Only 1 player in whole game!</p></div>
+<div class="card"><h2>📖 STORY - BY YOUR CLASS</h2><button class="btn2" onclick="playCutsceneByClass()">▶ PLAY MY CUTSCENE</button><button class="btn2" onclick="playCutscene(0)">▶ ALL CUTSCENES</button></div>
+<div class="card"><h3>☁️ CLOUD SAVE</h3><p>Cloud ID: <b id="cloudId">-</b></p><input id="cloudInput" placeholder="Enter Cloud ID to load..."><button class="btn2" onclick="loadCloud()">☁️ LOAD FROM CLOUD</button><button class="btn2" onclick="copyCloud()">📋 COPY CLOUD ID</button><p id="cloudMsg"></p><a href="https://wa.me/2601293138" target="_blank" style="color:#00FF00">📲 Game Line: +260 129 3138</a></div>
+<div class="card"><h3>🎯 DAILY QUEST</h3><p>100 Push-ups • 100 Sit-ups • 100 Squats • 10km Run</p><p>Progress: <b id="questProg">0 / 4</b> • Train: <b id="trainTimer">Ready</b> • Daily: <b id="dailyTimer">Ready</b></p><button class="btn" onclick="doQuest()">💪 TRAIN (4h CD)</button><button class="btnGold" onclick="claimQuest()">🎁 CLAIM DAILY (24h CD)</button><p id="questMsg"></p></div>
+<div class="card"><h3>🥊 2-PLAYER DUEL LINK</h3><button class="btn" onclick="createDuelLink()">🔗 CREATE DUEL LINK</button><p id="duelLinkOut" style="word-break:break-all;font-size:12px"></p></div>
 </div>
 
 <div id="profile" class="screen">
-<div class="card"><h2>👤 HUNTER PROFILE</h2><p>Name: <b id="pName">-</b> • ID: <b id="pId">H-0001</b></p><p>Rank: <b id="pRank">E-RANK</b> • Level: <b id="pLv">1</b> • Class: <b id="pClass">NONE</b></p><p>Title: <b id="pTitle">Weakest Hunter</b> <span id="monarchBadge" style="display:none" class="monarchBadge">👑 SHADOW MONARCH</span></p><p>HP: <span id="pHp">100</span> / <span id="pMaxHp">100</span></p><div class="hp"><div class="hpFill" id="hpFill" style="width:100%"></div></div><p>MP: <span id="pMp">50</span> / <span id="pMaxMp">50</span> <span id="infMp" style="display:none;color:#00FFFF">♾️ INFINITE MP</span></p><div class="mp"><div class="mpFill" id="mpFill" style="width:100%"></div></div><p>XP: <span id="pXp">0</span> / <span id="pXpNeed">100</span></p><div class="xp"><div class="xpFill" id="xpFill" style="width:0%"></div></div><p>Gold: <b id="pGold">10000</b> • Gems: <b id="pGem">0</b> • Keys: <b id="pKey">3</b></p><p>Perks: <span id="perkList">None</span></p></div>
-<div class="card"><h3>⚔️ CLASS CHANGE</h3><div class="row"><button class="btn2" onclick="changeClass('FIGHTER')">⚔️ FIGHTER</button><button class="btn2" onclick="changeClass('MAGE')">🔮 MAGE</button><button class="btn2" onclick="changeClass('ASSASSIN')">🥷 ASSASSIN</button><button class="btn2" onclick="changeClass('TANK')">🛡️ TANK</button><button class="btn2" onclick="changeClass('HEALER')">💖 HEALER</button><button class="btn2" onclick="changeClass('NECROMANCER')">💀 NECROMANCER</button></div><p id="classMsg"></p></div>
-<div class="card"><h3>🎒 INVENTORY & WEAPON</h3><div id="invList"></div><p>Weapon: <b id="pWeapon">Rusty Sword</b> • Armor: <b id="pArmor">Hunter Cloth</b></p><button class="btn2" onclick="renameWeapon()">✏️ RENAME WEAPON</button><button class="btn2" onclick="forgeWeapon()">🔨 FORGE +10 DMG - 500 Gold</button></div>
+<div class="card"><h2>👤 PROFILE</h2><p>Name: <b id="pName">-</b> • Cloud: <b id="pCloud">-</b></p><p>Rank: <b id="pRank">F-RANK</b> • Lv: <b id="pLv">1</b> • Class: <b id="pClass">NONE</b> • Title: <b id="pTitle">Weakest</b></p><p><span id="monarchBadge" style="display:none" class="monarchBadge">👑 SHADOW MONARCH</span> <span id="chosenBadge" style="display:none" class="chosenBadge">✨ CHOSEN ONE ✨</span></p><p>HP: <span id="pHp">100</span>/<span id="pMaxHp">100</span></p><div class="hp"><div class="hpFill" id="hpFill" style="width:100%"></div></div><p>MP: <span id="pMp">50</span> <span id="infMp" style="display:none;color:#00FFFF">♾️ INFINITE</span></p><div class="mp"><div class="mpFill" id="mpFill" style="width:100%"></div></div><p>XP: <span id="pXp">0</span>/<span id="pXpNeed">100</span></p><div class="xp"><div class="xpFill" id="xpFill" style="width:0%"></div></div><p>Gold: <b id="pGold">10000</b> • Bank: <b id="pBank">0</b> • Wood: <b id="pWood">0</b></p></div>
+<div class="card"><h3>🎲 TALENT - WITH GRADE</h3><p>Spirit Root: <b id="talRoot">-</b> - <b id="talGrade">-</b></p><p>Physique: <b id="talPhys">-</b></p><p>Special Constitution: <b id="talConst">-</b></p><p>Perks: <span id="perkList">None</span></p><p style="font-size:12px">Grades: Low → Mid → High → Supreme → Saint → Divine<br>Divine = 1% chance. Supreme = 5%. Saint = 2%.</p></div>
+<div class="card"><h3>🏠 MY HOUSE</h3><p>House: <b id="houseLevel">No House</b> • Level: <b id="houseLv">0</b></p><p>House gives +HP regen + Cultivation XP per hour</p></div>
+<div class="card"><h3>🏯 MY SECT</h3><p>Sect: <b id="sectName">No Sect</b> • Sect Rank: <b id="sectRank">-</b></p></div>
+<div class="card"><h3>🎒 INVENTORY</h3><div id="invList"></div><p>Weapon: <b id="pWeapon">Rusty Sword</b></p><button class="btn2" onclick="forgeWeapon()">🔨 FORGE +10 - 500 Gold</button></div>
 <div class="card"><h3>🔮 SKILLS</h3><div id="skillList"></div></div>
-<div class="card"><h3>🏆 LEADERBOARD - REAL PLAYERS ONLY</h3><p style="font-size:12px">Only hunters who registered with this link appear here. No mobs.</p><div id="leaderList"></div></div>
+<div class="card"><h3>🏆 LEADERBOARD - REAL PLAYERS ONLY</h3><div id="leaderList"></div></div>
 </div>
 
-<div id="gate" class="screen">
-<div class="card"><h2>🚪 GATES - TAP TO ENTER & FIGHT INSTANTLY</h2><p>Tap a Gate → Battle opens immediately. No extra steps.</p><div id="gateList"></div></div>
+<div id="gate" class="screen"><div class="card"><h2>🚪 GATES - TAP TO FIGHT</h2><div id="gateList"></div></div></div>
+
+<div id="cult" class="screen">
+<div class="card"><h2>🧘 CULTIVATION BASE</h2><p>Realm: <b id="cRealm">Body Tempering</b> • <b id="cLayerBadge">1st Layer</b></p><p>Cult XP: <span id="cXp">0</span> / <span id="cNeed">100</span></p><div class="cultBar"><div class="cultFill" id="cultFill" style="width:0%"></div></div><p style="font-size:12px">Each Realm 9 Layers. 9th = Peak. Breakthrough to next Realm.</p><button class="btn" onclick="cultivate()">🧘 MEDITATE (4h CD)</button><button class="btnGold" onclick="breakthrough()">⚡ BREAKTHROUGH</button><p id="cultMsg"></p><p>Next: <b id="cultTimer">Ready</b></p></div>
+<div class="card"><h3>🌌 REALM PATH</h3><p>Body Tempering → Qi Refinement → Foundation Establishment → Golden Core → Nascent Soul → Soul Formation → Void Refinement → Body Integration → Mahayana → Tribulation → Immortal</p></div>
+<div class="card"><h3>💊 CULTIVATION ITEMS</h3><button class="btn2" onclick="buyCult('Qi Pill',500)">💊 Qi Pill +50 - 500</button><button class="btn2" onclick="buyCult('Foundation Pill',2000)">💊 Foundation Pill +200 - 2000</button><button class="btn2" onclick="buyCult('Golden Core Pill',5000)">💊 Golden Core Pill +500 - 5000</button></div>
 </div>
 
-<div id="shadow" class="screen">
-<div class="card"><h2>💀 SHADOW ARMY</h2><div id="shadowList"></div><button class="btn" onclick="deployShadows()">⚔️ DEPLOY SHADOWS</button><p id="shadowMsg"></p></div>
-<div class="card"><h3>👑 MONARCH STATUS</h3><p>Monarchs Defeated: <b id="monarchCount">0</b></p><button class="btn2" onclick="becomeMonarch()">👑 CLAIM MONARCH - Lv.50+ OR Infinity Perk</button><p id="monarchMsg"></p></div>
+<div id="world" class="screen">
+<div class="card"><h2>🌎 CULTIVATION WORLD - MAP</h2><p>Current Location: <b id="worldName">Hunter City</b></p><div class="mapGrid" id="mapGrid"></div><p id="worldMsg"></p></div>
+<div class="card"><h2>🪓 CHOP WOOD & BUILD</h2><p>Wood: <b id="woodCount">0</b> • House: <b id="houseInfo">No House</b></p><button class="btn" onclick="chopWood()">🪓 CHOP WOOD +10 Wood</button><button class="btn2" onclick="sellWood()">💰 SELL WOOD - 10 Wood = 200 Gold</button><button class="btnGold" onclick="buildHouse()">🏠 BUILD / UPGRADE HOUSE - 50 Wood + 1000 Gold</button><p id="woodMsg"></p></div>
+<div class="card"><h2>🏯 SECT</h2><p>Your Sect: <b id="sectName2">No Sect</b></p><div class="row"><button class="btn2" onclick="joinSect('Heavenly Sword Sect')">⚔️ Heavenly Sword Sect</button><button class="btn2" onclick="joinSect('Shadow Sect')">💀 Shadow Sect</button><button class="btn2" onclick="joinSect('Chaos Sect')">🌌 Chaos Sect</button><button class="btn2" onclick="joinSect('Alchemy Sect')">🧪 Alchemy Sect</button></div><button class="btn2" onclick="sectMission()">📜 SECT MISSION +300 Gold</button><p id="sectMsg"></p></div>
+<div class="card"><h2>🛒 WORLD SHOP - BUY IN WORLD</h2><p>Buy things in the world, not just in Shop tab.</p><div class="row"><button class="btn2" onclick="buyWorld('Wood',100)">🪵 Wood 100 Gold</button><button class="btn2" onclick="buyWorld('Rice',50)">🍚 Rice 50 Gold</button><button class="btn2" onclick="buyWorld('Pill',500)">💊 Pill 500 Gold</button><button class="btn2" onclick="buyWorld('Sword',2000)">🗡️ Sword 2000 Gold</button><button class="btn2" onclick="buyWorld('House Material',1000)">🏠 House Material 1000</button></div><p id="worldShopMsg"></p></div>
+<div class="card"><h2>🌾 LIFE IN WORLD</h2><button class="btn2" onclick="farm()">🌾 FARM +50 Gold</button><button class="btn2" onclick="mine()">⛏️ MINE + Stone</button><button class="btn2" onclick="fish()">🎣 FISH + Food</button><p id="lifeMsg"></p></div>
 </div>
 
-<div id="shop" class="screen">
-<div class="card"><h2>🛒 SHOP</h2><p>Wallet: <b id="sGold">10000</b> • Bank: <b id="sBank">0</b></p><div class="row"><button class="btn2" onclick="deposit()">📥 DEPOSIT 1000</button><button class="btn2" onclick="withdraw()">📤 WITHDRAW 1000</button><button class="btn2" onclick="buyItem('Potion',100)">🧪 Potion 100</button><button class="btn2" onclick="buyItem('Gate Key',300)">🔑 Gate Key 300</button><button class="btn2" onclick="buyItem('Elixir',500)">💖 Elixir 500</button><button class="btn2" onclick="buyItem('Shadow Stone',1000)">💀 Shadow Stone 1000</button><button class="btn2" onclick="buyItem('Demon Sword',5000)">🗡️ Demon Sword 5000</button></div><p id="shopMsg"></p></div>
-<div class="card"><h3>🍖 FOOD & REST</h3><button class="btn2" onclick="eatFood()">🍽️ EAT +20 HP - 50 Gold</button><button class="btn2" onclick="sleep()">😴 SLEEP - Full HP/MP</button><button class="btn2" onclick="healFull()">💖 HEAL FULL - 100 Gold</button></div>
+<div id="bank" class="screen">
+<div class="card"><h2>🏦 BANK DASHBOARD</h2><p>Wallet: <b id="bWallet">10000</b> • Bank: <b id="bBank">0</b></p><input id="bankAmt" type="number" placeholder="Amount..."><div class="row"><button class="btn2" onclick="deposit()">📥 DEPOSIT</button><button class="btn2" onclick="withdraw()">📤 WITHDRAW</button></div><p id="bankMsg"></p></div>
+<div class="card"><h3>💸 SEND MONEY TO PLAYER</h3><input id="sendTo" placeholder="Player Name..."><input id="sendAmt" type="number" placeholder="Amount..."><button class="btnGold" onclick="sendMoney()">💸 SEND GOLD</button><p id="sendMsg"></p></div>
+<div class="card"><h3>📜 BANK HISTORY</h3><div id="bankHist">No transactions</div></div>
+<div class="card"><h3>📲 GAME LINE</h3><a href="https://wa.me/2601293138" target="_blank" style="color:#00FF00;font-weight:bold">📲 WhatsApp: +260 129 3138</a></div>
 </div>
 
 <div id="guild" class="screen">
-<div class="card"><h2>🛡️ GUILD</h2><p>Your Guild: <b id="guildName">NO GUILD</b> • Members: <b id="guildMembers">0</b></p><input id="guildInput" placeholder="Guild Name..."><button class="btn" onclick="createGuild()">CREATE GUILD</button><button class="btn2" onclick="joinGuild()">JOIN - Shadow Legion</button><button class="btn2" onclick="guildBoss()">⚔️ GUILD BOSS</button><p id="guildMsg"></p></div>
-<div class="card"><h3>🥊 DUEL & TOURNEY</h3><button class="btn2" onclick="duel()">🥊 DUEL RANDOM PLAYER</button><button class="btn2" onclick="tourney()">🏟️ TOURNEY</button><button class="btn2" onclick="showLeader()">🏆 LEADERBOARD - REAL PLAYERS</button><div id="leaderList2"></div><p id="duelMsg"></p></div>
-<div class="card"><h3>🌌 SECRET GATE</h3><button class="btnGold" onclick="secretGate()">🌌 ENTER SECRET GATE</button><p id="secretMsg"></p></div>
+<div class="card"><h2>🛡️ GUILD</h2><p>Guild: <b id="guildName">NO GUILD</b> • War Points: <b id="warPts">0</b></p><input id="guildInput" placeholder="Guild Name..."><button class="btn" onclick="createGuild()">CREATE GUILD</button><button class="btn2" onclick="joinGuild()">JOIN - Shadow Legion</button><p id="guildMsg"></p></div>
+<div class="card"><h2>⚔️ GUILD WAR</h2><button class="btnGold" onclick="guildWar()">⚔️ START GUILD WAR</button><p id="warMsg"></p><div id="warLog"></div></div>
+<div class="card"><h3>👹 GUILD BOSS</h3><button class="btn2" onclick="guildBoss()">⚔️ GUILD BOSS</button><p id="guildBossMsg"></p></div>
+<div class="card"><h3>🏆 GUILD LEADERBOARD</h3><div id="guildLeader"></div></div>
 </div>
 
-<div id="quest" class="screen">
-<div class="card"><h2>📋 QUESTS</h2><p>Daily: 100 Push-ups, 100 Sit-ups, 100 Squats, 10km Run</p><p>Progress: <b id="qProg2">0 / 4</b></p><button class="btn" onclick="doQuest()">TRAIN +</button><button class="btnGold" onclick="claimQuest()">🎁 CLAIM</button><p id="questMsg"></p></div>
-<div class="card"><h3>🌟 EVENTS</h3><p>• Double XP Weekend<br>• Gate Break - 3 Gates Open<br>• Monarch Raid - Sunday<br>• Secret Double Dungeon - Infinity Only</p></div>
-<div class="card"><h3>📢 SYSTEM NOTIFICATIONS</h3><div id="notifList"></div></div>
+<div id="shop" class="screen">
+<div class="card"><h2>🛒 SHOP</h2><p>Wallet: <b id="sGold">10000</b></p><div class="row"><button class="btn2" onclick="buyItem('Potion',100)">🧪 Potion 100</button><button class="btn2" onclick="buyItem('Gate Key',300)">🔑 Gate Key 300</button><button class="btn2" onclick="buyItem('Elixir',500)">💖 Elixir 500</button><button class="btn2" onclick="buyItem('Shadow Stone',1000)">💀 Shadow Stone 1000</button><button class="btn2" onclick="buyItem('Demon Sword',5000)">🗡️ Demon Sword 5000</button></div><p id="shopMsg"></p></div>
+<div class="card"><h3>🍖 FOOD & REST</h3><button class="btn2" onclick="eatFood()">🍽️ EAT +20 HP - 50</button><button class="btn2" onclick="sleep()">😴 SLEEP - Full HP/MP</button></div>
 </div>
 
-<!-- CUTSCENE -->
-<div id="cutscene"><img id="csImg" src=""><h2 id="csTitle"></h2><p id="csText"></p><button class="btnGold" onclick="nextCutscene()">CONTINUE ▶</button><button class="btn2" onclick="closeCutscene()">SKIP ✕</button></div>
+<div id="cutscene" style="display:none"><img id="csImg" src=""><h2 id="csTitle"></h2><p id="csText"></p><button class="btnGold" onclick="nextCutscene()">CONTINUE ▶</button><button class="btn2" onclick="closeCutscene()">SKIP ✕</button></div>
 
-<!-- BATTLE SCREEN - FULL PORTRAIT BATTLE -->
 <div id="battleScreen">
-<h2 id="gateTitle" style="text-align:center">GATE</h2>
-<img id="battleImg" class="animeImg" src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&q=80">
-<div class="bossBig" id="bossEmoji">👹</div>
-<p style="text-align:center">Boss: <b id="bossName">Boss</b> • Rank: <b id="bossRank">E</b></p>
-<p>Boss HP: <b id="bossHp">100</b></p><div class="hp"><div class="hpFill" id="bossHpFill" style="width:100%;background:red"></div></div>
-<p style="margin-top:8px">Your HP: <b id="battleHp">100</b> • MP: <b id="battleMp">50</b> • Combo: <b id="comboText">x0</b></p>
-<div class="hp"><div class="hpFill" id="battleHpFill" style="width:100%"></div></div>
-<div id="battleLog"></div>
-<div class="row"><button class="btn2" onclick="attack()">⚔️ ATTACK</button><button class="btn2" onclick="heavyAttack()">💥 HEAVY</button><button class="btn2" onclick="dodge()">💨 DODGE</button><button class="btn2" onclick="block()">🛡️ BLOCK</button></div>
-<div class="row"><button class="btn2" onclick="useSkill(1)">🔥 SKILL 1</button><button class="btn2" onclick="useSkill(2)">⚡ SKILL 2</button><button class="btn2" onclick="useSkill(3)">💥 ULTIMATE</button><button class="btn2" onclick="heal()">💖 HEAL</button></div>
-<button class="btn" onclick="arise()">💀 ARISE - EXTRACT SHADOW</button>
-<button class="btn2" onclick="runGate()">🏃 RUN FROM GATE</button>
-<p id="gateMsg" style="text-align:center;color:#FFD700"></p>
+<h2 id="gateTitle" style="text-align:center">GATE</h2><img id="battleImg" class="animeImg" src=""><div style="font-size:70px;text-align:center" id="bossEmoji">👹</div><p style="text-align:center">Boss: <b id="bossName">Boss</b></p><p>Boss HP: <b id="bossHp">100</b></p><div class="hp"><div class="hpFill" id="bossHpFill" style="width:100%;background:red"></div></div><p style="margin-top:8px">Your HP: <b id="battleHp">100</b> • MP: <b id="battleMp">50</b> • Combo: <b id="comboText">x0</b></p><div class="hp"><div class="hpFill" id="battleHpFill" style="width:100%"></div></div><div id="battleLog"></div><div class="row"><button class="btn2" onclick="attack()">⚔️ ATTACK</button><button class="btn2" onclick="heavyAttack()">💥 HEAVY</button><button class="btn2" onclick="dodge()">💨 DODGE</button><button class="btn2" onclick="block()">🛡️ BLOCK</button></div><div class="row"><button class="btn2" onclick="useSkill(1)">🔥 SKILL 1</button><button class="btn2" onclick="useSkill(2)">⚡ SKILL 2</button><button class="btn2" onclick="useSkill(3)">💥 ULTIMATE</button><button class="btn2" onclick="heal()">💖 HEAL</button></div><button class="btn" onclick="arise()">💀 ARISE</button><button class="btn2" onclick="runGate()">🏃 RUN</button><p id="gateMsg"></p><div id="clearedBox" style="display:none" class="clearedBox"><h2>🏆 <span id="clearGateName">E-RANK</span> GATE CLEARED! 🏆</h2><p>VICTORY BY <b id="clearPlayer">Player</b> • LEVEL <span id="clearLv">1</span></p><p>🪙 GOLD: +<span id="clearGold">500</span>g | ⚡ XP: +<span id="clearXp">250</span></p><p>📦 LOOT: +1x <span id="clearLoot">Mana Crystal</span></p><p>🔮 SHADOW EXTRACTION READY: Type .arise !</p><p>❤️ YOUR HP <span id="clearHp">100</span> / <span id="clearMaxHp">100</span></p><div class="hp"><div class="hpFill" id="clearHpFill" style="width:100%"></div></div><p style="font-size:12px">☁️ CLOUD SYSTEM • Auto exiting in 3s...</p></div>
 </div>
+
+<!-- GAME POPUP - REPLACES BROWSER ALERT -->
+<div id="gamePopup"><div id="gamePopupBox"><h2 id="popTitle">REWARD!</h2><img id="popImg" src="" style="display:none"><p id="popText"></p><button class="btnGold" onclick="closePopup()">CONTINUE ▶</button></div></div>
 
 <button id="soundBtn" onclick="toggleSound()">🔊 SOUND: ON</button>
-
 <script>
-// SOUNDS
-let soundOn=true, audioCtx=null;
-function sfx(f,d,t='square',v=0.2){ if(!soundOn) return; try{ if(!audioCtx) audioCtx=new (window.AudioContext||window.webkitAudioContext)(); let o=audioCtx.createOscillator(),g=audioCtx.createGain(); o.type=t; o.frequency.value=f; g.gain.value=v; o.connect(g); g.connect(audioCtx.destination); o.start(); o.stop(audioCtx.currentTime+d);}catch(e){} }
-function sfxSlash(){ sfx(800,0.12,'sawtooth',0.25); setTimeout(()=>sfx(400,0.1,'sawtooth',0.2),60); }
-function sfxHit(){ sfx(150,0.15,'square',0.3); }
-function sfxLevelUp(){ [523,659,784,1046].forEach((f,i)=>setTimeout(()=>sfx(f,0.18,'sine',0.25),i*100)); }
-function sfxArise(){ [200,300,400,600,900].forEach((f,i)=>setTimeout(()=>sfx(f,0.25,'sawtooth',0.2),i*120)); }
-function sfxGate(){ sfx(100,0.5,'sine',0.3); }
-function sfxBoss(){ sfx(80,0.6,'sawtooth',0.35); }
-function sfxCoin(){ sfx(1200,0.08,'sine',0.25); setTimeout(()=>sfx(1500,0.1,'sine',0.25),70); }
-function sfxHeal(){ sfx(600,0.3,'sine',0.2); }
-function sfxDodge(){ sfx(1000,0.08,'sine',0.2); }
-function sfxBlock(){ sfx(300,0.12,'square',0.3); }
-function toggleSound(){ soundOn=!soundOn; document.getElementById('soundBtn').textContent=soundOn?'🔊 SOUND: ON':'🔇 SOUND: OFF'; if(soundOn) sfxCoin(); }
-// DATA - Only real registered players
-let allPlayers=JSON.parse(localStorage.getItem('hunter_players')||'[]');
-let H=JSON.parse(localStorage.getItem('hunter_save_v2')||'null')||{name:'',registered:false,level:1,xp:0,xpNeed:100,hp:100,maxHp:100,mp:50,maxMp:50,gold:10000,gems:0,keys:3,bank:0,rank:'E',cls:'NONE',title:'Weakest Hunter',str:10,agi:10,int:10,vit:10,sen:10,pts:0,weapon:'Rusty Sword',weaponDmg:15,armor:'Hunter Cloth',inventory:['Potion x2','Gate Key x3'],shadows:[],guild:'NO GUILD',guildMembers:0,questProg:0,monarch:0,skills:['Slash','Dash','Fireball'],perks:[],isInfinity:false,infiniteMp:false};
-let curGate=null, curBoss=null, inBattle=false, combo=0, isBlocking=false, csIndex=0;
-const cutscenes=[
-{img:'https://images.unsplash.com/photo-1541562232579-512a21360020?w=800&q=80',title:'CUTSCENE 1: THE WEAKEST HUNTER',text:'You are laughed at. F-Rank. E-Rank. The weakest. Your party leaves you in a Gate to die. You crawl, bleeding... "Why me? Why am I so weak?"'},
-{img:'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&q=80',title:'CUTSCENE 2: DOUBLE DUNGEON',text:'Hidden door opens. DOUBLE DUNGEON. A giant statue smiles. Your friends scream and run. You cannot move. The statue raises its sword... "Is this the end?"'},
-{img:'https://images.unsplash.com/photo-1534447677768-be436bb09401?w=800&q=80',title:'CUTSCENE 3: SYSTEM AWAKENS',text:'DING! [ YOU HAVE ACQUIRED THE QUALIFICATION TO BE A PLAYER. DO YOU ACCEPT? ] A blue window appears only you can see. You whisper... "YES. I ACCEPT."'},
-{img:'https://images.unsplash.com/photo-1509347528160-9a9e33742cdb?w=800&q=80',title:'CUTSCENE 4: FIRST ARISE',text:'You kill the Boss. You raise your hand. Purple smoke rises. "ARISE." The Boss kneels before you. "My Monarch..." Your first Shadow is born.'},
-{img:'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=800&q=80',title:'CUTSCENE 5: MONARCH AWAKENS',text:'S-Rank Hunters kneel. Gates break open. The world shakes. You walk out of the Gate, shadows behind you. "I am no longer the weakest. I am the Shadow Monarch."'}
-];
-function save(){ localStorage.setItem('hunter_save_v2',JSON.stringify(H)); 
-  // Update leaderboard - only real players
-  let idx=allPlayers.findIndex(p=>p.name===H.name); if(H.registered){ if(idx>=0) allPlayers[idx]={name:H.name,level:H.level,rank:H.rank,cls:H.cls}; else allPlayers.push({name:H.name,level:H.level,rank:H.rank,cls:H.cls}); localStorage.setItem('hunter_players',JSON.stringify(allPlayers)); }
-  update(); }
-function getRank(){ if(H.isInfinity||H.level>=100) return {r:'CLASSIFIED',t:'SHADOW MONARCH'}; if(H.level>=80) return {r:'SSS',t:'National Level Hunter'}; if(H.level>=65) return {r:'SS',t:'SS Hunter'}; if(H.level>=50) return {r:'S',t:'S-Rank Hunter'}; if(H.level>=40) return {r:'A',t:'A-Rank Hunter'}; if(H.level>=30) return {r:'B',t:'B-Rank Hunter'}; if(H.level>=20) return {r:'C',t:'C-Rank Hunter'}; if(H.level>=10) return {r:'D',t:'D-Rank Hunter'}; if(H.level>=5) return {r:'E',t:'E-Rank Hunter'}; return {r:'F',t:'Weakest Hunter'}; }
+let soundOn=true,audioCtx=null; function sfx(f,d,t='square',v=0.2){ if(!soundOn) return; try{ if(!audioCtx) audioCtx=new (window.AudioContext||window.webkitAudioContext)(); let o=audioCtx.createOscillator(),g=audioCtx.createGain(); o.type=t; o.frequency.value=f; g.gain.value=v; o.connect(g); g.connect(audioCtx.destination); o.start(); o.stop(audioCtx.currentTime+d);}catch(e){} }
+function sfxSlash(){ sfx(800,0.12,'sawtooth',0.25); } function sfxHit(){ sfx(150,0.15,'square',0.3); } function sfxLevelUp(){ [523,659,784,1046].forEach((f,i)=>setTimeout(()=>sfx(f,0.18,'sine',0.25),i*100)); } function sfxArise(){ [200,300,400,600,900].forEach((f,i)=>setTimeout(()=>sfx(f,0.25,'sawtooth',0.2),i*120)); } function sfxGate(){ sfx(100,0.5,'sine',0.3); } function sfxBoss(){ sfx(80,0.6,'sawtooth',0.35); } function sfxCoin(){ sfx(1200,0.08,'sine',0.25); } function sfxHeal(){ sfx(600,0.3,'sine',0.2); } function toggleSound(){ soundOn=!soundOn; document.getElementById('soundBtn').textContent=soundOn?'🔊 SOUND: ON':'🔇 SOUND: OFF'; }
+// GAME POPUP - NOT BROWSER ALERT
+function showPopup(title,text,img=''){ document.getElementById('popTitle').textContent=title; document.getElementById('popText').innerHTML=text; let im=document.getElementById('popImg'); if(img){ im.src=img; im.style.display='block'; } else im.style.display='none'; document.getElementById('gamePopup').style.display='flex'; sfxCoin(); }
+function closePopup(){ document.getElementById('gamePopup').style.display='none'; }
+const REALMS=['Body Tempering','Qi Refinement','Foundation Establishment','Golden Core','Nascent Soul','Soul Formation','Void Refinement','Body Integration','Mahayana','Tribulation','Immortal'];
+const ROOTS=['Fire','Water','Wood','Earth','Metal','Ice','Lightning','Wind','Dark','Light','Chaos'];
+const GRADES=['Low Grade','Mid Grade','High Grade','Supreme Grade','Saint Grade','Divine Grade'];
+const GRADE_COLOR={'Low Grade':'gradeLow','Mid Grade':'gradeMid','High Grade':'gradeHigh','Supreme Grade':'gradeSupreme','Saint Grade':'gradeSaint','Divine Grade':'gradeDivine'};
+const PHYS=['Mortal Body','Iron Body','Flame Body','Ice Jade Body','Dragon Body','Phoenix Body','Star Body','Battle Body','Chaos Divine Body','Primordial Chaos Divine Body'];
+const CONSTS=['None','Sword Heart','Battle Saint Body','Heavenly Charm','Shadow Monarch Constitution','Eternal Body','Heavenly Dao Body','Eternal Shadow Monarch Constitution'];
+let allPlayers=JSON.parse(localStorage.getItem('hunter_players_v4')||'[]');
+let chosenOneName=localStorage.getItem('chosen_one_name')||'';
+let H=JSON.parse(localStorage.getItem('hunter_save_v4')||'null')||{name:'',registered:false,level:1,xp:0,xpNeed:100,hp:100,maxHp:100,mp:50,maxMp:50,gold:10000,gems:0,keys:3,bank:0,rank:'F',cls:'NONE',title:'Weakest Hunter',str:10,agi:10,int:10,vit:10,sen:10,pts:0,weapon:'Rusty Sword',weaponDmg:15,armor:'Hunter Cloth',inventory:['Potion x2'],shadows:[],guild:'NO GUILD',guildMembers:0,questProg:0,monarch:0,skills:['Slash','Dash','Fireball'],perks:[],isInfinity:false,infiniteMp:false,cloudId:'HUNTER-'+Math.random().toString(36).substr(2,6).toUpperCase(),talentRoot:'',talentGrade:'',talentPhys:'',talentConst:'',cultRealm:0,cultLayer:1,cultXp:0,cultNeed:100,lastTrain:0,lastDaily:0,lastCult:0,warPts:0,bankHist:[],world:0,wood:0,houseLv:0,sect:'No Sect',sectRank:'-',isChosen:false};
+let curGate=null,curBoss=null,inBattle=false,combo=0,isBlocking=false,csIndex=0,csList=[];
+const classCutscenes={
+FIGHTER:[{img:'https://images.unsplash.com/photo-1541562232579-512a21360020?w=800&q=80',title:'FIGHTER: THE SWORD THAT WOULD NOT BREAK',text:'You were F-Rank Fighter. Your sword broke. Everyone left you. You picked up a broken blade: "I will not die here." The System heard you.'}],
+MAGE:[{img:'https://images.unsplash.com/photo-1534447677768-be436bb09401?w=800&q=80',title:'MAGE: THE ONE WHO COULD NOT CAST',text:'You were a Mage who could not cast. They called you Fake Mage. In the Double Dungeon, your mana exploded. "I am not weak. My mana was sealed."'}],
+ASSASSIN:[{img:'https://images.unsplash.com/photo-1509347528160-9a9e33742cdb?w=800&q=80',title:'ASSASSIN: SHADOW IN THE DARK',text:'You hid in shadows because you were weak. In the Gate, the shadow spoke: "You ARE the shadow." You became the Assassin no one can see.'}],
+TANK:[{img:'https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=800&q=80',title:'TANK: THE SHIELD THAT NEVER FALLS',text:'You always took hits for others. They used you as shield and left you. Your shield cracked, but you stood. "I will not fall."'}],
+HEALER:[{img:'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=800&q=80',title:'HEALER: THE ONE WHO HEALS PAIN',text:'You healed everyone, but no one healed you. You bled alone. System gave you Holy Light: "Heal yourself first, then heal the world."'}],
+NECROMANCER:[{img:'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&q=80',title:'NECROMANCER: ARISE',text:'You talked to the dead. People feared you. In the Double Dungeon, the dead knelt to you. "ARISE." Your first shadow rose.'}],
+'SHADOW MONARCH':[{img:'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=800&q=80',title:'INFINITY: MONARCH AWAKENS',text:'Name: Infinity. Bloodline: Primordial Chaos. System: "WELCOME, MONARCH. You were never weak. You were sealed." Qi Refinement 9th Peak. Shadows kneel.'}]
+};
+function save(){ localStorage.setItem('hunter_save_v4',JSON.stringify(H)); if(H.registered){ let idx=allPlayers.findIndex(p=>p.name===H.name); let rec={name:H.name,level:H.level,rank:H.rank,cls:H.cls,cloudId:H.cloudId,cult:REALMS[H.cultRealm]+' '+H.cultLayer,isChosen:H.isChosen}; if(idx>=0) allPlayers[idx]=rec; else allPlayers.push(rec); localStorage.setItem('hunter_players_v4',JSON.stringify(allPlayers)); } update(); }
+function getRank(){ if(H.isInfinity||H.level>=100) return {r:'CLASSIFIED',t:'SHADOW MONARCH'}; if(H.level>=80) return {r:'SSS',t:'National Level'}; if(H.level>=65) return {r:'SS',t:'SS Hunter'}; if(H.level>=50) return {r:'S',t:'S-Rank'}; if(H.level>=40) return {r:'A',t:'A-Rank'}; if(H.level>=30) return {r:'B',t:'B-Rank'}; if(H.level>=20) return {r:'C',t:'C-Rank'}; if(H.level>=10) return {r:'D',t:'D-Rank'}; if(H.level>=5) return {r:'E',t:'E-Rank'}; return {r:'F',t:'Weakest Hunter'}; }
+function fmtTime(ms){ if(ms<=0) return 'Ready'; let h=Math.floor(ms/3600000),m=Math.floor(ms%3600000/60000); return h+'h '+m+'m'; }
 function update(){
-  let rk=getRank(); H.rank=rk.r; if(!H.isInfinity) H.title=rk.t;
-  document.getElementById('tName').textContent=H.name||'HUNTER'; document.getElementById('tRank').textContent=rk.r+'-RANK'; document.getElementById('tLv').textContent=H.level; document.getElementById('tHp').textContent=H.hp; document.getElementById('tGold').textContent=H.gold; document.getElementById('tKey').textContent=H.keys;
-  document.getElementById('pName').textContent=H.name||'-'; document.getElementById('pRank').textContent=rk.r+'-RANK'; document.getElementById('pLv').textContent=H.level; document.getElementById('pClass').textContent=H.cls; document.getElementById('pTitle').textContent=H.title; document.getElementById('pHp').textContent=H.hp; document.getElementById('pMaxHp').textContent=H.maxHp; document.getElementById('pMp').textContent=H.infiniteMp?'∞':H.mp; document.getElementById('pMaxMp').textContent=H.infiniteMp?'∞':H.maxMp; document.getElementById('pXp').textContent=H.xp; document.getElementById('pXpNeed').textContent=H.xpNeed; document.getElementById('pGold').textContent=H.gold; document.getElementById('pGem').textContent=H.gems; document.getElementById('pKey').textContent=H.keys; document.getElementById('pWeapon').textContent=H.weapon+' (+'+H.weaponDmg+')'; document.getElementById('pArmor').textContent=H.armor;
-  document.getElementById('hpFill').style.width=(H.hp/H.maxHp*100)+'%'; document.getElementById('mpFill').style.width=H.infiniteMp?100:(H.mp/H.maxMp*100)+'%'; document.getElementById('xpFill').style.width=(H.xp/H.xpNeed*100)+'%';
-  document.getElementById('questProg').textContent=H.questProg+' / 4'; document.getElementById('qProg2').textContent=H.questProg+' / 4';
-  document.getElementById('sGold').textContent=H.gold; document.getElementById('sBank').textContent=H.bank; document.getElementById('guildName').textContent=H.guild; document.getElementById('guildMembers').textContent=H.guildMembers; document.getElementById('monarchCount').textContent=H.monarch;
-  document.getElementById('monarchBadge').style.display=H.isInfinity?'inline-block':'none'; document.getElementById('infMp').style.display=H.infiniteMp?'inline':'none';
-  document.getElementById('perkList').textContent=H.perks.length?H.perks.join(', '):'None';
-  document.getElementById('invList').innerHTML=H.inventory.map(i=>'<span class="tag">'+i+'</span>').join('')||'Empty';
-  document.getElementById('skillList').innerHTML=H.skills.map(s=>'<span class="tag">🔮 '+s+'</span>').join('');
-  document.getElementById('shadowList').innerHTML=H.shadows.length?H.shadows.map(s=>'<div class="card">💀 '+s.name+' - Lv.'+s.lv+' - Power '+s.pow+'</div>').join(''):'No shadows yet. Kill a Gate Boss and use ARISE!';
-  if(H.registered) document.getElementById('registerBox').style.display='none';
-  renderGates(); showLeader();
+ let rk=getRank(); H.rank=rk.r; if(!H.isInfinity) H.title=rk.t;
+ document.getElementById('tName').textContent=H.name||'HUNTER'; document.getElementById('tRank').textContent=rk.r+'-RANK'; document.getElementById('tLv').textContent=H.level; document.getElementById('tHp').textContent=H.hp; document.getElementById('tGold').textContent=H.gold; document.getElementById('tCloud').textContent=H.cloudId;
+ document.getElementById('cloudId').textContent=H.cloudId; document.getElementById('pCloud').textContent=H.cloudId; document.getElementById('pName').textContent=H.name||'-'; document.getElementById('pRank').textContent=rk.r+'-RANK'; document.getElementById('pLv').textContent=H.level; document.getElementById('pClass').textContent=H.cls; document.getElementById('pTitle').textContent=H.title; document.getElementById('pHp').textContent=H.hp; document.getElementById('pMaxHp').textContent=H.maxHp; document.getElementById('pMp').textContent=H.infiniteMp?'∞':H.mp; document.getElementById('pXp').textContent=H.xp; document.getElementById('pXpNeed').textContent=H.xpNeed; document.getElementById('pGold').textContent=H.gold; document.getElementById('pBank').textContent=H.bank; document.getElementById('pWood').textContent=H.wood;
+ document.getElementById('hpFill').style.width=(H.hp/H.maxHp*100)+'%'; document.getElementById('mpFill').style.width=H.infiniteMp?100:(H.mp/H.maxMp*100)+'%'; document.getElementById('xpFill').style.width=(H.xp/H.xpNeed*100)+'%';
+ document.getElementById('talRoot').textContent=(H.talentRoot||'-')+' Spirit Root'; document.getElementById('talGrade').textContent=H.talentGrade||'-'; document.getElementById('talGrade').className=GRADE_COLOR[H.talentGrade]||''; document.getElementById('talPhys').textContent=H.talentPhys||'-'; document.getElementById('talConst').textContent=H.talentConst||'-'; document.getElementById('perkList').textContent=H.perks.length?H.perks.join(', '):'None';
+ document.getElementById('cRealm').textContent=REALMS[H.cultRealm]; document.getElementById('cLayerBadge').textContent=H.cultLayer+'th Layer'+(H.cultLayer==9?' - PEAK':''); document.getElementById('cXp').textContent=H.cultXp; document.getElementById('cNeed').textContent=H.cultNeed; document.getElementById('cultFill').style.width=(H.cultXp/H.cultNeed*100)+'%';
+ document.getElementById('questProg').textContent=H.questProg+' / 4'; document.getElementById('trainTimer').textContent=fmtTime(H.lastTrain+4*3600000-Date.now()); document.getElementById('dailyTimer').textContent=fmtTime(H.lastDaily+24*3600000-Date.now()); document.getElementById('cultTimer').textContent=fmtTime(H.lastCult+4*3600000-Date.now());
+ document.getElementById('sGold').textContent=H.gold; document.getElementById('bWallet').textContent=H.gold; document.getElementById('bBank').textContent=H.bank; document.getElementById('guildName').textContent=H.guild; document.getElementById('warPts').textContent=H.warPts; document.getElementById('monarchBadge').style.display=H.isInfinity?'inline-block':'none'; document.getElementById('chosenBadge').style.display=H.isChosen?'inline-block':'none'; document.getElementById('infMp').style.display=H.infiniteMp?'inline':'none';
+ document.getElementById('invList').innerHTML=H.inventory.map(i=>'<span class="tag">'+i+'</span>').join('')||'Empty'; document.getElementById('skillList').innerHTML=H.skills.map(s=>'<span class="tag">🔮 '+s+'</span>').join('');
+ document.getElementById('bankHist').innerHTML=H.bankHist.length?H.bankHist.map(h=>'<div>'+h+'</div>').join(''):'No transactions';
+ document.getElementById('woodCount').textContent=H.wood; document.getElementById('houseInfo').textContent=H.houseLv==0?'No House':'House Lv.'+H.houseLv; document.getElementById('houseLevel').textContent=H.houseLv==0?'No House':'House Lv.'+H.houseLv; document.getElementById('houseLv').textContent=H.houseLv; document.getElementById('sectName').textContent=H.sect; document.getElementById('sectName2').textContent=H.sect; document.getElementById('sectRank').textContent=H.sectRank;
+ let places=['Hunter City','Dark Forest','Demon Mountain','Dragon Valley','Monarch Palace','Chaos Abyss']; document.getElementById('worldName').textContent=places[H.world]; document.getElementById('mapGrid').innerHTML=places.map((p,i)=>'<div class="mapCell '+(i===H.world?'active':'')+'" onclick="travelTo('+i+')"><div style="font-size:30px">'+['🏙️','🌲','⛰️','🐉','👑','🌌'][i]+'</div><b>'+p+'</b><br><span style="font-size:11px">'+['Safe','E-D Gates','C-B Gates','A-S Gates','SS Gates','Secret'][i]+'</span></div>').join('');
+ if(H.registered) document.getElementById('registerBox').style.display='none';
+ renderGates(); showLeader();
 }
 function show(id,btn){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.getElementById(id).classList.add('active'); document.querySelectorAll('.tb').forEach(b=>b.classList.remove('active')); if(btn) btn.classList.add('active'); }
+function randomGrade(){ let r=Math.random()*100; if(r<1) return 'Divine Grade'; if(r<3) return 'Saint Grade'; if(r<8) return 'Supreme Grade'; if(r<30) return 'High Grade'; if(r<60) return 'Mid Grade'; return 'Low Grade'; }
 function registerHunter(){
-  let n=document.getElementById('hunterName').value.trim(); if(!n){ document.getElementById('regMsg').textContent='Enter Hunter Name!'; return; }
-  H.name=n; H.registered=true; H.gold=10000; H.keys=3;
-  // INFINITY PERK - From second link: Hidden Monarch Bloodline
-  if(n.toLowerCase()==='infinity'){
-    H.isInfinity=true; H.cls='SHADOW MONARCH'; H.title='SHADOW MONARCH - THE ONE WHO CANNOT DIE'; H.level=1; H.skills=['Shadow Slash','Arise','Monarch Aura','Shadow Exchange','Ruler\'s Reach','Army of Shadows']; H.shadows=[{name:'Igris Shadow',lv:1,pow:999},{name:'Beru Shadow',lv:1,pow:999},{name:'Tusk Shadow',lv:1,pow:999}]; H.perks=['INFINITE MP','MONARCH BLOODLINE','SECRET GATE UNLOCKED','ALL SKILLS','SHADOW ARMY STARTER','DOUBLE XP','CANNOT DIE - Revive Once Per Battle','HIDDEN SYSTEM']; H.infiniteMp=true; H.gold=15000; H.maxHp=300; H.hp=300; H.weapon='Monarch Blade'; H.weaponDmg=100;
-    document.getElementById('regMsg').innerHTML='👑 <b>INFINITY DETECTED!</b> Hidden Monarch Bloodline Awakened! You are SHADOW MONARCH at Lv.1! All perks unlocked!';
-  } else {
-    document.getElementById('regMsg').innerHTML='Welcome, <b>'+n+'</b>! System Accepted! You start with 10,000 Gold!';
-  }
-  save(); sfxLevelUp(); setTimeout(()=>{ document.getElementById('registerBox').style.display='none'; playCutscene(2); },800);
+ let n=document.getElementById('hunterName').value.trim(); if(!n){ document.getElementById('regMsg').textContent='Enter Name!'; return; }
+ let cls=document.getElementById('regClass').value; H.name=n; H.registered=true; H.cls=cls; H.gold=10000; H.keys=3;
+ // CHOSEN ONE - Only 1 player, 1% chance, not Infinity (Infinity already Monarch)
+ let roll=Math.random()*100; let canBeChosen=!chosenOneName || chosenOneName===n;
+ if(n.toLowerCase()==='infinity'){
+   H.isInfinity=true; H.cls='SHADOW MONARCH'; H.title='SHADOW MONARCH'; H.skills=['Shadow Slash','Arise','Monarch Aura','Shadow Exchange','Ruler\'s Reach','Army of Shadows']; H.shadows=[{name:'Igris Shadow',lv:1,pow:999},{name:'Beru Shadow',lv:1,pow:999},{name:'Tusk Shadow',lv:1,pow:999}]; H.perks=['INFINITE MP','MONARCH BLOODLINE','SECRET GATE','ALL SKILLS','DOUBLE XP','CANNOT DIE']; H.infiniteMp=true; H.gold=15000; H.maxHp=300; H.hp=300; H.weapon='Monarch Blade'; H.weaponDmg=100;
+   H.talentRoot='Heavenly Chaos'; H.talentGrade='Divine Grade'; H.talentPhys='Primordial Chaos Divine Body'; H.talentConst='Eternal Shadow Monarch Constitution'; H.cultRealm=1; H.cultLayer=9; H.cultNeed=500;
+   document.getElementById('regMsg').innerHTML='👑 INFINITY! Divine Grade Chaos Root + Primordial Chaos Divine Body! Qi Refinement 9th Peak!';
+ } else {
+   H.talentRoot=ROOTS[Math.floor(Math.random()*(ROOTS.length-1))]; H.talentGrade=randomGrade(); H.talentPhys=PHYS[Math.floor(Math.random()*8)]; H.talentConst=CONSTS[Math.floor(Math.random()*6)];
+   if(cls==='FIGHTER') H.skills=['Power Slash','Rage Burst','Iron Fist']; if(cls==='MAGE') H.skills=['Fireball','Ice Storm','Meteor']; if(cls==='ASSASSIN') H.skills=['Shadow Step','Backstab','Poison Blade']; if(cls==='TANK') H.skills=['Shield Wall','Taunt','Earthquake']; if(cls==='HEALER') H.skills=['Heal','Holy Light','Revive']; if(cls==='NECROMANCER') H.skills=['Arise','Soul Drain','Army of Dead'];
+   H.cultRealm=0; H.cultLayer=1;
+   // CHOSEN ONE roll
+   if(roll<1 && canBeChosen){ H.isChosen=true; chosenOneName=n; localStorage.setItem('chosen_one_name',n); H.perks.push('CHOSEN ONE - 10x XP','HEAVENLY FATE','DIVINE WEAPON','SEE HIDDEN GATES'); H.weapon='Divine Heaven Sword'; H.weaponDmg=80; H.gold+=5000; showPopup('✨ HEAVEN HAS CHOSEN YOU ✨','You are THE CHOSEN ONE! Only ONE player in the whole game can have this!<br><br>Perks: 10x XP • Heavenly Fate • Divine Weapon • See Hidden Gates<br><br>Heaven chose you for a reason.','https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=800&q=80'); }
+   document.getElementById('regMsg').innerHTML='Welcome '+n+'! Root: '+H.talentRoot+' - '+H.talentGrade+' | Physique: '+H.talentPhys;
+ }
+ save(); sfxLevelUp(); setTimeout(()=>{ document.getElementById('registerBox').style.display='none'; playCutsceneByClass(); },600);
 }
-function playCutscene(i){ csIndex=i; let c=cutscenes[i]; document.getElementById('csImg').src=c.img; document.getElementById('csTitle').textContent=c.title; document.getElementById('csText').textContent=c.text; document.getElementById('cutscene').style.display='flex'; sfxGate(); }
-function nextCutscene(){ if(csIndex<cutscenes.length-1) playCutscene(csIndex+1); else closeCutscene(); }
+function playCutsceneByClass(){ let key=H.isInfinity?'SHADOW MONARCH':H.cls; csList=classCutscenes[key]||classCutscenes.FIGHTER; csIndex=0; showCs(); }
+function playCutscene(i){ csList=[{img:'https://images.unsplash.com/photo-1541562232579-512a21360020?w=800&q=80',title:'THE WEAKEST',text:'Everyone laughed...'}]; csIndex=0; showCs(); }
+function showCs(){ let c=csList[csIndex]; document.getElementById('csImg').src=c.img; document.getElementById('csTitle').textContent=c.title; document.getElementById('csText').textContent=c.text; document.getElementById('cutscene').style.display='flex'; sfxGate(); }
+function nextCutscene(){ if(csIndex<csList.length-1){ csIndex++; showCs(); } else closeCutscene(); }
 function closeCutscene(){ document.getElementById('cutscene').style.display='none'; }
-function changeClass(c){ if(H.isInfinity){ document.getElementById('classMsg').textContent='You are already SHADOW MONARCH! No need to change.'; return; } if(H.cls!=='NONE'){ document.getElementById('classMsg').textContent='Already '+H.cls; return; } H.cls=c; if(c==='FIGHTER')H.skills=['Power Slash','Rage Burst','Iron Fist']; if(c==='MAGE')H.skills=['Fireball','Ice Storm','Meteor']; if(c==='ASSASSIN')H.skills=['Shadow Step','Backstab','Poison Blade']; if(c==='TANK')H.skills=['Shield Wall','Taunt','Earthquake']; if(c==='HEALER')H.skills=['Heal','Holy Light','Revive']; if(c==='NECROMANCER')H.skills=['Arise','Soul Drain','Army of Dead']; save(); sfxLevelUp(); document.getElementById('classMsg').textContent='Class: '+c; }
-function renameWeapon(){ let n=prompt('New weapon name:'); if(n){ H.weapon=n; save(); sfxCoin(); } }
-function forgeWeapon(){ if(H.gold<500){ alert('Need 500 Gold!'); return; } H.gold-=500; H.weaponDmg+=10; save(); sfxSlash(); alert('Forged! +10 DMG'); }
 function renderGates(){
-  let gates=[
-    {r:'E',c:'#00FF00',e:'🐺',boss:'Wolf King',hp:80,reward:500,img:'https://images.unsplash.com/photo-1541562232579-512a21360020?w=800&q=80'},
-    {r:'D',c:'#00AAFF',e:'🐻',boss:'Bear Tyrant',hp:150,reward:800,img:'https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?w=800&q=80'},
-    {r:'C',c:'#FFAA00',e:'🐍',boss:'Serpent Queen',hp:300,reward:1500,img:'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&q=80'},
-    {r:'B',c:'#FF6600',e:'🦁',boss:'Lion Monarch',hp:600,reward:3000,img:'https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=800&q=80'},
-    {r:'A',c:'#FF0000',e:'🐉',boss:'Dragon Lord',hp:1200,reward:6000,img:'https://images.unsplash.com/photo-1578662996442-2e1f8f0f0b0b?w=800&q=80'},
-    {r:'S',c:'#FF00FF',e:'👹',boss:'Demon King',hp:2500,reward:12000,img:'https://images.unsplash.com/photo-1509347528160-9a9e33742cdb?w=800&q=80'},
-    {r:'SS',c:'#FFD700',e:'👑',boss:'Ancient Monarch',hp:5000,reward:25000,img:'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=800&q=80'}
-  ];
-  document.getElementById('gateList').innerHTML=gates.map(g=>'<div class="card" style="border:2px solid '+g.c+'"><img class="animeImg" src="'+g.img+'"><h3>'+g.r+'-RANK GATE '+g.e+'</h3><p>Boss: '+g.boss+' • Reward: '+g.reward+' Gold</p><button class="btn" onclick="enterGate(\''+g.r+'\',\''+g.boss+'\','+g.hp+','+g.reward+',\''+g.e+'\',\''+g.img+'\')">🚪 ENTER GATE - FIGHT NOW ▶</button></div>').join('');
+ let gates=[
+  {r:'E',c:'#00FF00',e:'🐺',boss:'Wolf King',hp:80,reward:500,img:'https://images.unsplash.com/photo-1541562232579-512a21360020?w=800&q=80'},
+  {r:'D',c:'#00AAFF',e:'🐻',boss:'Bear Tyrant',hp:150,reward:800,img:'https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?w=800&q=80'},
+  {r:'C',c:'#FFAA00',e:'🐍',boss:'Serpent Queen',hp:300,reward:1500,img:'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&q=80'},
+  {r:'B',c:'#FF6600',e:'🦁',boss:'Lion Monarch',hp:600,reward:3000,img:'https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=800&q=80'},
+  {r:'A',c:'#FF0000',e:'🐉',boss:'Dragon Lord',hp:1200,reward:6000,img:'https://images.unsplash.com/photo-1578662996442-2e1f8f0f0b0b?w=800&q=80'},
+  {r:'S',c:'#FF00FF',e:'👹',boss:'Demon King',hp:2500,reward:12000,img:'https://images.unsplash.com/photo-1509347528160-9a9e33742cdb?w=800&q=80'},
+  {r:'SS',c:'#FFD700',e:'👑',boss:'Ancient Monarch',hp:5000,reward:25000,img:'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=800&q=80'}
+ ];
+ document.getElementById('gateList').innerHTML=gates.map(g=>'<div class="card" style="border:2px solid '+g.c+'"><img class="animeImg" src="'+g.img+'"><h3>'+g.r+'-RANK GATE '+g.e+'</h3><p>Boss: '+g.boss+' • Reward: '+g.reward+' Gold</p><button class="btn" onclick="enterGate(\''+g.r+'\',\''+g.boss+'\','+g.hp+','+g.reward+',\''+g.e+'\',\''+g.img+'\')">🚪 ENTER GATE - FIGHT NOW ▶</button></div>').join('');
 }
 function enterGate(rank,boss,hp,reward,emoji,img){
-  if(!H.registered){ alert('Register first! Enter your Hunter Name on HOME.'); show('home',document.querySelectorAll('.tb')[0]); return; }
-  if(H.keys<=0){ alert('No Gate Keys! Buy in Shop.'); return; }
-  H.keys--; curGate={rank,boss,hp,reward}; curBoss={name:boss,hp:hp,maxHp:hp,emoji:emoji,reward:reward}; inBattle=true; combo=0;
-  document.getElementById('battleScreen').style.display='flex'; document.getElementById('gateTitle').textContent=rank+'-RANK GATE - '+boss; document.getElementById('bossEmoji').textContent=emoji; document.getElementById('bossName').textContent=boss; document.getElementById('bossRank').textContent=rank; document.getElementById('battleImg').src=img;
-  document.getElementById('battleLog').innerHTML='<div>SYSTEM: Gate Opened! Boss appeared!</div>'; document.getElementById('gateMsg').textContent=''; sfxGate(); setTimeout(sfxBoss,400); updateBattle(); save();
+ if(!H.registered){ showPopup('⚠️ REGISTER FIRST','Enter your Hunter Name on HOME to awaken the System!'); show('home',document.querySelectorAll('.tb')[0]); return; }
+ if(H.keys<=0){ showPopup('🔑 NO KEYS','No Gate Keys! Buy in Shop for 300 Gold.'); return; }
+ H.keys--; curGate={rank,boss,hp,reward}; curBoss={name:boss,hp:hp,maxHp:hp,emoji:emoji,reward:reward}; inBattle=true; combo=0;
+ document.getElementById('battleScreen').style.display='flex'; document.getElementById('clearedBox').style.display='none'; document.getElementById('gateTitle').textContent=rank+'-RANK GATE - '+boss; document.getElementById('bossEmoji').textContent=emoji; document.getElementById('bossName').textContent=boss; document.getElementById('battleImg').src=img;
+ document.getElementById('battleLog').innerHTML='<div>SYSTEM: Gate Opened!</div>'; document.getElementById('gateMsg').textContent=''; sfxGate(); setTimeout(sfxBoss,400); updateBattle(); save();
 }
 function updateBattle(){ if(!curBoss) return; document.getElementById('bossHp').textContent=Math.max(0,curBoss.hp); document.getElementById('bossHpFill').style.width=Math.max(0,curBoss.hp/curBoss.maxHp*100)+'%'; document.getElementById('battleHp').textContent=H.hp; document.getElementById('battleMp').textContent=H.infiniteMp?'∞':H.mp; document.getElementById('battleHpFill').style.width=(H.hp/H.maxHp*100)+'%'; document.getElementById('comboText').textContent='x'+combo; }
 function logBattle(t){ document.getElementById('battleLog').innerHTML+='<div>'+t+'</div>'; document.getElementById('battleLog').scrollTop=9999; }
-function showDmg(n){ let d=document.createElement('div'); d.className='dmgFloat'; d.textContent='-'+n; document.body.appendChild(d); setTimeout(()=>d.remove(),800); }
-function gainXP(x){ H.xp+=x; if(H.isInfinity) H.xp+=x; // Double XP for Infinity
-  while(H.xp>=H.xpNeed){ H.xp-=H.xpNeed; H.level++; H.xpNeed=Math.floor(H.xpNeed*1.4)+50; H.pts+=5; H.maxHp+=20; H.hp=H.maxHp; if(!H.infiniteMp){H.maxMp+=10; H.mp=H.maxMp;} sfxLevelUp(); logBattle('⭐ LEVEL UP! Lv.'+H.level+' Rank: '+getRank().r); alert('⭐ LEVEL UP! Lv.'+H.level+' - '+getRank().r+'-RANK'); } }
-function attack(){
-  if(!inBattle) return; combo++; let crit=Math.random()<0.2; let dmg=(H.weaponDmg+H.str+Math.floor(Math.random()*15))*(crit?2:1)+combo*5; curBoss.hp-=dmg; sfxSlash(); showDmg(dmg); logBattle('⚔️ Attack'+(crit?' CRITICAL!':'')+' - '+dmg+' dmg! Combo x'+combo);
-  if(combo>=3){ logBattle('🔥 COMBO x3! Bonus damage!'); curBoss.hp-=20; }
-  if(curBoss.hp<=0){ bossDead(); return; } bossTurn(); updateBattle(); save();
-}
-function heavyAttack(){
-  if(!inBattle) return; if(H.mp<15 && !H.infiniteMp){ logBattle('Not enough MP!'); return; } if(!H.infiniteMp) H.mp-=15; let dmg=(H.weaponDmg*2+H.str+30); curBoss.hp-=dmg; sfxHit(); showDmg(dmg); document.getElementById('battleScreen').classList.add('shake'); setTimeout(()=>document.getElementById('battleScreen').classList.remove('shake'),300); logBattle('💥 HEAVY ATTACK! - '+dmg);
-  if(curBoss.hp<=0){ bossDead(); return; } bossTurn(); updateBattle(); save();
-}
-function dodge(){ if(!inBattle) return; sfxDodge(); let success=Math.random()>0.3; if(success){ logBattle('💨 DODGED! Boss missed! +1 Combo'); combo++; } else { logBattle('💨 Dodge failed!'); bossTurn(); } updateBattle(); save(); }
-function block(){ if(!inBattle) return; sfxBlock(); isBlocking=true; logBattle('🛡️ BLOCKING! Next attack reduced 80%'); setTimeout(()=>isBlocking=false,3000); bossTurn(true); updateBattle(); save(); }
-function useSkill(n){
-  if(!inBattle) return; let cost=[0,10,20,40][n]; if(!H.infiniteMp && H.mp<cost){ logBattle('Not enough MP!'); return; } if(!H.infiniteMp) H.mp-=cost;
-  let dmg=(H.weaponDmg+H.int)*n+Math.floor(Math.random()*40); curBoss.hp-=dmg; sfxHit(); showDmg(dmg); logBattle('🔥 SKILL '+(H.skills[n-1]||'Skill')+' - '+dmg+' dmg!');
-  if(n===3){ document.getElementById('battleScreen').classList.add('shake'); setTimeout(()=>document.getElementById('battleScreen').classList.remove('shake'),500); logBattle('💥 ULTIMATE! Screen shakes!'); }
-  if(curBoss.hp<=0){ bossDead(); return; } bossTurn(); updateBattle(); save();
-}
-function bossTurn(blocked=false){
-  let dmg=10+Math.floor(Math.random()*20)+(curGate.rank==='S'?30:0); if(blocked||isBlocking) dmg=Math.floor(dmg*0.2);
-  H.hp-=dmg; sfxHit(); logBattle('👹 '+curBoss.name+' hits you - '+dmg+'! HP: '+H.hp);
-  if(H.hp<=0){ if(H.isInfinity){ H.hp=Math.floor(H.maxHp/2); logBattle('👑 INFINITY PERK: CANNOT DIE! Revived with 50% HP!'); sfxLevelUp(); } else { H.hp=0; inBattle=false; logBattle('💀 YOU DIED! Heal and try again.'); alert('You died! Heal in Shop and try again.'); } }
-}
+function gainXP(x){ if(H.isChosen) x*=10; if(H.isInfinity) x*=2; H.xp+=x; while(H.xp>=H.xpNeed){ H.xp-=H.xpNeed; H.level++; H.xpNeed=Math.floor(H.xpNeed*1.4)+50; H.pts+=5; H.maxHp+=20; H.hp=H.maxHp; if(!H.infiniteMp){H.maxMp+=10; H.mp=H.maxMp;} sfxLevelUp(); showPopup('⭐ LEVEL UP!','You are now Lv.'+H.level+'!<br>Rank: '+getRank().r+'-RANK<br>+5 Stat Points • +20 Max HP','https://images.unsplash.com/photo-1534447677768-be436bb09401?w=800&q=80'); } }
+function attack(){ if(!inBattle) return; combo++; let crit=Math.random()<0.2; let dmg=(H.weaponDmg+H.str+Math.floor(Math.random()*15))*(crit?2:1)+combo*5; curBoss.hp-=dmg; sfxSlash(); logBattle('⚔️ Attack'+(crit?' CRITICAL!':'')+' - '+dmg+' Combo x'+combo); if(curBoss.hp<=0){ bossDead(); return; } bossTurn(); updateBattle(); save(); }
+function heavyAttack(){ if(!inBattle) return; if(!H.infiniteMp && H.mp<15){ logBattle('No MP'); return; } if(!H.infiniteMp) H.mp-=15; let dmg=H.weaponDmg*2+H.str+30; curBoss.hp-=dmg; sfxHit(); logBattle('💥 HEAVY - '+dmg); if(curBoss.hp<=0){ bossDead(); return; } bossTurn(); updateBattle(); save(); }
+function dodge(){ if(!inBattle) return; if(Math.random()>0.3){ logBattle('💨 DODGED!'); combo++; } else { logBattle('Dodge failed'); bossTurn(); } updateBattle(); save(); }
+function block(){ if(!inBattle) return; isBlocking=true; logBattle('🛡️ BLOCKING'); setTimeout(()=>isBlocking=false,3000); bossTurn(true); updateBattle(); save(); }
+function useSkill(n){ if(!inBattle) return; let cost=[0,10,20,40][n]; if(!H.infiniteMp && H.mp<cost){ logBattle('No MP'); return; } if(!H.infiniteMp) H.mp-=cost; let dmg=(H.weaponDmg+H.int)*n+Math.floor(Math.random()*40); curBoss.hp-=dmg; sfxHit(); logBattle('🔥 SKILL '+(H.skills[n-1]||'Skill')+' - '+dmg); if(curBoss.hp<=0){ bossDead(); return; } bossTurn(); updateBattle(); save(); }
+function bossTurn(blocked=false){ let dmg=10+Math.floor(Math.random()*20); if(blocked||isBlocking) dmg=Math.floor(dmg*0.2); H.hp-=dmg; sfxHit(); logBattle('👹 Boss hits - '+dmg+' HP:'+H.hp); if(H.hp<=0){ if(H.isInfinity){ H.hp=Math.floor(H.maxHp/2); logBattle('👑 INFINITY: CANNOT DIE! Revived!'); } else { H.hp=0; inBattle=false; showPopup('💀 YOU DIED','You died in the Gate!<br>Heal in Shop and train more.<br>Your HP is now 10.','https://images.unsplash.com/photo-1509347528160-9a9e33742cdb?w=800&q=80'); H.hp=10; } } }
 function bossDead(){
-  let gold=curBoss.reward, xp=curBoss.reward/2; H.gold+=gold; H.keys+=1; gainXP(xp); inBattle=false; sfxCoin(); logBattle('🏆 BOSS DEFEATED! +'+gold+' Gold, +'+xp+' XP, +1 Key! Press ARISE!');
-  document.getElementById('gateMsg').innerHTML='BOSS DEFEATED! Press <b>ARISE</b>!'; updateBattle(); save(); playCutscene(3);
+ let gold=curBoss.reward, xp=Math.floor(curBoss.reward/2); H.gold+=gold; H.keys+=1; gainXP(xp); H.cultXp+=50; inBattle=false; sfxCoin();
+ document.getElementById('clearedBox').style.display='block'; document.getElementById('clearGateName').textContent=curGate.rank+'-RANK'; document.getElementById('clearPlayer').textContent=H.name||'Hunter'; document.getElementById('clearLv').textContent=H.level; document.getElementById('clearGold').textContent=gold; document.getElementById('clearXp').textContent=xp; document.getElementById('clearHp').textContent=H.hp; document.getElementById('clearMaxHp').textContent=H.maxHp; document.getElementById('clearHpFill').style.width=(H.hp/H.maxHp*100)+'%';
+ document.getElementById('gateMsg').innerHTML='BOSS DEFEATED! Press ARISE then auto-exit in 3s...';
+ updateBattle(); save();
+ setTimeout(()=>{ document.getElementById('battleScreen').style.display='none'; document.getElementById('clearedBox').style.display='none'; show('gate',document.querySelectorAll('.tb')[2]); },3000);
 }
-function arise(){
-  if(!curBoss){ alert('Kill a Boss first!'); return; } let s={name:curBoss.name+' Shadow',lv:H.level,pow:50+H.level*10}; H.shadows.push(s); sfxArise(); document.getElementById('gateMsg').innerHTML='💀 ARISE! '+s.name+' joined! "My Monarch..."'; logBattle('💀 ARISE! '+s.name); save();
-}
-function heal(){ if(!H.infiniteMp && H.mp<10){ logBattle('Not enough MP!'); return; } if(!H.infiniteMp) H.mp-=10; H.hp=Math.min(H.maxHp,H.hp+40); sfxHeal(); logBattle('💖 Healed +40'); updateBattle(); save(); }
-function runGate(){ inBattle=false; document.getElementById('battleScreen').style.display='none'; alert('You escaped the Gate...'); }
-function deployShadows(){ if(!H.shadows.length){ document.getElementById('shadowMsg').textContent='No shadows!'; return; } document.getElementById('shadowMsg').textContent='Deployed '+Math.min(3,H.shadows.length)+' Shadows! +20 DMG'; sfxArise(); }
-function becomeMonarch(){ if(H.isInfinity){ document.getElementById('monarchMsg').textContent='You are already Shadow Monarch!'; return; } if(H.level<50){ document.getElementById('monarchMsg').textContent='Need Lv.50+! You are Lv.'+H.level; return; } H.monarch++; H.title='MONARCH'; save(); sfxLevelUp(); document.getElementById('monarchMsg').textContent='👑 YOU ARE NOW A MONARCH!'; }
-function doQuest(){ H.questProg=Math.min(4,H.questProg+1); save(); sfxCoin(); document.getElementById('questMsg')&&(document.getElementById('questMsg').textContent='Training done! '+H.questProg+' / 4'); }
-function claimQuest(){ if(H.questProg<4){ alert('Finish Quest! '+H.questProg+' / 4'); return; } H.gold+=500; H.gems+=2; H.questProg=0; gainXP(200); save(); sfxCoin(); alert('Daily Quest Complete! +500 Gold'); }
-function deposit(){ if(H.gold<1000){ alert('Need 1000!'); return; } H.gold-=1000; H.bank+=1000; save(); sfxCoin(); }
-function withdraw(){ if(H.bank<1000){ alert('Bank empty!'); return; } H.bank-=1000; H.gold+=1000; save(); sfxCoin(); }
+function arise(){ if(!curBoss){ showPopup('💀 NO BOSS','Kill a Boss first to extract shadow!'); return; } let s={name:curBoss.name+' Shadow',lv:H.level,pow:50+H.level*10}; H.shadows.push(s); sfxArise(); document.getElementById('gateMsg').innerHTML='💀 ARISE! '+s.name+' joined!'; logBattle('💀 ARISE! '+s.name); save(); showPopup('💀 ARISE SUCCESS!','Shadow Extracted!<br><b>'+s.name+'</b> joined your Shadow Army!<br>"My Monarch..."','https://images.unsplash.com/photo-1509347528160-9a9e33742cdb?w=800&q=80'); }
+function heal(){ if(!H.infiniteMp && H.mp<10){ logBattle('No MP'); return; } if(!H.infiniteMp) H.mp-=10; H.hp=Math.min(H.maxHp,H.hp+40); sfxHeal(); logBattle('💖 +40 HP'); updateBattle(); save(); }
+function runGate(){ inBattle=false; document.getElementById('battleScreen').style.display='none'; }
+function cultivate(){ if(Date.now()<H.lastCult+4*3600000){ showPopup('⏰ COOLDOWN','Cultivation on cooldown!<br>Wait '+fmtTime(H.lastCult+4*3600000-Date.now())); return; } H.lastCult=Date.now(); let gain=50+H.level*5; H.cultXp+=gain; sfxCoin(); document.getElementById('cultMsg').textContent='Meditated! +'+gain+' Cult XP'; save(); showPopup('🧘 CULTIVATION','Meditation Complete!<br>+'+gain+' Cultivation XP<br>Next in 4 hours.'); }
+function breakthrough(){ if(H.cultXp<H.cultNeed){ showPopup('⚠️ NOT ENOUGH','Need '+H.cultNeed+' Cult XP!<br>You have '+H.cultXp); return; } H.cultXp-=H.cultNeed; H.cultNeed=Math.floor(H.cultNeed*1.5)+100; if(H.cultLayer<9){ H.cultLayer++; } else { H.cultLayer=1; H.cultRealm=Math.min(REALMS.length-1,H.cultRealm+1); } H.maxHp+=30; H.hp=H.maxHp; sfxLevelUp(); save(); showPopup('🌌 BREAKTHROUGH!','Breakthrough Success!<br>New Realm: <b>'+REALMS[H.cultRealm]+'</b><br>Layer: '+H.cultLayer+'th<br>+30 Max HP','https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=800&q=80'); }
+function buyCult(name,price){ if(H.gold<price){ showPopup('💰 NOT ENOUGH GOLD','Need '+price+' Gold to buy '+name); return; } H.gold-=price; H.cultXp+= (name.includes('Qi')?50:name.includes('Foundation')?200:500); save(); sfxCoin(); document.getElementById('cultMsg').textContent='Bought '+name; }
+function travelTo(i){ let req=[0,0,0,2,4,5][i]; if(H.cultRealm<req && i>0 && !H.isInfinity){ showPopup('🔒 LOCKED','Need '+REALMS[req]+' Realm to enter this place!<br>You are '+REALMS[H.cultRealm]); return; } H.world=i; save(); showPopup('🌎 TRAVELED','You traveled to <b>'+['Hunter City','Dark Forest','Demon Mountain','Dragon Valley','Monarch Palace','Chaos Abyss'][i]+'</b>!'); }
+function chopWood(){ H.wood+=10; save(); sfxHit(); document.getElementById('woodMsg').textContent='Chopped +10 Wood! Total: '+H.wood; }
+function sellWood(){ if(H.wood<10){ document.getElementById('woodMsg').textContent='Need 10 Wood!'; return; } H.wood-=10; H.gold+=200; save(); sfxCoin(); document.getElementById('woodMsg').textContent='Sold 10 Wood for 200 Gold!'; }
+function buildHouse(){ if(H.wood<50||H.gold<1000){ showPopup('🏠 CANNOT BUILD','Need 50 Wood + 1000 Gold!<br>You have '+H.wood+' Wood, '+H.gold+' Gold'); return; } H.wood-=50; H.gold-=1000; H.houseLv++; H.maxHp+=50; H.hp=H.maxHp; save(); showPopup('🏠 HOUSE BUILT!','House Upgraded to Lv.'+H.houseLv+'!<br>+50 Max HP • +Cultivation XP per hour<br>Your house is your safe zone.','https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=800&q=80'); }
+function joinSect(name){ H.sect=name; H.sectRank='Outer Disciple'; save(); showPopup('🏯 SECT JOINED!','You joined <b>'+name+'</b>!<br>Rank: Outer Disciple<br>Sect Missions Unlocked!'); }
+function sectMission(){ if(H.sect==='No Sect'){ document.getElementById('sectMsg').textContent='Join a Sect first!'; return; } H.gold+=300; gainXP(100); save(); sfxCoin(); document.getElementById('sectMsg').textContent='Sect Mission Complete! +300 Gold +100 XP'; }
+function buyWorld(item,price){ if(H.gold<price){ showPopup('💰 NOT ENOUGH','Need '+price+' Gold for '+item); return; } H.gold-=price; if(item==='Wood') H.wood+=10; else H.inventory.push(item); save(); sfxCoin(); document.getElementById('worldShopMsg').textContent='Bought '+item+' in World!'; }
+function farm(){ H.gold+=50; save(); sfxCoin(); document.getElementById('lifeMsg').textContent='Farmed +50 Gold!'; }
+function mine(){ H.inventory.push('Stone'); save(); document.getElementById('lifeMsg').textContent='Mined +1 Stone!'; }
+function fish(){ H.inventory.push('Fish'); save(); document.getElementById('lifeMsg').textContent='Fished +1 Fish! Eat for +10 HP'; }
+function doQuest(){ if(Date.now()<H.lastTrain+4*3600000){ showPopup('⏰ TRAIN COOLDOWN','Wait '+fmtTime(H.lastTrain+4*3600000-Date.now())+' to train again!'); return; } H.lastTrain=Date.now(); H.questProg=Math.min(4,H.questProg+1); save(); sfxCoin(); document.getElementById('questMsg').textContent='Trained! '+H.questProg+' / 4'; }
+function claimQuest(){ if(H.questProg<4){ showPopup('📋 NOT DONE','Finish Daily Quest! '+H.questProg+' / 4'); return; } if(Date.now()<H.lastDaily+24*3600000){ showPopup('⏰ DAILY COOLDOWN','Wait '+fmtTime(H.lastDaily+24*3600000-Date.now())+' for next Daily!'); return; } H.lastDaily=Date.now(); H.gold+=500; H.gems+=2; H.questProg=0; gainXP(200); save(); showPopup('🎁 DAILY REWARD!','Daily Quest Complete!<br>+500 Gold • +2 Gems • +200 XP','https://images.unsplash.com/photo-1534447677768-be436bb09401?w=800&q=80'); }
+function deposit(){ let amt=parseInt(document.getElementById('bankAmt').value)||0; if(amt<=0||H.gold<amt){ document.getElementById('bankMsg').textContent='Not enough Gold!'; return; } H.gold-=amt; H.bank+=amt; H.bankHist.unshift('Deposit +'+amt); save(); sfxCoin(); document.getElementById('bankMsg').textContent='Deposited '+amt; }
+function withdraw(){ let amt=parseInt(document.getElementById('bankAmt').value)||0; if(amt<=0||H.bank<amt){ document.getElementById('bankMsg').textContent='Not enough Bank!'; return; } H.bank-=amt; H.gold+=amt; H.bankHist.unshift('Withdraw +'+amt); save(); sfxCoin(); document.getElementById('bankMsg').textContent='Withdrew '+amt; }
+function sendMoney(){ let to=document.getElementById('sendTo').value.trim(); let amt=parseInt(document.getElementById('sendAmt').value)||0; if(!to||amt<=0){ document.getElementById('sendMsg').textContent='Enter player + amount!'; return; } if(H.gold<amt){ document.getElementById('sendMsg').textContent='Not enough Gold!'; return; } let target=allPlayers.find(p=>p.name.toLowerCase()===to.toLowerCase()); if(!target){ document.getElementById('sendMsg').textContent='Player not found! Must be registered.'; return; } H.gold-=amt; H.bankHist.unshift('Sent '+amt+' to '+to); save(); sfxCoin(); document.getElementById('sendMsg').textContent='Sent '+amt+' to '+to+'!'; }
+function copyCloud(){ navigator.clipboard.writeText(H.cloudId); showPopup('☁️ CLOUD ID COPIED','Your Cloud ID: <b>'+H.cloudId+'</b><br>Share in WhatsApp group to sync across phones.'); }
+function loadCloud(){ let id=document.getElementById('cloudInput').value.trim(); if(!id){ document.getElementById('cloudMsg').textContent='Enter Cloud ID!'; return; } let found=allPlayers.find(p=>p.cloudId===id); if(found){ document.getElementById('cloudMsg').textContent='Found '+found.name+' on Cloud!'; } else { document.getElementById('cloudMsg').textContent='Cloud ID not found on this device. Share in WhatsApp +260 129 3138.'; } }
+function createGuild(){ let n=document.getElementById('guildInput').value.trim(); if(!n) return; H.guild=n; H.guildMembers=1; save(); document.getElementById('guildMsg').textContent='Guild '+n+' Created!'; }
+function joinGuild(){ H.guild='Shadow Legion'; H.guildMembers=124; save(); document.getElementById('guildMsg').textContent='Joined Shadow Legion!'; }
+function guildWar(){ if(H.guild==='NO GUILD'){ document.getElementById('warMsg').textContent='Join Guild first!'; return; } H.gold+=5000; H.warPts+=100; gainXP(500); save(); sfxBoss(); showPopup('⚔️ GUILD WAR WON!','Your Guild WON the War!<br>+5000 Gold • +100 War Points • +500 XP'); document.getElementById('warMsg').textContent='GUILD WAR WON! +5000 Gold'; document.getElementById('guildLeader').innerHTML='<div class="card">#1 '+H.guild+' - '+H.warPts+'</div>'; }
+function guildBoss(){ if(H.guild==='NO GUILD'){ document.getElementById('guildBossMsg').textContent='Join Guild!'; return; } H.gold+=1000; gainXP(500); save(); document.getElementById('guildBossMsg').textContent='Guild Boss Defeated! +1000 Gold'; }
 function buyItem(name,price){ if(H.gold<price){ document.getElementById('shopMsg').textContent='Not enough Gold!'; return; } H.gold-=price; if(name==='Gate Key') H.keys++; else H.inventory.push(name); save(); sfxCoin(); document.getElementById('shopMsg').textContent='Bought '+name; }
 function eatFood(){ if(H.gold<50) return; H.gold-=50; H.hp=Math.min(H.maxHp,H.hp+20); save(); sfxHeal(); }
-function sleep(){ H.hp=H.maxHp; if(!H.infiniteMp) H.mp=H.maxMp; save(); sfxHeal(); alert('Slept! Full HP/MP'); }
-function healFull(){ if(H.gold<100) return; H.gold-=100; H.hp=H.maxHp; if(!H.infiniteMp) H.mp=H.maxMp; save(); sfxHeal(); }
-function createGuild(){ let n=document.getElementById('guildInput').value.trim(); if(!n) return; H.guild=n; H.guildMembers=1; save(); sfxLevelUp(); document.getElementById('guildMsg').textContent='Guild '+n+' Created! You are Guild Master!'; }
-function joinGuild(){ H.guild='Shadow Legion'; H.guildMembers=124; save(); document.getElementById('guildMsg').textContent='Joined Shadow Legion!'; }
-function guildBoss(){ if(H.guild==='NO GUILD'){ document.getElementById('guildMsg').textContent='Join Guild first!'; return; } H.gold+=1000; gainXP(500); save(); sfxBoss(); document.getElementById('guildMsg').textContent='Guild Boss Defeated! +1000 Gold'; }
-function duel(){ let win=Math.random()>0.4; if(win){ H.gold+=300; gainXP(150); save(); sfxLevelUp(); document.getElementById('duelMsg').textContent='Duel WON! +300 Gold'; } else { H.hp=Math.max(10,H.hp-30); save(); sfxHit(); document.getElementById('duelMsg').textContent='Duel LOST! -30 HP'; } }
-function tourney(){ let place=Math.floor(Math.random()*8)+1; let r=(9-place)*200; H.gold+=r; gainXP(r); save(); sfxLevelUp(); document.getElementById('duelMsg').textContent='Tourney Place #'+place+'! +'+r+' Gold'; }
-function showLeader(){
-  // ONLY real players from this link - stored in allPlayers
-  let sorted=[...allPlayers].sort((a,b)=>b.level-a.level);
-  let html=sorted.length?sorted.map((p,i)=>'<div class="card">#'+(i+1)+' '+p.name+' - Lv.'+p.level+' - '+p.rank+'-RANK - '+(p.cls||'')+' '+(p.name===H.name?'👈 YOU':'')+'</div>').join(''):'<div class="card">No hunters yet. Be the first to register! Share your link.</div>';
-  document.getElementById('leaderList').innerHTML=html; document.getElementById('leaderList2').innerHTML=html;
-}
-function secretGate(){ if(!H.isInfinity && ['S','SS','SSS','CLASSIFIED'].indexOf(getRank().r)===-1){ document.getElementById('secretMsg').textContent='LOCKED! Need S-Rank+ or Infinity Perk. You are '+getRank().r; return; } H.gold+=5000; gainXP(1000); save(); sfxGate(); document.getElementById('secretMsg').textContent='🌌 SECRET GATE CLEARED! +5000 Gold! Double Dungeon Found!'; }
-let duelCode='';
-function createDuelLink(){ duelCode='DUEL-'+Math.random().toString(36).substr(2,6).toUpperCase(); let link=location.href.split('?')[0]+'?duel='+duelCode+'&hunter='+(H.name||'Hunter')+'&lv='+H.level; document.getElementById('duelLinkOut').innerHTML='Your Duel Link:<br><b>'+link+'</b><br>Send to friend on WhatsApp. Friend opens link → Fight starts!'; window._duelLink=link; sfxCoin(); alert('Duel Link Created! Share it!'); }
-function copyDuel(){ if(window._duelLink){ navigator.clipboard.writeText(window._duelLink); alert('Duel Link Copied! Send to friend!'); } else createDuelLink(); }
-// Check duel link
-let params=new URLSearchParams(location.search); if(params.get('duel')){ setTimeout(()=>{ alert('⚔️ DUEL CHALLENGE! '+params.get('hunter')+' Lv.'+params.get('lv')+' challenged you! Register and go to GATES to accept duel!'); },1000); }
-document.getElementById('notifList').innerHTML='<div class="card">🔔 Gate Break in 1 hour!</div><div class="card">🔔 Daily Quest Reset!</div><div class="card">🔔 Double XP Weekend!</div>';
+function sleep(){ H.hp=H.maxHp; if(!H.infiniteMp) H.mp=H.maxMp; save(); sfxHeal(); showPopup('😴 SLEPT','Full HP/MP Restored!<br>Your house gave you +10 Cultivation XP'); H.cultXp+=10; save(); }
+function forgeWeapon(){ if(H.gold<500){ showPopup('💰 NOT ENOUGH','Need 500 Gold to forge!'); return; } H.gold-=500; H.weaponDmg+=10; save(); sfxSlash(); showPopup('🔨 FORGED!','Weapon Forged!<br>+10 Damage • Now +'+H.weaponDmg); }
+function showLeader(){ let sorted=[...allPlayers].sort((a,b)=>b.level-a.level); document.getElementById('leaderList').innerHTML=sorted.length?sorted.map((p,i)=>'<div class="card">#'+(i+1)+' '+p.name+' - Lv.'+p.level+' - '+p.rank+' - '+p.cls+' '+(p.isChosen?'✨ CHOSEN ONE':'')+' '+(p.name===H.name?'👈 YOU':'')+'</div>').join(''):'<div class="card">No hunters yet. Be first!</div>'; }
+function createDuelLink(){ let code='DUEL-'+Math.random().toString(36).substr(2,6).toUpperCase(); let link=location.href.split('?')[0]+'?duel='+code+'&hunter='+(H.name||'Hunter')+'&lv='+H.level; document.getElementById('duelLinkOut').innerHTML='Duel Link:<br><b>'+link+'</b>'; navigator.clipboard.writeText(link); showPopup('🔗 DUEL LINK CREATED','Duel Link Copied!<br>Send to friend on WhatsApp.<br>Friend opens link → Fight starts!'); }
+let params=new URLSearchParams(location.search); if(params.get('duel')){ setTimeout(()=>showPopup('⚔️ DUEL CHALLENGE!','<b>'+params.get('hunter')+'</b> Lv.'+params.get('lv')+' challenged you!<br>Register and go to GATES to accept duel!'),1000); }
+setInterval(update,1000);
 update();
 </script>
 </body>
